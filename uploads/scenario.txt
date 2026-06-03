@@ -1,0 +1,224 @@
+
+CONVERGE 2026 · SALES ROLEPLAY SCENARIO
+Delta Air Lines
+Resilience Modernization: Building the Airline of the Future
+Facilitator: [Name]  ·  Date: [Date]
+
+Scenario
+Strategic Context
+World's largest airline by revenue: ~$58B (FY2024), ~100,000 employees, ~900 aircraft, 7 major U.S. hubs (ATL, DTW, JFK, LAX, MSP, SLC, SEA)
+Operates ~5,500+ flights/day to 290+ destinations across 50+ countries; ~200M passengers annually
+SkyMiles loyalty program: 100M+ members and a major revenue engine (Amex co-brand renewed through 2029)
+Multi-billion technology investment underway; long-running Microsoft Azure relationship (announced 2018) plus AWS for select workloads
+July 2024 CrowdStrike outage hit Delta hardest of any airline: ~7,000 cancellations, ~$500M financial impact, ongoing litigation
+Post-outage mandate: rebuild operational resilience, modernize data infrastructure, and reduce recovery time across the fleet
+
+WHY NOW
+The CrowdStrike incident exposed brittleness in Delta's legacy data platforms. The board has greenlit a multi-year resilience and modernization program — and the storage layer is on the critical path.
+Strategic Initiatives
+Five active initiatives where NetApp's portfolio has a natural fit
+Initiative
+Current State
+Pain
+Impact
+Desired Outcome
+Resilience Modernization (post-CrowdStrike)
+Legacy ops &amp; data platforms in Atlanta OCC; ~25% of arrays 5+ yrs old; multi-vendor sprawl.
+12-hr restore time vs 1–2 hr target. CrowdStrike exposed full fleet to single-point failures.
+$500M+ outage; board scrutiny; reputational hit; class actions; competitor share gain.
+5× MTTR improvement; ransomware-resilient restore; consolidated control plane.
+Operations Intelligence Platform
+Real-time ops data scattered across Azure, AWS, on-prem; OCC dashboards lag 5–15 min.
+Decisions made on stale data; recovery slower than peers; reactive irregular-ops handling.
+Cascading delays, missed connections, $M+/day during disruptions, fuel waste.
+Sub-minute ops data; predictive disruption modeling; unified data fabric.
+Fleet &amp; MRO Data Modernization
+~900 aircraft generating sensor data; siloed across TechOps; legacy MRO storage.
+Predictive maintenance limited; manual ingestion delays; AOG events not anticipated.
+Unscheduled groundings; warranty leakage; lower fleet utilization.
+Real-time fleet telemetry; AI-driven predictive maintenance at scale.
+SkyMiles &amp; Customer Data Unification
+100M+ member data split across loyalty, sales, ops, and Amex co-brand systems.
+Personalization gaps; offers misfire; slow analytics turnaround.
+Loyalty churn risk; lower co-brand spend; weaker retention vs JetBlue/United.
+Unified customer 360; near-real-time personalization; richer Amex co-brand value.
+Hybrid Cloud Consolidation
+Multi-cloud: Microsoft Azure (primary), AWS (select), on-prem in ATL/MSP; growing OpEx.
+Multi-platform complexity; egress costs; inconsistent data services across clouds.
+Cloud spend creep; longer time-to-deploy; vendor lock-in concerns.
+Consistent data services across Azure, AWS, on-prem; right-sized OpEx; cleaner data residency.
+Current State
+What's broken, what's holding it together, what the board is watching.
+Aging infrastructure — ~25% of storage arrays are 5+ years old, with several past end-of-support across three primary U.S. data centers and the Atlanta Operations Control Center.
+Hybrid complexity — Four primary storage platforms across Microsoft Azure (primary cloud), AWS (select workloads), on-prem (ATL/MSP), and legacy edge systems at hub stations.
+Siloed operational data — Real-time ops data spread across crew, fleet, customer, and ground-handling systems — OCC dashboards lag 5–15 minutes during disruptions.
+Resilience gap exposed by CrowdStrike — July 2024 outage produced a multi-day recovery; internal restore time benchmarked at ~10× best-in-class peers. Class actions and DOT scrutiny ongoing.
+Backup &amp; ransomware risk — Backup success rate ~91% against a 99% target. Limited immutable copies for ops-critical workloads. Aviation sector is a rising ransomware target.
+Multi-cloud cost creep — Combined cloud + storage OpEx growing faster than IT budget. Egress and storage tiering not optimized across providers; visibility limited.
+Data Infrastructure
+Hybrid multi-cloud supporting ~5,500 daily flights and 290+ destinations
+Scale: 200M+ passengers per year · 5,500+ flights per day · ~900 aircraft in fleet · 100M+ SkyMiles members · 7 major U.S. hubs · ~100K employees globally
+Microsoft Azure (Primary Cloud)
+Modernized analytics, customer 360, app workloads
+Azure Synapse, Cosmos DB, AKS containers
+AI/ML for operations and personalization
+Active multi-year strategic agreement
+AWS (Select Workloads)
+Specific data science and developer tooling
+Workloads requiring AWS-native services
+Maintained but not the default landing zone
+On-Prem (ATL HQ, Operations Control Center)
+Operations control &amp; dispatch systems
+Legacy reservations and crew systems
+Aircraft sensor ingestion at hub stations
+Mixed legacy storage vendors, mid-refresh
+
+KEY TENSION
+Azure is the strategic cloud, but the OCC and most ops-critical workloads still run on-prem — and that's where the CrowdStrike pain was felt.
+Stakeholder Map
+Who holds the purse strings, who runs the tech, and who you'll actually talk to.
+Economic Buyers
+Ed Bastian — Chief Executive Officer
+CEO since 2016 — Atlanta-based
+Owns board narrative on resilience
+Personally fronted CrowdStrike response
+Outcome-driven, board-savvy
+Dan Janki — EVP &amp; Chief Financial Officer
+CFO since 2021
+Tight on cloud OpEx growth
+Final sign-off on multi-year tech CapEx
+ROI and TCO over technology stories
+Technical Decision Maker
+Rahul Samant — EVP &amp; Chief Information Officer
+CIO leading the modernization program
+Public on Delta's multi-cloud strategy
+Visible post-CrowdStrike
+Demands proven hybrid + ransomware resilience
+AI Personas (in-game characters)
+Sarah Chen — VP, Global Data Infrastructure
+Owns data platform &amp; storage strategy
+Reports to Rahul Samant
+Michael Torres — Director, Data Platform Engineering
+Runs hybrid cloud operations
+Reports to Sarah Chen
+Marcus Webb — Manager, Storage Infrastructure
+Owns storage ops &amp; vendor management
+Reports to Michael Torres
+Competitive Landscape
+Who's already in the room — and how to differentiate.
+Pure Storage
+What they're pitching:
+Evergreen//One STaaS model
+Flash-only simplicity
+DirectFlash for AI workloads
+Their weakness at Delta:
+Limited unified file + object story
+Cloud-tier capabilities lag
+Higher TCO at multi-petabyte scale
+Dell Technologies
+What they're pitching:
+PowerStore + PowerMax for tier-1
+PowerProtect for backup
+Long incumbency in airline IT
+Their weakness at Delta:
+Disjointed product portfolio
+Slow innovation post-merger
+Weaker hybrid-cloud data services
+HPE
+What they're pitching:
+Alletra storage + GreenLake
+Hybrid-cloud as-a-service narrative
+Aruba-tied ops resilience story
+Their weakness at Delta:
+GreenLake consumption complexity
+Limited native Azure integration depth
+Smaller proven ops-critical footprint
+Discovery Question Guide (SPIN)
+SPIN-based questions to unlock pain and build urgency.
+SITUATION — Understand the current state
+&quot;Walk me through your current data infrastructure — what's running on-prem in Atlanta vs in Azure today?&quot;
+&quot;How has the Azure migration evolved since the original announcement? What's still on AWS or legacy systems?&quot;
+&quot;What does the storage footprint look like across your hubs — and how is the OCC architected from a data perspective?&quot;
+PROBLEM — Surface the friction
+&quot;Where in the platform did the CrowdStrike event hit hardest — and what's been hardest to remediate since?&quot;
+&quot;What does your team's restore-time target look like for ops-critical workloads vs reality today?&quot;
+&quot;How are you handling immutable backup and ransomware-resilient copies across your multi-cloud estate?&quot;
+IMPLICATION — Quantify the cost of status quo
+&quot;What does another hour of OCC downtime translate to in cancellations and customer-comp dollars?&quot;
+&quot;How is the board thinking about resilience SLA targets coming out of the CrowdStrike review?&quot;
+&quot;What's the operational cost of running four different storage platforms with different tooling and ops models?&quot;
+NEED-PAYOFF — Build the case for change
+&quot;If you could cut OCC restore time by 5× and consolidate to a unified data plane, what would that unlock for Rahul and the board?&quot;
+&quot;Where does a consistent data service across Azure, AWS, and on-prem change the economics of the modernization program?&quot;
+&quot;How would AI-driven predictive ops change MRO planning if real-time sensor data were unified?&quot;
+
+Personas — Deep Dive
+Sarah Chen — VP, Global Data Infrastructure
+VP TIER · ECONOMIC INFLUENCE
+Focus: Data platform strategy · Hybrid cloud architecture · Storage modernization · AI infrastructure
+KPIs: Platform uptime · Storage TCO · Data availability · Recovery time objective · Infrastructure scalability
+Top Pressures: CrowdStrike outage fallout · Board pressure on resilience SLA · Multi-billion modernization program execution · Skills gap on hybrid + AI
+What Unlocks Them: Business-impact framing tied to CrowdStrike, board narrative, and 5× MTTR. Quantified outcomes, not feature lists.
+Pain
+Owns the post-CrowdStrike resilience response with personal board exposure
+Four storage platforms across Azure, AWS, on-prem create operational drag
+12-hour ops restore time vs 1–2 hour target — biggest open board item
+Board demanding ROI clarity on the multi-billion modernization program
+Ransomware risk rising for aviation; needs immutable, recovery-tested architecture
+AI/ML on operations and MRO stalled by fragmented data plane
+Talent: AI infra and SRE roles open; can't run change without bench
+Desired Outcomes
+5× faster OCC restore time and ransomware-resilient recovery
+Unified data services across Azure, AWS, and on-prem
+TCO reduction tied to consolidation and OpEx control
+How to Win This Conversation
+Lead with the CrowdStrike recovery story — quantified
+Bring an aviation reference and Azure-native architecture
+Connect to Rahul's board narrative; don't pitch products
+Offer a paid resilience assessment as a concrete first step
+Michael Torres — Director, Data Platform Engineering
+DIRECTOR TIER · TECHNICAL BUYER
+Focus: Platform reliability · Storage efficiency · Hybrid cloud operations · Team capacity
+KPIs: Uptime SLA · MTTR · Storage utilization · Sprint velocity · Ops ticket volume
+Top Pressures: Team stretched thin across 24/7 ops · Legacy platforms hard to staff · Zero-downtime migration mandate · CrowdStrike remediation still active
+What Unlocks Them: Practical, hands-on detail on hybrid ops, day-2 operations, and reducing platform sprawl. Honest about trade-offs.
+Pain
+Managing four different storage platforms across Azure, AWS, on-prem, and legacy edge
+22-person team stretched across 24/7 ops for 290+ destinations
+Zero-downtime migration mandate while remediating CrowdStrike findings
+Existing tooling sprawl: each platform has its own CLI, API, and alerting
+MTTR targets cut in half post-CrowdStrike — current process won't get there
+Vendor support response inconsistent across legacy arrays
+Pressure to move workloads to Azure without breaking the OCC dependency
+Desired Outcomes
+Consistent data services and tooling across clouds and on-prem
+Cut MTTR in half through unified observability and automation
+Free engineering time from undifferentiated heavy lifting
+How to Win This Conversation
+Talk to him about day-2 ops, not vision slides
+Bring a real customer reference with hybrid Azure + on-prem deployment
+Be specific on integration with their existing tooling stack
+Connect technical wins to Sarah's board narrative
+Marcus Webb — Manager, Storage Infrastructure
+MANAGER TIER · USER BUYER
+Focus: Storage operations · Backup &amp; recovery · Capacity planning · Vendor management
+KPIs: Uptime SLA · Backup success rate · Storage utilization · Ticket resolution time
+Top Pressures: Legacy system maintenance · End-of-support arrays · Burnt-out team · Vendor escalation churn
+What Unlocks Them: Specific operational pain — backup windows, restore tests, day-of-incident behavior. He's been burned by vendor promises before.
+Pain
+Four legacy arrays past end-of-support with multi-week lead time on replacement parts
+Team of 6 managing four different storage platforms with different CLIs and alerting
+Backup success rate 91% vs 99% target — fixing failed jobs on weekends
+Last full restore test took 11 hours; CrowdStrike review demands &lt;2
+Vendor escalations for legacy arrays routinely drag past SLA
+Capacity planning is reactive — discovers shortages mid-quarter
+Spends days a month chasing spare parts across hub sites
+Desired Outcomes
+99%+ backup success and proven sub-2-hour restore
+Consolidate to fewer platforms with one tooling experience
+Replace the on-call grind with proactive operations
+How to Win This Conversation
+Acknowledge the day-to-day pain credibly
+Bring real numbers on backup success, restore test results, support SLAs
+Don't sell vision — sell a proof-of-value plan
+Offer to run a backup posture assessment as a first step
