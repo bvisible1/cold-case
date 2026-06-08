@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priya Natarajan - LinkedIn</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#f3f2ef;color:#000000e6;line-height:1.4;}
+  .header-bar{background:#fff;border-bottom:1px solid #e0e0e0;padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+  .linkedin-logo{width:34px;height:34px;background:#0a66c2;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:20px;flex-shrink:0;}
+  .search-bar{background:#eef3f8;border-radius:4px;padding:8px 16px;width:280px;border:none;font-size:14px;}
+  .container{max-width:1128px;margin:24px auto;display:grid;grid-template-columns:790px 1fr;gap:24px;padding:0 24px;}
+  .main-content{display:flex;flex-direction:column;gap:8px;}
+  .card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;}
+  .profile-header{position:relative;}
+  .banner{height:196px;background:linear-gradient(135deg,#142b3d 0%,#2a6f7c 55%,#46b08a 100%);}
+  .profile-photo{width:140px;height:140px;border-radius:50%;border:4px solid #fff;overflow:hidden;flex-shrink:0;position:relative;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.15);margin:-70px 0 16px 24px;background:#e9eef3;}
+  .profile-photo img{width:100%;height:100%;object-fit:cover;}
+  .profile-info{padding:0 24px 24px;}
+  .profile-name{font-size:24px;font-weight:600;}
+  .profile-headline{font-size:16px;margin-top:4px;font-weight:400;}
+  .profile-location{font-size:14px;color:#00000099;margin-top:8px;}
+  .profile-location a{color:#0a66c2;text-decoration:none;font-weight:600;}
+  .connections{font-size:14px;color:#0a66c2;font-weight:600;margin-top:12px;}
+  .action-buttons{display:flex;gap:8px;margin-top:16px;}
+  .btn{padding:6px 16px;border-radius:24px;font-size:16px;font-weight:600;cursor:pointer;border:none;}
+  .btn-primary{background:#0a66c2;color:#fff;}
+  .btn-secondary{background:transparent;color:#0a66c2;border:1px solid #0a66c2;}
+  .btn-tertiary{background:transparent;color:#00000099;border:1px solid #00000099;}
+  .section{padding:24px;}
+  .section-title{font-size:20px;font-weight:600;margin-bottom:16px;}
+  .about-text{font-size:14px;line-height:1.6;white-space:pre-line;}
+  .experience-item,.cert-item,.education-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #e0e0e0;}
+  .experience-item:last-child,.cert-item:last-child{border-bottom:none;}
+  .company-logo,.school-logo,.cert-logo{width:48px;height:48px;min-width:48px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;}
+  .logo-mcg{background:#0b3d5c;color:#7fd3c9;font-size:15px;}
+  .logo-bank{background:#1a3a6b;color:#fff;font-size:13px;}
+  .school-logo{background:#13294b;color:#fff;font-size:16px;}
+  .cert-logo{background:#0a66c2;color:#fff;font-size:11px;}
+  .exp-details h3{font-size:16px;font-weight:600;}
+  .exp-details .company,.exp-details .duration,.exp-details .location{font-size:14px;}
+  .exp-details .duration,.exp-details .location{color:#00000099;}
+  .exp-details .description{font-size:14px;margin-top:8px;line-height:1.5;}
+  .exp-details .description ul{margin-top:8px;padding-left:20px;}
+  .exp-details .description li{margin-bottom:4px;}
+  .skills-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-tag{background:#f3f2ef;padding:6px 12px;border-radius:16px;font-size:14px;}
+  .activity-item{padding:16px 0;border-bottom:1px solid #e0e0e0;}
+  .activity-item:last-child{border-bottom:none;}
+  .activity-meta{font-size:12px;color:#00000099;margin-bottom:8px;}
+  .activity-content{font-size:14px;line-height:1.5;white-space:pre-line;}
+  .activity-engagement{display:flex;gap:16px;margin-top:12px;font-size:12px;color:#00000099;}
+  .sidebar{display:flex;flex-direction:column;gap:8px;}
+  .sidebar-card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;padding:16px;}
+  .sidebar-title{font-size:16px;font-weight:600;margin-bottom:12px;}
+  .similar-profile{display:flex;gap:12px;padding:8px 0;align-items:flex-start;}
+  .similar-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;background:#718096;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;}
+  .similar-info h4{font-size:14px;font-weight:600;}
+  .similar-info p{font-size:12px;color:#00000099;}
+  .mutual{font-size:12px;color:#00000099;margin-top:4px;}
+  .recommendation{padding:16px 0;border-bottom:1px solid #e0e0e0;}
+  .recommendation:last-child{border-bottom:none;}
+  .rec-header{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+  .rec-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;background:#718096;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;}
+  .rec-info h4{font-size:14px;font-weight:600;}
+  .rec-info p{font-size:12px;color:#00000099;}
+  .rec-text{font-size:14px;line-height:1.6;font-style:italic;}
+  @media (max-width:1200px){.container{grid-template-columns:1fr;max-width:800px;}}
+</style>
+</head>
+<body>
+  <div class="header-bar"><div class="linkedin-logo">in</div><input type="text" class="search-bar" placeholder="Search" disabled></div>
+  <div class="container">
+    <div class="main-content">
+
+      <div class="card profile-header">
+        <div class="banner"></div>
+        <div class="profile-photo"><img src="face-priya.png" alt="Priya Natarajan"></div>
+        <div class="profile-info">
+          <h1 class="profile-name">Priya Natarajan</h1>
+          <p class="profile-headline">Manager, Observability &amp; Monitoring Operations @ Meridian Capital Group | Detection · alerting · keeping the signal clean</p>
+          <p class="profile-location">Charlotte, North Carolina, United States · <a href="#">Contact info</a></p>
+          <p class="connections">500+ connections</p>
+          <div class="action-buttons">
+            <button class="btn btn-primary">Connect</button>
+            <button class="btn btn-secondary">Message</button>
+            <button class="btn btn-tertiary">More</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">About</h2>
+        <p class="about-text">I keep the monitoring running at Meridian — detection, dashboards, alerting, and the Splunk and Instana stacks everyone quietly depends on until something slips through.
+
+I've owned monitoring here through the whole Heritage integration, which means I'm the person who knows why the two core systems log differently and which alerts you can and can't trust. Most of my week is the unglamorous stuff behind every "resilience" headline: tuning noise out of the queue, chasing failed log pipelines, and watching an ingest bill that keeps climbing faster than anyone upstairs would like.
+
+Came up as a hands-on operator, not a slide-maker. So when a vendor pitches me, I'm going to test the claim on the spot — give me the false-positive rate, the time-to-detect on a real bad change, what it costs at our volume. Bring me numbers and I'll champion you internally. Bring me adjectives and I'll smile and end the meeting early.
+
+When I'm not staring at dashboards I shoot black-and-white film photography — mostly street stuff around Charlotte on weekends. It's the one thing in my life with no alerts.
+
+Report into Daniel Hughes. Always glad to compare notes with other observability and monitoring folks.</p>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Activity</h2>
+        <p style="font-size:14px;color:#00000099;margin-bottom:16px;">1,340 followers</p>
+        <div class="activity-item">
+          <p class="activity-meta">Priya Natarajan posted this · 3d</p>
+          <p class="activity-content">Spent another weekend chasing false alerts.
+
+Here's the part that actually keeps me up: the one alert that mattered earlier this year — a bad change going out — didn't page anyone until customers were already locked out. Two alerting models, two tools, no single source of truth. This is the reality behind every resilience headline, and it's exactly the gap I want closed.</p>
+          <div class="activity-engagement"><span>👍 510</span><span>70 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Priya Natarajan posted this · 3w</p>
+          <p class="activity-content">Question for the observability crowd: what are people actually using to catch a bad deploy before customers do, across a mixed estate — legacy .NET and Java plus newer Kubernetes services?
+
+Our mean-time-to-detect on that kind of change is way too long right now. Real-world answers only, please. No vendor brochures.</p>
+          <div class="activity-engagement"><span>👍 150</span><span>41 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Priya Natarajan posted this · 6w</p>
+          <p class="activity-content">Two tools, ten dashboards, and a Splunk bill that goes up every quarter while finance asks me why.
+
+We don't need another dashboard. We need fewer things to babysit and faster detection. Consolidation isn't a buzzword for me this year — it's survival.</p>
+          <div class="activity-engagement"><span>👍 280</span><span>33 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Priya Natarajan posted this · 2mo</p>
+          <p class="activity-content">Developed a roll of Tri-X from a walk through NoDa last weekend. No metrics, no SLAs, no on-call. Highly recommend a hobby your pager can't reach.</p>
+          <div class="activity-engagement"><span>👍 224</span><span>18 comments</span></div>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-item">
+          <div class="company-logo logo-mcg">MC</div>
+          <div class="exp-details">
+            <h3>Manager, Observability &amp; Monitoring Operations</h3>
+            <p class="company">Meridian Capital Group · Full-time</p>
+            <p class="duration">Aug 2019 - Present · 7 yrs</p>
+            <p class="location">Charlotte, North Carolina</p>
+            <div class="description"><ul>
+              <li>Own detection, alerting, and dashboards across the merged Meridian + Heritage application estate</li>
+              <li>Run the Splunk and IBM Instana monitoring stacks; accountable for mean-time-to-detect and alert quality</li>
+              <li>Carried monitoring operations through the Heritage Southern integration and dual-core period</li>
+              <li>Pushing to consolidate tooling and control rising log-ingest cost</li>
+              <li>Report to Daniel Hughes, Director, Site Reliability Engineering</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="company-logo logo-bank">B</div>
+          <div class="exp-details">
+            <h3>Monitoring / NOC Lead</h3>
+            <p class="company">Regional Bank · Full-time</p>
+            <p class="duration">Jul 2014 - Jul 2019 · 5 yrs 1 mo</p>
+            <p class="location">Charlotte, North Carolina</p>
+            <div class="description"><p>Led the 24/7 network operations center and monitoring tooling for a regional retail bank.</p></div>
+          </div>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Licenses &amp; Certifications</h2>
+        <div class="cert-item"><div class="cert-logo">SPL</div><div class="exp-details"><h3>Splunk Core Certified Power User</h3><p class="company">Splunk</p><p class="duration">Issued 2021</p></div></div>
+        <div class="cert-item"><div class="cert-logo">OTel</div><div class="exp-details"><h3>OpenTelemetry Certified Associate</h3><p class="company">The Linux Foundation</p><p class="duration">Issued 2025</p></div></div>
+        <div class="cert-item"><div class="cert-logo">AWS</div><div class="exp-details"><h3>AWS Certified Cloud Practitioner</h3><p class="company">Amazon Web Services</p><p class="duration">Issued 2024 (self-studied)</p></div></div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="education-item"><div class="school-logo">UNC</div><div class="exp-details"><h3>UNC Charlotte</h3><p class="company">BS, Information Technology</p><p class="duration">2008 - 2012</p></div></div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">Observability</span><span class="skill-tag">Splunk</span><span class="skill-tag">IBM Instana</span><span class="skill-tag">OpenTelemetry</span><span class="skill-tag">Alerting &amp; Detection</span><span class="skill-tag">Dashboards</span><span class="skill-tag">Incident Detection</span><span class="skill-tag">Log Management</span><span class="skill-tag">On-Call Operations</span><span class="skill-tag">Grafana</span><span class="skill-tag">Mean-Time-to-Detect</span>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Recommendations</h2>
+        <p style="font-size:14px;color:#00000099;margin-bottom:16px;">Received (2) · Given (3)</p>
+        <div class="recommendation">
+          <div class="rec-header"><div class="rec-avatar">DH</div><div class="rec-info"><h4>Daniel Hughes</h4><p>Director, Site Reliability Engineering at Meridian</p><p style="color:#00000066;font-size:11px;">Oct 2025 · Daniel manages Priya directly</p></div></div>
+          <p class="rec-text">"Priya is the most clear-eyed monitoring person I've worked with. She knows exactly where our blind spots are because she's the one staring into them at 3am. When she says a tool would actually move our detection time, I take it straight up the chain — she doesn't cry wolf, and she doesn't get dazzled by demos."</p>
+        </div>
+      </div></div>
+
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">People also viewed</h3>
+        <div class="similar-profile"><div class="similar-avatar">DH</div><div class="similar-info"><h4>Daniel Hughes</h4><p>Director, Site Reliability Engineering at Meridian</p><p class="mutual">Priya reports to Daniel</p></div></div>
+        <div class="similar-profile"><div class="similar-avatar">RM</div><div class="similar-info"><h4>Rachel Morgan</h4><p>VP, Infrastructure &amp; Platform Engineering at Meridian</p><p class="mutual">5 mutual connections</p></div></div>
+        <div class="similar-profile"><div class="similar-avatar">GH</div><div class="similar-info"><h4>Greg Halloran</h4><p>Site Reliability Engineer · Open to work</p><p class="mutual">Former colleague</p></div></div>
+      </div>
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">People you may know</h3>
+        <div class="similar-profile"><div class="similar-avatar">BS</div><div class="similar-info"><h4>Brian Sorrell</h4><p>Chief Technology Officer at Meridian</p><p class="mutual">2 mutual connections</p></div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

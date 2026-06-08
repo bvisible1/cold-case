@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachel Morgan - LinkedIn</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#f3f2ef;color:#000000e6;line-height:1.4;}
+  .header-bar{background:#fff;border-bottom:1px solid #e0e0e0;padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+  .linkedin-logo{width:34px;height:34px;background:#0a66c2;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:20px;flex-shrink:0;}
+  .search-bar{background:#eef3f8;border-radius:4px;padding:8px 16px;width:280px;border:none;font-size:14px;}
+  .container{max-width:1128px;margin:24px auto;display:grid;grid-template-columns:790px 1fr;gap:24px;padding:0 24px;}
+  .main-content{display:flex;flex-direction:column;gap:8px;}
+  .card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;}
+  .profile-header{position:relative;}
+  .banner{height:196px;background:linear-gradient(135deg,#0b2f4f 0%,#1c5a86 55%,#2bb1ab 100%);}
+  .profile-photo{width:140px;height:140px;border-radius:50%;border:4px solid #fff;overflow:hidden;flex-shrink:0;position:relative;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.15);margin:-70px 0 16px 24px;background:#e9eef3;}
+  .profile-photo img{width:100%;height:100%;object-fit:cover;}
+  .profile-info{padding:0 24px 24px;}
+  .profile-name{font-size:24px;font-weight:600;}
+  .profile-headline{font-size:16px;margin-top:4px;font-weight:400;}
+  .profile-location{font-size:14px;color:#00000099;margin-top:8px;}
+  .profile-location a{color:#0a66c2;text-decoration:none;font-weight:600;}
+  .connections{font-size:14px;color:#0a66c2;font-weight:600;margin-top:12px;}
+  .action-buttons{display:flex;gap:8px;margin-top:16px;}
+  .btn{padding:6px 16px;border-radius:24px;font-size:16px;font-weight:600;cursor:pointer;border:none;}
+  .btn-primary{background:#0a66c2;color:#fff;}
+  .btn-secondary{background:transparent;color:#0a66c2;border:1px solid #0a66c2;}
+  .btn-tertiary{background:transparent;color:#00000099;border:1px solid #00000099;}
+  .section{padding:24px;}
+  .section-title{font-size:20px;font-weight:600;margin-bottom:16px;}
+  .about-text{font-size:14px;line-height:1.6;white-space:pre-line;}
+  .experience-item,.cert-item,.education-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #e0e0e0;}
+  .experience-item:last-child,.cert-item:last-child{border-bottom:none;}
+  .company-logo,.school-logo,.cert-logo{width:48px;height:48px;min-width:48px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;}
+  .logo-mcg{background:#0b3d5c;color:#7fd3c9;font-size:15px;}
+  .logo-bank{background:#1a3a6b;color:#fff;font-size:13px;}
+  .school-logo{background:#13294b;color:#fff;font-size:16px;}
+  .cert-logo{background:#0a66c2;color:#fff;font-size:12px;}
+  .exp-details h3{font-size:16px;font-weight:600;}
+  .exp-details .company,.exp-details .duration,.exp-details .location{font-size:14px;}
+  .exp-details .duration,.exp-details .location{color:#00000099;}
+  .exp-details .description{font-size:14px;margin-top:8px;line-height:1.5;}
+  .exp-details .description ul{margin-top:8px;padding-left:20px;}
+  .exp-details .description li{margin-bottom:4px;}
+  .skills-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-tag{background:#f3f2ef;padding:6px 12px;border-radius:16px;font-size:14px;}
+  .activity-item{padding:16px 0;border-bottom:1px solid #e0e0e0;}
+  .activity-item:last-child{border-bottom:none;}
+  .activity-meta{font-size:12px;color:#00000099;margin-bottom:8px;}
+  .activity-content{font-size:14px;line-height:1.5;white-space:pre-line;}
+  .activity-engagement{display:flex;gap:16px;margin-top:12px;font-size:12px;color:#00000099;}
+  .sidebar{display:flex;flex-direction:column;gap:8px;}
+  .sidebar-card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;padding:16px;}
+  .sidebar-title{font-size:16px;font-weight:600;margin-bottom:12px;}
+  .similar-profile{display:flex;gap:12px;padding:8px 0;align-items:flex-start;}
+  .similar-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;background:#718096;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;}
+  .similar-info h4{font-size:14px;font-weight:600;}
+  .similar-info p{font-size:12px;color:#00000099;}
+  .mutual{font-size:12px;color:#00000099;margin-top:4px;}
+  .recommendation{padding:16px 0;border-bottom:1px solid #e0e0e0;}
+  .recommendation:last-child{border-bottom:none;}
+  .rec-header{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+  .rec-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;background:#718096;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;}
+  .rec-info h4{font-size:14px;font-weight:600;}
+  .rec-info p{font-size:12px;color:#00000099;}
+  .rec-text{font-size:14px;line-height:1.6;font-style:italic;}
+  @media (max-width:1200px){.container{grid-template-columns:1fr;max-width:800px;}}
+</style>
+</head>
+<body>
+  <div class="header-bar"><div class="linkedin-logo">in</div><input type="text" class="search-bar" placeholder="Search" disabled></div>
+  <div class="container">
+    <div class="main-content">
+
+      <div class="card profile-header">
+        <div class="banner"></div>
+        <div class="profile-photo"><img src="face-rachel.png" alt="Rachel Morgan"></div>
+        <div class="profile-info">
+          <h1 class="profile-name">Rachel Morgan</h1>
+          <p class="profile-headline">VP, Infrastructure &amp; Platform Engineering @ Meridian Capital Group | Operational resilience · Observability · Platform consolidation</p>
+          <p class="profile-location">Charlotte, North Carolina, United States · <a href="#">Contact info</a></p>
+          <p class="connections">500+ connections</p>
+          <div class="action-buttons">
+            <button class="btn btn-primary">Connect</button>
+            <button class="btn btn-secondary">Message</button>
+            <button class="btn btn-tertiary">More</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">About</h2>
+        <p class="about-text">Charlotte-based infrastructure leader. I run platform engineering and operational resilience for Meridian's banking estate — the systems behind 420+ branches and everything our customers touch on their phones.
+
+This past year has come down to one question I keep getting from leadership, and now from our examiners: when something goes wrong in a release, how fast do we know — before a customer ever does? After a rough Friday in March, that stopped being theoretical. Resilience isn't a line on my roadmap anymore; it's the mandate.
+
+We're a more complicated shop than people assume. Two core-banking platforms still running side by side from the Heritage integration, a fast-growing cloud footprint, and a monitoring stack that grew by accretion rather than design. Simplifying all of that is most of my job right now.
+
+Before Meridian I spent six years leading infrastructure at a top-10 US bank, so regulated, high-stakes environments are home for me. I came up the technical track and still care more about how something behaves at 2am than how it looks in a demo.
+
+I mentor with Women in Tech here in Charlotte and sit on the board of a local STEM nonprofit — always happy to talk with people earlier in their careers. If you're a vendor: I respect a sharp point of view, but please don't open with a product tour. Lead with my world and we'll get along fine.</p>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Activity</h2>
+        <p style="font-size:14px;color:#00000099;margin-bottom:16px;">4,612 followers</p>
+        <div class="activity-item">
+          <p class="activity-meta">Rachel Morgan posted this · 1w</p>
+          <p class="activity-content">Operational resilience is a board-level conversation now. After March, "the dashboard didn't catch it" stopped being an acceptable answer in this building.
+
+We're investing so a bad deploy surfaces in our own tooling before a single customer feels it. Yes — the urgency came from the boardroom, not from IT. That's the part that changed.</p>
+          <div class="activity-engagement"><span>👍 1,940</span><span>150 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Rachel Morgan reposted this · 2w</p>
+          <p class="activity-content">Resharing Brian Sorrell's first post since joining us as CTO: "Detection is a design choice, not a postmortem."
+
+This is the lens we're applying to every platform decision this year. Glad to be building it alongside him.</p>
+          <div class="activity-engagement"><span>👍 520</span><span>34 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Rachel Morgan posted this · 3w</p>
+          <p class="activity-content">Spoke at the Southeast Bank Tech Forum on running observability across two core systems mid-integration.
+
+The constraint nobody outside banking quite gets: you can't take the core down, so your detection has to be consistent across the old platform, the new one, and a growing cloud — all at the same time. Fun problem. Mostly.</p>
+          <div class="activity-engagement"><span>👍 360</span><span>21 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Rachel Morgan commented on a post · 1mo</p>
+          <p class="activity-content">We're growing the platform team this year — observability and SRE especially. If you've instrumented a genuinely messy hybrid estate (not a greenfield demo), come find me.</p>
+          <div class="activity-engagement"><span>👍 188</span><span>16 comments</span></div>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-item">
+          <div class="company-logo logo-mcg">MC</div>
+          <div class="exp-details">
+            <h3>VP, Infrastructure &amp; Platform Engineering</h3>
+            <p class="company">Meridian Capital Group · Full-time</p>
+            <p class="duration">Mar 2022 - Present · 4 yrs</p>
+            <p class="location">Charlotte, North Carolina</p>
+            <div class="description"><ul>
+              <li>Own platform engineering and operational resilience across 420+ branches and the digital banking estate</li>
+              <li>Leading the response to the March 2026 service incident and Category III examination readiness</li>
+              <li>Consolidating a 10+ tool monitoring estate inherited through the Heritage integration</li>
+              <li>Executive sponsor for the Meridian Forward cloud platform (AWS / Kubernetes) buildout</li>
+              <li>Report to Brian Sorrell, Chief Technology Officer</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="company-logo logo-bank">B</div>
+          <div class="exp-details">
+            <h3>VP, Infrastructure</h3>
+            <p class="company">Top-10 US Bank · Full-time</p>
+            <p class="duration">Jul 2016 - Feb 2022 · 5 yrs 8 mos</p>
+            <p class="location">Charlotte, North Carolina</p>
+            <div class="description"><p>Led infrastructure and resilience engineering for a large regulated retail bank through a multi-year cloud migration.</p></div>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="company-logo logo-bank">B</div>
+          <div class="exp-details">
+            <h3>Director, Infrastructure Engineering</h3>
+            <p class="company">Top-10 US Bank · Full-time</p>
+            <p class="duration">Aug 2012 - Jun 2016 · 3 yrs 11 mos</p>
+            <p class="location">Charlotte, North Carolina</p>
+          </div>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Licenses &amp; Certifications</h2>
+        <div class="cert-item"><div class="cert-logo">AWS</div><div class="exp-details"><h3>AWS Certified Solutions Architect – Professional</h3><p class="company">Amazon Web Services</p><p class="duration">Issued 2024</p></div></div>
+        <div class="cert-item"><div class="cert-logo">EXEC</div><div class="exp-details"><h3>Executive Leadership Program</h3><p class="company">UNC Kenan-Flagler Business School</p><p class="duration">2021</p></div></div>
+        <div class="cert-item"><div class="cert-logo">ITIL</div><div class="exp-details"><h3>ITIL Foundation</h3><p class="company">Axelos</p><p class="duration">Issued 2017</p></div></div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="education-item"><div class="school-logo">UNC</div><div class="exp-details"><h3>University of North Carolina at Chapel Hill</h3><p class="company">BS, Computer Science</p><p class="duration">2004 - 2008</p></div></div>
+        <div class="education-item"><div class="school-logo">UNC</div><div class="exp-details"><h3>UNC Kenan-Flagler Business School</h3><p class="company">MBA</p><p class="duration">2018 - 2020</p></div></div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">Operational Resilience</span><span class="skill-tag">Observability</span><span class="skill-tag">Platform Engineering</span><span class="skill-tag">AWS</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Incident Management</span><span class="skill-tag">Regulatory Compliance (OCC)</span><span class="skill-tag">Vendor Management</span><span class="skill-tag">Cloud Migration</span><span class="skill-tag">Site Reliability</span><span class="skill-tag">Disaster Recovery</span><span class="skill-tag">Engineering Leadership</span>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Recommendations</h2>
+        <p style="font-size:14px;color:#00000099;margin-bottom:16px;">Received (5) · Given (4)</p>
+        <div class="recommendation">
+          <div class="rec-header"><div class="rec-avatar">BS</div><div class="rec-info"><h4>Brian Sorrell</h4><p>Chief Technology Officer at Meridian Capital Group</p><p style="color:#00000066;font-size:11px;">May 2026 · Brian manages Rachel directly</p></div></div>
+          <p class="rec-text">"Rachel is the rare infrastructure leader who can hold a board conversation and a postmortem in the same hour. When I joined, hers was already the org pushing hardest on detection and consolidation. She doesn't chase shiny tools — she asks what problem a thing actually removes, and she expects a straight answer."</p>
+        </div>
+        <div class="recommendation">
+          <div class="rec-header"><div class="rec-avatar">DH</div><div class="rec-info"><h4>Daniel Hughes</h4><p>Director, Site Reliability Engineering at Meridian (reports to Rachel)</p><p style="color:#00000066;font-size:11px;">Feb 2026 · Daniel reports to Rachel</p></div></div>
+          <p class="rec-text">"Rachel fights for her teams and gives us air cover to fix root causes instead of papering over them. She's technical enough to challenge a design and trusting enough to let us own it. The MTTR mandate is hard, but she's pointed us at the right problems."</p>
+        </div>
+      </div></div>
+
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">People also viewed</h3>
+        <div class="similar-profile"><div class="similar-avatar">BS</div><div class="similar-info"><h4>Brian Sorrell</h4><p>Chief Technology Officer at Meridian</p><p class="mutual">Rachel reports to Brian</p></div></div>
+        <div class="similar-profile"><div class="similar-avatar">DH</div><div class="similar-info"><h4>Daniel Hughes</h4><p>Director, Site Reliability Engineering at Meridian</p><p class="mutual">Reports to Rachel</p></div></div>
+        <div class="similar-profile"><div class="similar-avatar">RC</div><div class="similar-info"><h4>Robert Callahan</h4><p>Chief Information Officer at Meridian</p><p class="mutual">9 mutual connections</p></div></div>
+      </div>
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">People you may know</h3>
+        <div class="similar-profile"><div class="similar-avatar">PN</div><div class="similar-info"><h4>Priya Natarajan</h4><p>Manager, Observability &amp; Monitoring Ops at Meridian</p><p class="mutual">3 mutual connections</p></div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

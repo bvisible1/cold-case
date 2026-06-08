@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Hughes - LinkedIn</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#f3f2ef;color:#000000e6;line-height:1.4;}
+  .header-bar{background:#fff;border-bottom:1px solid #e0e0e0;padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+  .linkedin-logo{width:34px;height:34px;background:#0a66c2;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:20px;flex-shrink:0;}
+  .search-bar{background:#eef3f8;border-radius:4px;padding:8px 16px;width:280px;border:none;font-size:14px;}
+  .container{max-width:1128px;margin:24px auto;display:grid;grid-template-columns:790px 1fr;gap:24px;padding:0 24px;}
+  .main-content{display:flex;flex-direction:column;gap:8px;}
+  .card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;overflow:hidden;}
+  .profile-header{position:relative;}
+  .banner{height:196px;background:linear-gradient(135deg,#10243f 0%,#21557f 55%,#3a8a7f 100%);}
+  .profile-photo{width:140px;height:140px;border-radius:50%;border:4px solid #fff;overflow:hidden;flex-shrink:0;position:relative;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.15);margin:-70px 0 16px 24px;background:#e9eef3;}
+  .profile-photo img{width:100%;height:100%;object-fit:cover;}
+  .profile-info{padding:0 24px 24px;}
+  .profile-name{font-size:24px;font-weight:600;}
+  .profile-headline{font-size:16px;margin-top:4px;font-weight:400;}
+  .profile-location{font-size:14px;color:#00000099;margin-top:8px;}
+  .profile-location a{color:#0a66c2;text-decoration:none;font-weight:600;}
+  .connections{font-size:14px;color:#0a66c2;font-weight:600;margin-top:12px;}
+  .action-buttons{display:flex;gap:8px;margin-top:16px;}
+  .btn{padding:6px 16px;border-radius:24px;font-size:16px;font-weight:600;cursor:pointer;border:none;}
+  .btn-primary{background:#0a66c2;color:#fff;}
+  .btn-secondary{background:transparent;color:#0a66c2;border:1px solid #0a66c2;}
+  .btn-tertiary{background:transparent;color:#00000099;border:1px solid #00000099;}
+  .section{padding:24px;}
+  .section-title{font-size:20px;font-weight:600;margin-bottom:16px;}
+  .about-text{font-size:14px;line-height:1.6;white-space:pre-line;}
+  .experience-item,.cert-item,.education-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #e0e0e0;}
+  .experience-item:last-child,.cert-item:last-child{border-bottom:none;}
+  .company-logo,.school-logo,.cert-logo{width:48px;height:48px;min-width:48px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;}
+  .logo-mcg{background:#0b3d5c;color:#7fd3c9;font-size:15px;}
+  .logo-fin{background:#23303a;color:#7fd3c9;font-size:13px;}
+  .school-logo{background:#13294b;color:#fff;font-size:16px;}
+  .cert-logo{background:#0a66c2;color:#fff;font-size:12px;}
+  .exp-details h3{font-size:16px;font-weight:600;}
+  .exp-details .company,.exp-details .duration,.exp-details .location{font-size:14px;}
+  .exp-details .duration,.exp-details .location{color:#00000099;}
+  .exp-details .description{font-size:14px;margin-top:8px;line-height:1.5;}
+  .exp-details .description ul{margin-top:8px;padding-left:20px;}
+  .exp-details .description li{margin-bottom:4px;}
+  .skills-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-tag{background:#f3f2ef;padding:6px 12px;border-radius:16px;font-size:14px;}
+  .activity-item{padding:16px 0;border-bottom:1px solid #e0e0e0;}
+  .activity-item:last-child{border-bottom:none;}
+  .activity-meta{font-size:12px;color:#00000099;margin-bottom:8px;}
+  .activity-content{font-size:14px;line-height:1.5;white-space:pre-line;}
+  .activity-engagement{display:flex;gap:16px;margin-top:12px;font-size:12px;color:#00000099;}
+  .sidebar{display:flex;flex-direction:column;gap:8px;}
+  .sidebar-card{background:#fff;border-radius:8px;border:1px solid #e0e0e0;padding:16px;}
+  .sidebar-title{font-size:16px;font-weight:600;margin-bottom:12px;}
+  .similar-profile{display:flex;gap:12px;padding:8px 0;align-items:flex-start;}
+  .similar-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;background:#718096;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;}
+  .similar-info h4{font-size:14px;font-weight:600;}
+  .similar-info p{font-size:12px;color:#00000099;}
+  .mutual{font-size:12px;color:#00000099;margin-top:4px;}
+  .recommendation{padding:16px 0;border-bottom:1px solid #e0e0e0;}
+  .recommendation:last-child{border-bottom:none;}
+  .rec-header{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+  .rec-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;background:#718096;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;}
+  .rec-info h4{font-size:14px;font-weight:600;}
+  .rec-info p{font-size:12px;color:#00000099;}
+  .rec-text{font-size:14px;line-height:1.6;font-style:italic;}
+  @media (max-width:1200px){.container{grid-template-columns:1fr;max-width:800px;}}
+</style>
+</head>
+<body>
+  <div class="header-bar"><div class="linkedin-logo">in</div><input type="text" class="search-bar" placeholder="Search" disabled></div>
+  <div class="container">
+    <div class="main-content">
+
+      <div class="card profile-header">
+        <div class="banner"></div>
+        <div class="profile-photo"><img src="face-daniel.png" alt="Daniel Hughes"></div>
+        <div class="profile-info">
+          <h1 class="profile-name">Daniel Hughes</h1>
+          <p class="profile-headline">Director, Site Reliability Engineering @ Meridian Capital Group | Reliability · MTTR · day-2 operations</p>
+          <p class="profile-location">Charlotte, North Carolina, United States · <a href="#">Contact info</a></p>
+          <p class="connections">500+ connections</p>
+          <div class="action-buttons">
+            <button class="btn btn-primary">Connect</button>
+            <button class="btn btn-secondary">Message</button>
+            <button class="btn btn-tertiary">More</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">About</h2>
+        <p class="about-text">I run the SRE team that keeps Meridian's banking platforms reliable around the clock — the systems behind 420+ branches and a mobile app a lot of people depend on.
+
+Came up through platform engineering, so I care about day-2 reality, not vision slides: what actually breaks at 2am, how long it takes us to notice, and how fast we put it back. Right now "day-2" means wrangling two core-banking systems that don't log the same way, about ten monitoring tools that don't agree with each other, and a Kubernetes buildout we're standing up at the same time. We're under a hard mandate to cut MTTR. The current tooling won't get us there, and I'm not shy about saying so.
+
+I'm an engineer at heart. If a vendor tells me their thing is "AI-powered," my next three questions are: causal or correlation, what's the false-positive rate, and what does it do to my ingest bill. Bring me real numbers and a day-in-the-life of my team and you'll have my attention. Bring me a keynote and you won't.
+
+Outside work I'm on a bike most weekends — did the Assault on Mount Mitchell last year and I'm still recovering emotionally. Also maintain a home lab that mostly exists to break things on purpose.
+
+Reports into Rachel Morgan. Always happy to talk shop with other SRE and platform folks.</p>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Activity</h2>
+        <p style="font-size:14px;color:#00000099;margin-bottom:16px;">2,180 followers</p>
+        <div class="activity-item">
+          <p class="activity-meta">Daniel Hughes posted this · 5d</p>
+          <p class="activity-content">Running ten monitoring tools isn't a strategy. It's a tax.
+
+Splunk over here, Instana over there, a dozen dashboards nobody fully trusts — and a bad deploy still slipped past all of them earlier this year. My team pays that tax every single night. If your "platform" adds an eleventh tool to the pile, we are not going to be friends.</p>
+          <div class="activity-engagement"><span>👍 760</span><span>88 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Daniel Hughes commented on a post · 2w</p>
+          <p class="activity-content">On a thread about core migrations: the migration is the easy part. The hard part is doing it while you're also under an examination cycle and can't take an outage. Nobody hands you a maintenance window in banking.</p>
+          <div class="activity-engagement"><span>👍 230</span><span>19 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Daniel Hughes posted this · 1mo</p>
+          <p class="activity-content">We're hiring SREs and an Observability Engineer who has actually instrumented Kubernetes at scale — not on a slide, in production, with real traffic and real on-call. Terraform and ArgoCD shop. If that's you, my DMs are open.</p>
+          <div class="activity-engagement"><span>👍 300</span><span>27 comments</span></div>
+        </div>
+        <div class="activity-item">
+          <p class="activity-meta">Daniel Hughes posted this · 5w</p>
+          <p class="activity-content">102 miles, 11,000 feet of climbing, one questionable life decision. Assault on Mount Mitchell in the books. Back to on-call Monday — which honestly felt easier.</p>
+          <div class="activity-engagement"><span>👍 412</span><span>54 comments</span></div>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-item">
+          <div class="company-logo logo-mcg">MC</div>
+          <div class="exp-details">
+            <h3>Director, Site Reliability Engineering</h3>
+            <p class="company">Meridian Capital Group · Full-time</p>
+            <p class="duration">Jan 2021 - Present · 5 yrs</p>
+            <p class="location">Charlotte, North Carolina</p>
+            <div class="description"><ul>
+              <li>Lead the SRE org responsible for reliability across the dual core-banking estate (FIS + legacy Fiserv) and digital channels</li>
+              <li>Own MTTR, change/deployment success, and on-call health; driving a mandate to halve mean-time-to-restore</li>
+              <li>Standing up observability for the new AWS / Kubernetes platform (Terraform, ArgoCD, OpenTelemetry)</li>
+              <li>Owned the technical post-incident review of the March 2026 deployment outage</li>
+              <li>Report to Rachel Morgan, VP Infrastructure &amp; Platform Engineering</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="company-logo logo-fin">F</div>
+          <div class="exp-details">
+            <h3>Staff Platform Engineer</h3>
+            <p class="company">Fintech (payments) · Full-time</p>
+            <p class="duration">Jun 2017 - Dec 2020 · 3 yrs 7 mos</p>
+            <p class="location">Charlotte, North Carolina</p>
+            <div class="description"><p>Built the reliability and deployment tooling for a high-volume payments platform. Lots of Kubernetes, lots of 2am.</p></div>
+          </div>
+        </div>
+        <div class="experience-item">
+          <div class="company-logo logo-fin">F</div>
+          <div class="exp-details">
+            <h3>Site Reliability Engineer</h3>
+            <p class="company">Fintech (payments) · Full-time</p>
+            <p class="duration">Jul 2014 - May 2017 · 2 yrs 11 mos</p>
+            <p class="location">Charlotte, North Carolina</p>
+          </div>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Licenses &amp; Certifications</h2>
+        <div class="cert-item"><div class="cert-logo">CKA</div><div class="exp-details"><h3>Certified Kubernetes Administrator (CKA)</h3><p class="company">The Linux Foundation</p><p class="duration">Issued 2023</p></div></div>
+        <div class="cert-item"><div class="cert-logo">HCT</div><div class="exp-details"><h3>HashiCorp Certified: Terraform Associate</h3><p class="company">HashiCorp</p><p class="duration">Issued 2023</p></div></div>
+        <div class="cert-item"><div class="cert-logo">AWS</div><div class="exp-details"><h3>AWS Certified Solutions Architect – Associate</h3><p class="company">Amazon Web Services</p><p class="duration">Issued 2022</p></div></div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="education-item"><div class="school-logo">NCS</div><div class="exp-details"><h3>North Carolina State University</h3><p class="company">BS, Computer Engineering</p><p class="duration">2006 - 2010</p></div></div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">Site Reliability Engineering</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Terraform</span><span class="skill-tag">ArgoCD</span><span class="skill-tag">Observability</span><span class="skill-tag">OpenTelemetry</span><span class="skill-tag">Incident Response</span><span class="skill-tag">MTTR Reduction</span><span class="skill-tag">On-Call Operations</span><span class="skill-tag">AWS</span><span class="skill-tag">Go</span><span class="skill-tag">Python</span>
+        </div>
+      </div></div>
+
+      <div class="card"><div class="section">
+        <h2 class="section-title">Recommendations</h2>
+        <p style="font-size:14px;color:#00000099;margin-bottom:16px;">Received (3) · Given (5)</p>
+        <div class="recommendation">
+          <div class="rec-header"><div class="rec-avatar">RM</div><div class="rec-info"><h4>Rachel Morgan</h4><p>VP, Infrastructure &amp; Platform Engineering at Meridian</p><p style="color:#00000066;font-size:11px;">Jan 2024 · Rachel manages Daniel directly</p></div></div>
+          <p class="rec-text">"Daniel is who I want owning reliability when the stakes are highest. He's blunt — sometimes more than a vendor would like — but it's because he actually knows where the bodies are buried in our estate. He'll tell you exactly what breaks and why, and he has no patience for hand-waving. If he vouches for a tool, I believe him."</p>
+        </div>
+        <div class="recommendation">
+          <div class="rec-header"><div class="rec-avatar">PN</div><div class="rec-info"><h4>Priya Natarajan</h4><p>Manager, Observability &amp; Monitoring Ops at Meridian (reports to Daniel)</p><p style="color:#00000066;font-size:11px;">Nov 2025 · Priya reports to Daniel</p></div></div>
+          <p class="rec-text">"Best manager I've had. Daniel shields the team from politics and actually listens when we raise concerns about alert fatigue and on-call load. Technical enough to debug with us, but he trusts us to own our work. The grind is real right now, but he's fighting to fix the root cause instead of just accepting it."</p>
+        </div>
+      </div></div>
+
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">People also viewed</h3>
+        <div class="similar-profile"><div class="similar-avatar">RM</div><div class="similar-info"><h4>Rachel Morgan</h4><p>VP, Infrastructure &amp; Platform Engineering at Meridian</p><p class="mutual">Daniel reports to Rachel</p></div></div>
+        <div class="similar-profile"><div class="similar-avatar">PN</div><div class="similar-info"><h4>Priya Natarajan</h4><p>Manager, Observability &amp; Monitoring Ops at Meridian</p><p class="mutual">Reports to Daniel</p></div></div>
+        <div class="similar-profile"><div class="similar-avatar">GH</div><div class="similar-info"><h4>Greg Halloran</h4><p>Site Reliability Engineer · Open to work</p><p class="mutual">4 mutual connections</p></div></div>
+      </div>
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">People you may know</h3>
+        <div class="similar-profile"><div class="similar-avatar">BS</div><div class="similar-info"><h4>Brian Sorrell</h4><p>Chief Technology Officer at Meridian</p><p class="mutual">7 mutual connections</p></div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

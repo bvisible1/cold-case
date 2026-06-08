@@ -208,13 +208,13 @@ function SceneCardScreen({ state, nav, sceneKey, next }) {
 // ─────────────────────────────────────────────────────────
 const INVESTIGATION = [
 { id: "past-opps", cat: "PRIOR DEALS", title: "Past closed opportunities", q: "What did they buy before?", findings: [
-  { src: "CRM · closed-lost", text: "FY2025 — an observability & security POC, ~$520K. Shortlisted with Datadog and favored, then lost to 'no decision' when a 90-day IT spend freeze hit after a Q1 earnings miss." },
-  { src: "CRM · history", text: "First engaged Nov 2024 after a branch-cutover incident the incumbent monitoring missed. No closed-won — this account has never bought from us." },
+  { src: "CRM · closed-lost", text: "FY2025 — a small observability pilot, ~$48K. Shortlisted with Datadog and favored, then lost to 'no decision' when a 90-day IT spend freeze hit after a Q1 earnings miss." },
+  { src: "CRM · history", text: "First engaged Nov 2024 after a branch-cutover incident the incumbent monitoring missed. A bottom-up technical pilot — never reached budget authority. No closed-won." },
   { src: "Signal", text: "No active opportunity in ~13 months. This is a cold account — the relationship went quiet, not hostile." }]
 },
 { id: "leadership", cat: "PEOPLE", title: "Leadership changes", q: "Who's new or moved on?", findings: [
   { src: "LinkedIn", text: "First-ever CTO, Brian Sorrell, joined ~1 month ago from Capital One — known to have used Dynatrace there." },
-  { src: "Press", text: "Your prior champion, VP of Infrastructure Greg Halloran, left the company last year." },
+  { src: "Press", text: "Your prior pilot champion, Greg Halloran (a Lead SRE), was laid off last year — a bottom-up contact, never a budget owner." },
   { src: "Org", text: "CIO Robert Callahan — the original economic buyer — is still in seat; a new CISO, Kevin Landers, came in mid-2025." }]
 },
 { id: "earnings", cat: "FINANCIALS", title: "Earnings & financial performance", q: "How are they performing?", findings: [
@@ -258,7 +258,7 @@ const INVEST_POS = [21.5, 29, 36.2, 43.7, 50.8, 57.7, 64.4, 71.1, 77.8];
 const RIGHT_TOOLS = [
 { id: "sfdc", cat: "CRM RECORD", title: "SFDC Record", q: "Account details, ownership, pipeline history, and prior engagements.", html: "assets/sfdc-record.html", pos: { left: "70.4%", top: "18.4%", width: "20.2%", height: "14.2%" }, findings: [
   { src: "Account", text: "Owner: unassigned — the last AE (Paul Nettles) rolled off. Tier: Enterprise. Segment: Banking & Financial Services." },
-  { src: "Pipeline history", text: "One closed-lost POC ($520K, 'no decision / budget freeze'). Two open plays: revive the deal, or net-new whitespace." },
+  { src: "Pipeline history", text: "One small closed-lost pilot ($48K, 'no decision / budget freeze'). Two open plays: revive bigger, or net-new whitespace." },
   { src: "Engagement", text: "Last logged activity ~13 months ago. The account is dormant — this is a re-entry." }]
 },
 { id: "ir", cat: "INVESTOR RELATIONS", title: "Investor Relations", q: "Financials, investor presentations, earnings calls, and shareholder comms.", pos: { left: "70.4%", top: "34.4%", width: "20.2%", height: "18.2%" }, findings: [
@@ -274,7 +274,7 @@ const RIGHT_TOOLS = [
 { id: "li", cat: "LINKEDIN", title: "LinkedIn Intelligence", q: "Leadership profiles, recent posts, org changes, and company activity.", html: "assets/linkedin-intel.html", pos: { left: "70.4%", top: "70.6%", width: "20.2%", height: "15.0%" }, findings: [
   { src: "Profiles", text: "New CTO Brian Sorrell (ex-Capital One, an observability-first leader) and CIO Robert Callahan, the original economic buyer." },
   { src: "Recent posts", text: "Rachel Morgan (VP, Infra & Platform Eng) posting that 'detection is a design choice, not a postmortem.'" },
-  { src: "Org changes", text: "Your prior champion, VP Greg Halloran, has departed; Rachel Morgan now owns the platform org." }]
+  { src: "Org changes", text: "Your prior champion, Greg Halloran (Lead SRE), was laid off — no warm thread left. Rachel Morgan owns the platform org today." }]
 }];
 
 
@@ -599,7 +599,7 @@ function OutreachScreen({ state, nav }) {
         <div className="invest-veil" onClick={(e) => {if (e.target.classList.contains("invest-veil")) setShowLI(false);}}>
             <div className="invest-modal embed">
               <button className="modal-x" onClick={() => setShowLI(false)}>×</button>
-              <iframe className="invest-embed" src={"assets/persona-linkedin.html?p=" + pkey} title="LinkedIn profile"></iframe>
+              <iframe className="invest-embed" src={"assets/" + pkey + "-linkedin.html"} title="LinkedIn profile"></iframe>
             </div>
           </div>
         }
