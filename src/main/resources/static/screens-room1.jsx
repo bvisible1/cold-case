@@ -390,7 +390,7 @@ const RIGHT_TOOLS = [
   { src: "Coverage", text: "First-ever CTO appointed; the bank is entering its first Category III exam cycle." },
   { src: "Signal", text: "Lead with the outage and the exam — fresh, dated, and squarely about detection." }]
 },
-{ id: "li", cat: "LINKEDIN", title: "LinkedIn Intelligence", q: "Leadership profiles, recent posts, org changes, and company activity.", html: "assets/linkedin-intel.html", pos: { left: "70.4%", top: "70.6%", width: "20.2%", height: "15.0%" }, findings: [
+{ id: "li", cat: "LINKEDIN", title: "LinkedIn Intelligence", q: "Leadership profiles, recent posts, org changes, and company activity.", href: "https://www.linkedin.com/company/meridian-capital-group", pos: { left: "70.4%", top: "70.6%", width: "20.2%", height: "15.0%" }, findings: [
   { src: "Profiles", text: "New CTO Brian Sorrell (ex-Capital One, an observability-first leader) and CIO Robert Callahan, the original economic buyer." },
   { src: "Recent posts", text: "Rachel Morgan (VP, Infra & Platform Eng) posting that 'detection is a design choice, not a postmortem.'" },
   { src: "Org changes", text: "Your prior champion, Greg Halloran (Lead SRE), was laid off — no warm thread left. Rachel Morgan owns the platform org today." }]
@@ -412,6 +412,7 @@ function ResearchScreen({ state, nav }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-investigation">
         <img className="exact-img" src="assets/investigation-exact.png" alt="Investigation — Phase 01" />
+        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
 
         {/* Left "what you're looking for" list is static (not clickable) */}
 
@@ -554,6 +555,7 @@ function PersonaSelectScreen({ state, nav }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-persona">
         <img className="exact-img" src="assets/persona-exact.png" alt="Persons of Interest" />
+        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
         {/* Three SELECT buttons → choose persona and proceed to outreach */}
         <button className="exact-hotspot persona-select" style={{ left: "27.4%", top: "62.4%", width: "11.2%", height: "5.2%" }} onClick={() => pick("sarah")} aria-label="Select Rachel Morgan"></button>
         <button className="exact-hotspot persona-select" style={{ left: "43.1%", top: "62.6%", width: "11.2%", height: "5.2%" }} onClick={() => pick("michael")} aria-label="Select Daniel Hughes"></button>
@@ -657,6 +659,7 @@ function OutreachScreen({ state, nav }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-outreach">
         <img className="exact-img" src="assets/outreach-exact.png" alt="Outreach — Phase 01" />
+        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
 
         {/* Dynamic polaroid: face + caption over the baked card */}
         <div className="ot-photo"><img src={"assets/face-" + pkey + ".png"} alt={persona.name} /></div>
@@ -852,6 +855,7 @@ function ColdCallScreen({ state, nav, difficulty }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-coldcall">
         <img className="exact-img" src="assets/coldcall-exact.png" alt="Cold call — surveillance room" />
+        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
         <div className="cc-title"><b>COLD CALL</b> <span>/ SURVEILLANCE ROOM</span></div>
         <div className={"cc-timer" + tcls}>{tmm}:{tss}</div>
 
