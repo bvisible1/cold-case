@@ -106,13 +106,15 @@ function TransitionScreen({ state, nav }) {
     v.addEventListener("ended", onEnd);
     v.addEventListener("error", onEnd);
     const fallback = setTimeout(onEnd, 60000);
+    v.muted = false;
+    v.volume = 1;
     const p = v.play && v.play();
-    if (p && p.catch) p.catch(() => {});
+    if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
     return () => { v.removeEventListener("ended", onEnd); v.removeEventListener("error", onEnd); clearTimeout(fallback); };
   }, []);
   return (
     <div className="transition-stage" onClick={go}>
-      <video ref={vidRef} className="transition-video" src="assets/prospecting-transition.mp4" autoPlay muted playsInline></video>
+      <video ref={vidRef} className="transition-video" src="assets/prospecting-transition.mp4" autoPlay playsInline></video>
       <div className="transition-skip">tap anywhere to skip →</div>
     </div>);
 
@@ -132,13 +134,15 @@ function Room2TransitionScreen({ state, nav }) {
     v.addEventListener("ended", onEnd);
     v.addEventListener("error", onEnd);
     const fallback = setTimeout(onEnd, 60000);
+    v.muted = false;
+    v.volume = 1;
     const p = v.play && v.play();
-    if (p && p.catch) p.catch(() => {});
+    if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
     return () => { v.removeEventListener("ended", onEnd); v.removeEventListener("error", onEnd); clearTimeout(fallback); };
   }, []);
   return (
     <div className="transition-stage" onClick={go}>
-      <video ref={vidRef} className="transition-video" src="assets/discovery-room-transition.mp4" autoPlay muted playsInline></video>
+      <video ref={vidRef} className="transition-video" src="assets/discovery-room-transition.mp4" autoPlay playsInline></video>
       <div className="transition-skip">tap anywhere to skip →</div>
     </div>);
 
