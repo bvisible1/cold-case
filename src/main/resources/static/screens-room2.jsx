@@ -757,4 +757,4 @@ function VaultScreen({ state, nav }) {
   );
 }
 
-Object.assign(window, { ContactReviewScreen, PreCallScreen, DiscoveryScreen, ClosingScreen, SolutionScreen, VaultScreen });
+Object.assign(window, { ContactReviewScreen, PreCallScreen, DiscoveryScreen, ClosingScreen, SolutionScreen, VaultScreen, AssessmentPage, ForensicEval });

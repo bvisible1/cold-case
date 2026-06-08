@@ -154,15 +154,102 @@ function Room2TransitionScreen({ state, nav }) {
 function BriefingScreen({ state, nav }) {
   const proceed = () => nav("scene-1");
   return (
-    <div className="exact-landing briefing-exact">
-      <div className="exact-frame exact-frame-briefing">
-        <img className="exact-img" src="assets/briefing-exact.png" alt="Case File Dynatrace — Dossier" />
-        <div className="brief-subject">Dynatrace</div>
+    <div className="brf">
+      <div className="brf-grain"></div>
+      <button className="brf-restart" onClick={() => nav("landing")} aria-label="Restart">↺ Restart</button>
+      <div className="brf-inner">
+        <header className="brf-head">
+          <div className="brf-status">● Case Reopened · Active</div>
+          <h1 className="brf-title">Case File</h1>
+          <div className="brf-subject2">Meridian Capital Group</div>
+        </header>
 
-        {/* Begin pill */}
-        <button className="brief-begin" onClick={proceed}>Begin Investigation →</button>
-        {/* Restart (logo area top-left) */}
-        <button className="exact-hotspot brief-restart" onClick={() => nav("landing")} aria-label="Restart"></button>
+        <div className="brf-cols">
+          <div className="brf-left">
+            <div className="brf-block">
+              <div className="brf-kicker">// Your Assignment</div>
+              <p>You've been assigned to revive a cold account. A small Dynatrace pilot here went quiet thirteen months ago. Rebuild the case, find the opening, and revive the opportunity — or uncover a bigger one. Follow the protocol. Uncover the truth.</p>
+            </div>
+            <div className="brf-block">
+              <div className="brf-kicker">// Phase 01 Objective</div>
+              <p>Uncover the signal. Build the case. Create the opening.</p>
+            </div>
+            <button className="brf-begin2" onClick={proceed}>Begin Investigation →</button>
+          </div>
+
+          <div className="brf-right">
+            <div className="dossier">
+              <div className="dos-head">
+                <div>
+                  <div className="dos-l">Dossier</div>
+                  <div className="dos-subject">Subject: <span>Meridian Capital Group</span></div>
+                </div>
+                <img className="dos-logo" src="assets/meridian-logo.svg" alt="Meridian Capital Group" />
+              </div>
+
+              <div className="dos-grid">
+                <div className="dos-overview">
+                  <div className="dos-h">Company Overview</div>
+                  <p>Meridian Capital Group (NYSE: MCG) is a mid-tier regional bank in commercial lending, wealth management, and capital markets across the US Southeast &amp; Mid-Atlantic. Mid-integration after the 2023 Heritage Southern acquisition, and newly under enhanced regulatory examination.</p>
+                  <div className="dos-h">Tech Estate</div>
+                  <div className="dos-chips">
+                    <span>Core: FIS + Fiserv (dual)</span><span>Cloud: AWS · Kubernetes</span><span>Monitoring: Splunk + Instana</span><span>Data: Snowflake</span>
+                  </div>
+                </div>
+                <div className="dos-glance">
+                  <div className="dos-h">At a Glance</div>
+                  <table><tbody>
+                    <tr><td>Founded</td><td>1987</td></tr>
+                    <tr><td>HQ</td><td>Charlotte, NC</td></tr>
+                    <tr><td>Revenue (FY25)</td><td>~$4.8B</td></tr>
+                    <tr><td>Total Assets</td><td>$310B</td></tr>
+                    <tr><td>Employees</td><td>~14,200</td></tr>
+                    <tr><td>Branches</td><td>420+</td></tr>
+                  </tbody></table>
+                </div>
+              </div>
+
+              <div className="dos-grid2">
+                <div>
+                  <div className="dos-h">Revenue Mix (FY2025)</div>
+                  <div className="dos-donut-row">
+                    <div className="dos-donut"></div>
+                    <ul className="dos-legend">
+                      <li><i style={{ background: "#1f8a87" }}></i>65% Net Interest Income</li>
+                      <li><i style={{ background: "#6fb78a" }}></i>22% Wealth Management</li>
+                      <li><i style={{ background: "#7b5ea7" }}></i>8% Treasury Services</li>
+                      <li><i style={{ background: "#8a93a0" }}></i>5% Other</li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <div className="dos-h">Pressure Points</div>
+                  <ul className="dos-checks">
+                    <li>March 2026 mobile outage — undetected bad deploy</li>
+                    <li>Category III OCC exam now underway</li>
+                    <li>Dual core-banking integration (FIS + Fiserv)</li>
+                    <li>Meridian Forward cloud / Kubernetes buildout</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="dos-why">
+                <div className="dos-h">Why It Matters</div>
+                <p>A favored Dynatrace pilot froze on budget — not a loss. The freeze has lifted, a new observability-first CTO is in, and a public outage gives a fresh, dated reason to re-open. Revive the deal, and grow it into the cloud buildout.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="brf-protocol">
+          <div className="brf-kicker">// Phase 01 Protocol</div>
+          <div className="brf-steps">
+            <div className="brf-step"><span className="n">01</span><b>Investigate the Account.</b></div>
+            <div className="brf-step"><span className="n">02</span><b>Build a Pain Hypothesis.</b></div>
+            <div className="brf-step"><span className="n">03</span><b>Choose a Persona.</b></div>
+            <div className="brf-step"><span className="n">04</span><b>Craft Your Outreach.</b></div>
+          </div>
+        </div>
       </div>
     </div>);
 
@@ -265,12 +352,12 @@ const RIGHT_TOOLS = [
   { src: "Pipeline history", text: "One small closed-lost pilot ($48K, 'no decision / budget freeze'). Two open plays: revive bigger, or net-new whitespace." },
   { src: "Engagement", text: "Last logged activity ~13 months ago. The account is dormant — this is a re-entry." }]
 },
-{ id: "ir", cat: "INVESTOR RELATIONS", title: "Investor Relations", q: "Financials, investor presentations, earnings calls, and shareholder comms.", pos: { left: "70.4%", top: "34.4%", width: "20.2%", height: "18.2%" }, findings: [
+{ id: "ir", cat: "INVESTOR RELATIONS", title: "Investor Relations", q: "Financials, investor presentations, earnings calls, and shareholder comms.", href: "https://www.google.com/search?q=Meridian+Capital+Group+investor+relations", pos: { left: "70.4%", top: "34.4%", width: "20.2%", height: "18.2%" }, findings: [
   { src: "10-K", text: "Now a Category III institution after crossing $100B in assets — subject to enhanced OCC examination for the first time." },
   { src: "Earnings call", text: "Q1 2026 — tech & ops spend up ~$40M YoY on dual-core complexity; compliance infrastructure a top capital priority." },
   { src: "Investor deck", text: "'Meridian Forward' centers on cloud modernization, a real-time payments hub, and ~$80M in AI efficiency by 2027." }]
 },
-{ id: "news2", cat: "PRESS", title: "In the News", q: "The latest news, press releases, and market coverage.", pos: { left: "70.4%", top: "53.6%", width: "20.2%", height: "15.6%" }, findings: [
+{ id: "news2", cat: "PRESS", title: "In the News", q: "The latest news, press releases, and market coverage.", href: "https://www.google.com/search?q=%22Meridian+Capital+Group%22&tbm=nws", pos: { left: "70.4%", top: "53.6%", width: "20.2%", height: "15.6%" }, findings: [
   { src: "Press", text: "The March 2026 mobile-banking outage tied to a failed middleware deploy — board-level attention to resilience." },
   { src: "Coverage", text: "First-ever CTO appointed; the bank is entering its first Category III exam cycle." },
   { src: "Signal", text: "Lead with the outage and the exam — fresh, dated, and squarely about detection." }]
@@ -305,7 +392,7 @@ function ResearchScreen({ state, nav }) {
           key={t.id}
           className={"exact-hotspot invest-hotspot" + (logged.includes(t.id) ? " logged" : "")}
           style={t.pos}
-          onClick={() => setOpen(t.id)}
+          onClick={() => { if (t.href) { window.open(t.href, "_blank", "noopener"); logToNotes(t); } else { setOpen(t.id); } }}
           aria-label={t.title}>
         </button>
         )}
@@ -376,12 +463,24 @@ function HypothesisScreen({ state, nav, setStepTimerSeconds }) {
     setBusy(false);
   };
 
+  // Immediate feedback on its own screen (same as the pre-call assessment).
+  const AP = window.AssessmentPage;
+  if (eval_ && AP) return (
+    <AP
+      result={eval_}
+      label="Hypothesis"
+      phase="Phase 01 · Hypothesis Assessment"
+      onRevise={() => setEval(null)}
+      continueLabel="Select Target →"
+      onContinue={() => nav("room1-persona", { hypothesis: text, hypothesisEval: eval_ })} />
+  );
+
   return (
     <div className="centered-pane">
       <div className="pre-kicker">// Phase 01 / Step 02</div>
       <h2>Working hypothesis.</h2>
       <div className="lead">
-        Based on the evidence, what initiative is Acme prioritizing — and what data challenges would you predict?
+        Based on the evidence, what initiative is {window.HEIST_DATA.SCENARIO.account} prioritizing — and what would you predict is broken?
         Be specific. Cite what you found.
       </div>
 
@@ -400,27 +499,19 @@ function HypothesisScreen({ state, nav, setStepTimerSeconds }) {
         className="big-textarea"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="The pattern emerging at Acme appears to be..." />
-      
+        placeholder={`The pattern emerging at ${window.HEIST_DATA.SCENARIO.account} appears to be...`} />
+
 
       <div className="step-foot">
         <span><span className="count">{text.length}</span> chars · aim for 200-500</span>
         <span>{busy ? <Spinner label="judging" /> : null}</span>
       </div>
 
-      {eval_ && <EvalCard result={eval_} />}
-
       <div className="row-end mt-32">
         <button className="btn btn-ghost" onClick={() => nav("room1-research")}>↩ Back to Research</button>
-        {!eval_ ?
         <button className="btn btn-primary" onClick={submit} disabled={!text.trim() || busy}>
-            Submit Hypothesis →
-          </button> :
-
-        <button className="btn btn-primary" onClick={() => nav("room1-persona", { hypothesis: text, hypothesisEval: eval_ })}>
-            Select Target →
-          </button>
-        }
+          {busy ? "Analyzing…" : "Submit Hypothesis →"}
+        </button>
       </div>
     </div>);
 
