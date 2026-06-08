@@ -13,14 +13,14 @@ function TopBar({ state, screen }) {
     <div className="topbar">
       <div className="brand">
         <span className="dot"></span>
-        <span>B-Visible · Case File</span>
+        <span>SignalPursuits · Case File</span>
       </div>
       <div className="crumbs">
         <span className={screen === "briefing" ? "active" : ""}>Case File</span>
         <span>·</span>
         <span className={screen.startsWith("room1") || screen === "scene-1" ? "active" : ""}>Phase 01</span>
         <span>·</span>
-        <span className={screen.startsWith("room2") || screen === "scene-2" ? "active" : ""}>Phase 02</span>
+        <span className={screen.startsWith("room2") || screen === "scene-2" ? "active" : ""}>Discovery</span>
         <span>·</span>
         <span className={screen === "vault" ? "active" : ""}>Findings</span>
       </div>
@@ -32,19 +32,15 @@ function TopBar({ state, screen }) {
   );
 }
 
-// ─────────────── Room clock ───────────────
-function RoomClock({ secondsLeft, label = "Room clock" }) {
-  if (secondsLeft == null) return null;
-  const m = Math.floor(secondsLeft / 60);
-  const s = secondsLeft % 60;
-  const warn = secondsLeft < 600;
-  const crit = secondsLeft < 180;
+// ─────────────── Case clock (elapsed, no limit) ───────────────
+function RoomClock({ seconds, label = "Case open" }) {
+  if (seconds == null) return null;
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
   return (
-    <div className={`room-clock ${crit ? "critical" : warn ? "warning" : ""}`}>
+    <div className="room-clock">
       <span className="label">{label}</span>
-      <span className="time">
-        {String(m).padStart(2, "0")}:{String(s).padStart(2, "0")}
-      </span>
+      <span className="time">⏱ {String(m).padStart(2, "0")}:{String(s).padStart(2, "0")} elapsed</span>
     </div>
   );
 }
@@ -124,21 +120,15 @@ function ChatScreen({ state, nav, persona, mode, durationSeconds, onComplete, di
   const [busy, setBusy] = useState(false);
   const [typing, setTyping] = useState("");
   const [ice, setIce] = useState({ implication: false, champion: false, economicBuyer: false });
-  const [remaining, setRemaining] = useState(durationSeconds);
+  const [elapsed, setElapsed] = useState(0);
   const [ending, setEnding] = useState(false);
   const [scored, setScored] = useState(null);
   const logRef = useRef(null);
 
-  // Tick
+  // Tick — counts elapsed time up; no limit, no auto-end
   useEffect(() => {
-    const id = setInterval(() => {
-      setRemaining(r => {
-        if (r <= 1) { clearInterval(id); endCall("time"); return 0; }
-        return r - 1;
-      });
-    }, 1000);
+    const id = setInterval(() => setElapsed(e => e + 1), 1000);
     return () => clearInterval(id);
-    // eslint-disable-next-line
   }, []);
 
   // Initial system greeting from persona — they get the first word.
@@ -213,15 +203,24 @@ function ChatScreen({ state, nav, persona, mode, durationSeconds, onComplete, di
   };
 
   const proceed = () => {
-    onComplete({
-      transcript: messages,
-      score: scored || { implication: 30, champion: 30, economicBuyer: 30, quality: 30, meetingEarned: false, summary: "Incomplete." }
-    });
+    const finalScore = scored || { implication: 30, champion: 30, economicBuyer: 30, quality: 30, meetingEarned: false, summary: "Incomplete." };
+    // Append-only capture of the full transcript + score (no-ops if Supabase unconfigured).
+    if (window.HEIST_DB) {
+      window.HEIST_DB.saveCall({
+        playId: state && state.playId,
+        teamId: state && state.teamId,
+        mode,
+        personaId: persona.id,
+        personaName: persona.name,
+        personaTitle: persona.title,
+        transcript: messages,
+        score: finalScore,
+      });
+    }
+    onComplete({ transcript: messages, score: finalScore });
   };
 
-  const m = Math.floor(remaining / 60), s = remaining % 60;
-  const warn = remaining < 120;
-  const crit = remaining < 30;
+  const m = Math.floor(elapsed / 60), s = elapsed % 60;
 
   return (
     <div className="chat-stage">
@@ -238,7 +237,7 @@ function ChatScreen({ state, nav, persona, mode, durationSeconds, onComplete, di
             // CALL TYPE
           </div>
           <div style={{ fontSize: 13, color: "var(--text-2)" }}>
-            {mode === "cold" ? "Cold outbound · 5:00 max" : "Discovery meeting · 15:00"}
+            {mode === "cold" ? "Cold outbound · no time limit" : "Discovery interview · no time limit"}
           </div>
         </div>
 
@@ -268,8 +267,8 @@ function ChatScreen({ state, nav, persona, mode, durationSeconds, onComplete, di
       <div className="chat-pane">
         <div className="chat-head">
           <div className="status"><span className="dot"></span> {headline || (mode === "cold" ? "Cold Call · Live" : "Discovery Call · Live")}</div>
-          <div className={`timer ${crit ? "critical" : warn ? "warning" : ""}`}>
-            {String(m).padStart(2, "0")}:{String(s).padStart(2, "0")}
+          <div className="timer">
+            ⏱ {String(m).padStart(2, "0")}:{String(s).padStart(2, "0")}
           </div>
         </div>
 

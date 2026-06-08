@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Profile</title>
+<style>
+  :root{
+    --li:#4aa3ec; --li-deep:#0a66c2;
+    --bg:#0c1620; --bg-1:#10202d; --bg-2:#16293a; --line:#23394d;
+    --txt:#e7eef5; --txt-2:#9fb2c4; --dim:#6f8499; --green:#3aa76d;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:14px;line-height:1.5;}
+  .topbar{display:flex;align-items:center;gap:10px;padding:10px 18px;background:linear-gradient(180deg,#0c3a6b,#0a2c4f);border-bottom:1px solid var(--line);}
+  .in{width:24px;height:24px;border-radius:5px;background:#fff;color:var(--li-deep);font-weight:800;font-size:14px;display:grid;place-items:center;}
+  .topbar .brand{font-weight:700;}
+  .topbar .tab{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9cc8f0;}
+  .cover{height:88px;background:linear-gradient(120deg,#0a66c2,#15324d 55%,#0a2230);}
+  .head{padding:0 22px 16px;border-bottom:1px solid var(--line);background:var(--bg-1);}
+  .pfp{width:104px;height:104px;border-radius:50%;border:4px solid var(--bg-1);margin-top:-52px;background:#26405a;overflow:hidden;}
+  .pfp img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1);}
+  .nm{font-size:24px;font-weight:700;margin-top:8px;}
+  .hl{color:var(--txt-2);font-size:14px;}
+  .meta{color:var(--dim);font-size:12px;margin-top:4px;}
+  .meta b{color:var(--li);font-weight:600;}
+  .openrow{display:flex;gap:8px;margin-top:12px;}
+  .btn{font-family:var(--sans);font-size:13px;font-weight:600;padding:6px 16px;border-radius:18px;border:1px solid var(--li);color:#06121c;background:var(--li);cursor:default;}
+  .btn.ghost{background:transparent;color:var(--li);}
+  .wrap{padding:18px 22px;display:grid;gap:16px;}
+  .card{background:var(--bg-1);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .card h2{margin:0 0 10px;font-size:12px;font-family:var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--li);}
+  .about{font-size:13.5px;line-height:1.65;color:var(--txt);}
+  .exp{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);}
+  .exp:last-child{border-bottom:0;}
+  .exp .ico{width:38px;height:38px;border-radius:8px;background:var(--bg-3,#1a2c3d);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--li);flex:0 0 auto;}
+  .exp .role{font-weight:600;font-size:14px;}
+  .exp .co{color:var(--txt-2);font-size:12px;}
+  .exp .dur{color:var(--dim);font-size:11px;font-family:var(--mono);}
+  .post{padding:12px 0;border-bottom:1px solid var(--line);}
+  .post:last-child{border-bottom:0;}
+  .post .when{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:5px;}
+  .post .body{font-size:13.5px;line-height:1.6;}
+  .post .react{margin-top:7px;font-family:var(--mono);font-size:10px;color:var(--dim);}
+  .post .react b{color:var(--li);}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:12px;padding:5px 11px;border-radius:14px;border:1px solid var(--line);color:var(--txt-2);background:var(--bg-2);}
+  .det{display:flex;gap:10px;padding:8px 0;font-size:13px;align-items:baseline;border-bottom:1px solid var(--line);}
+  .det:last-child{border-bottom:0;}
+  .det .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--li);min-width:104px;}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  const PROFILES = {
+    rachel: {
+      name: "Rachel Morgan", initials:"RM", face:"face-rachel.png",
+      headline: "VP, Global Data Infrastructure at Delta Air Lines",
+      meta: "Atlanta, GA · 500+ connections · <b>3 mutual</b> (incl. 1 at NetApp)",
+      about: "Accountable for the data platform and storage strategy behind Delta's operations. Since last summer I've been laser-focused on one question the board keeps asking: when the next outage hits, how fast do we recover? Resilience isn't a project anymore — it's the mandate. Previously led infrastructure at a Fortune 100 global operations org.",
+      experience: [
+        { ico:"DAL", role:"VP, Global Data Infrastructure", co:"Delta Air Lines", dur:"3 yrs" },
+        { ico:"PRV", role:"VP, Infrastructure", co:"(prior Fortune 100 ops org)", dur:"5 yrs" },
+      ],
+      posts: [
+        { when:"POSTED · 1 WEEK AGO", body:"\u201cResilience is a board-level conversation now. After last summer, &lsquo;good enough&rsquo; infrastructure stopped being acceptable. We&rsquo;re targeting a 5x improvement in recovery time across ops-critical workloads — and yes, that number came from the boardroom, not from IT.\u201d", react:"<b>2,140</b> reactions · <b>180</b> comments" },
+        { when:"RESHARED · 2 WEEKS AGO", body:"Resharing our CIO Rahul Samant&rsquo;s post: &lsquo;Resilience is a design principle, not a recovery step.&rsquo; This is exactly the lens we&rsquo;re applying to every infrastructure decision this year.", react:"<b>640</b> reactions" },
+        { when:"SPOKE AT · AVIATION IT SUMMIT 2026", body:"Grateful to have shared the stage to talk about rebuilding the data fabric under the Operations Control Center — the constraint nobody outside aviation appreciates: the OCC can&rsquo;t move to the cloud, so the data plane has to be consistent across Azure, AWS, and on-prem.", react:"<b>410</b> reactions" },
+      ],
+      details: [
+        { k:"Volunteers", v:"Mentor, Women in STEM — Atlanta chapter (great rapport angle, not a sales angle)." },
+        { k:"Posted req", v:"Her org is hiring a Director, Hybrid Cloud Engineering — she's building, not migrating away from on-prem." },
+        { k:"Reads as", v:"Speaks in board outcomes, not features. Lead with the 5x MTTR mandate and what a miss costs." },
+      ],
+      chips: ["Hybrid cloud","Operational resilience","Forecast/MTTR","Board reporting","Data platform strategy"],
+    },
+    daniel: {
+      name: "Daniel Hughes", initials:"DH", face:"face-daniel.png",
+      headline: "Director, Data Platform Engineering at Delta Air Lines",
+      meta: "Atlanta, GA · 500+ connections · <b>2 mutual</b>",
+      about: "I run the team that keeps Delta's data platforms alive 24/7 across 290+ destinations. Came up through SRE. I care about day-2 reality, not vision slides — what breaks at 2am and how fast we fix it. Right now that means wrangling four storage platforms across Azure, AWS, on-prem, and legacy edge while we cut MTTR in half.",
+      experience: [
+        { ico:"DAL", role:"Director, Data Platform Engineering", co:"Delta Air Lines", dur:"5 yrs" },
+        { ico:"SAAS", role:"Staff SRE", co:"(major SaaS)", dur:"4 yrs" },
+      ],
+      posts: [
+        { when:"POSTED · 5 DAYS AGO", body:"\u201cManaging four different storage platforms isn&rsquo;t a strategy, it&rsquo;s a tax. Four CLIs, four alerting models, four on-call runbooks. My 22-person team pays that tax every single night. If your &lsquo;platform&rsquo; adds a fifth, we&rsquo;re not talking.\u201d", react:"<b>820</b> reactions · <b>96</b> comments" },
+        { when:"COMMENTED · 2 WEEKS AGO", body:"On a thread about zero-downtime migration: &lsquo;The migration is the easy part. The hard part is doing it while you&rsquo;re also remediating findings from last year&rsquo;s outage. Nobody hands you a maintenance window in aviation.&rsquo;", react:"<b>210</b> reactions" },
+        { when:"POSTED · 1 MONTH AGO", body:"We&rsquo;re hiring a Principal Architect, Data Platform to own the unified data-fabric blueprint. If you&rsquo;ve actually unified hybrid storage at scale (not on a slide), my DMs are open.", react:"<b>330</b> reactions" },
+      ],
+      details: [
+        { k:"Personal", v:"Marathon runner — posts splits from the Atlanta Marathon (rapport, used carefully)." },
+        { k:"Tell", v:"Allergic to 'AI-powered' hand-waving. Respects specifics: latency, rate limits, failure modes." },
+        { k:"Reads as", v:"Win him with a 'day in the life' of his team, not an outcomes pitch. He gates the technical yes to Rachel." },
+      ],
+      chips: ["SRE","Hybrid ops","MTTR","Zero-downtime migration","Tooling consolidation"],
+    },
+    priya: {
+      name: "Priya Natarajan", initials:"PN", face:"face-priya.png",
+      headline: "Manager, Storage Infrastructure at Delta Air Lines",
+      meta: "Atlanta, GA · 500+ connections · <b>1 mutual</b>",
+      about: "I keep the storage running — backups, restores, capacity, the legacy arrays everyone forgets about until they fail. Spent years on the vendor side before this, so I can smell a pitch from a mile away. Tell me what your thing actually does on a Tuesday, not what it does in a keynote.",
+      experience: [
+        { ico:"DAL", role:"Manager, Storage Infrastructure", co:"Delta Air Lines", dur:"8 yrs" },
+        { ico:"VND", role:"Sr. Storage Engineer", co:"(storage vendor)", dur:"6 yrs" },
+      ],
+      posts: [
+        { when:"POSTED · 3 DAYS AGO", body:"\u201cSpent the weekend chasing failed backup jobs again. A 91% success rate is not a number I can live with when the target is 99%. Four of our arrays are past end-of-support and parts take weeks. This is the unglamorous reality behind every &lsquo;resilience&rsquo; headline.\u201d", react:"<b>540</b> reactions · <b>72</b> comments" },
+        { when:"ASKED · STORAGE COMMUNITY · 3 WEEKS AGO", body:"Question for the group: what are people actually using for immutable, ransomware-resilient backups on ops-critical workloads? Our last full restore test took 11 hours. I need that under two. Real answers only.", react:"<b>160</b> reactions" },
+        { when:"POSTED · 6 WEEKS AGO", body:"Six people, four storage platforms, 24/7. We don&rsquo;t need another dashboard. We need fewer things to babysit.", react:"<b>290</b> reactions" },
+      ],
+      details: [
+        { k:"Personal", v:"Film photography hobbyist — posts black-and-white street shots on weekends." },
+        { k:"Tell", v:"Ex-vendor. She'll test your technical claims immediately. Bring numbers, not adjectives." },
+        { k:"Reads as", v:"Earn her with backup/restore specifics. She can champion a proof-of-value up to Daniel." },
+      ],
+      chips: ["Backup & recovery","Immutable / ransomware","Capacity planning","Legacy arrays","Restore testing"],
+    },
+  };
+
+  const p = new URLSearchParams(location.search).get('p') || 'rachel';
+  const d = PROFILES[p] || PROFILES.rachel;
+  document.title = d.name + " · LinkedIn";
+  document.getElementById('app').innerHTML = `
+    <div class="topbar"><span class="in">in</span><span class="brand">LinkedIn</span><span class="tab">Profile</span></div>
+    <div class="cover"></div>
+    <div class="head">
+      <div class="pfp"><img src="${d.face}" alt=""></div>
+      <div class="nm">${d.name}</div>
+      <div class="hl">${d.headline}</div>
+      <div class="meta">${d.meta}</div>
+      <div class="openrow"><span class="btn">Message</span><span class="btn ghost">Connect</span><span class="btn ghost">Follow</span></div>
+    </div>
+    <div class="wrap">
+      <div class="card"><h2>About</h2><div class="about">${d.about}</div></div>
+      <div class="card"><h2>Activity</h2>${d.posts.map(x=>`<div class="post"><div class="when">${x.when}</div><div class="body">${x.body}</div><div class="react">${x.react}</div></div>`).join('')}</div>
+      <div class="card"><h2>Experience</h2>${d.experience.map(x=>`<div class="exp"><div class="ico">${x.ico}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="dur">${x.dur}</div></div></div>`).join('')}</div>
+      <div class="card"><h2>Intel — read the room</h2>${d.details.map(x=>`<div class="det"><span class="k">${x.k}</span><span>${x.v}</span></div>`).join('')}</div>
+      <div class="card"><h2>Topics they engage with</h2><div class="chips">${d.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div></div>
+    </div>`;
+</script>
+</body>
+</html>

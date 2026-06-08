@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Command Center — SignalPursuits Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+  :root{
+    --bg:#060a10; --bg-1:#0b1019; --bg-2:#111722; --bg-3:#1a2230;
+    --line:#1f2836; --line-2:#2a3545;
+    --accent:#2dd4d0; --accent-bright:#6ef0ed; --accent-dim:#1f8a87;
+    --red:#e84a5c; --green:#6fb78a; --amber:#d9b06a; --gold:#d9b06a;
+    --txt:#ecf0f5; --txt-2:#b0b8c4; --txt-dim:#6f7986; --txt-faint:#4a5260;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+    --serif:'IBM Plex Serif',Georgia,serif;
+    --type:'Special Elite','IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:14px;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(45,212,208,.05), transparent 55%),
+      linear-gradient(180deg,#070c13,#060a10);}
+  .wrap{position:relative;z-index:1;max-width:1480px;margin:0 auto;padding:28px 30px 80px;}
+
+  /* Lock screen */
+  .lock{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:var(--bg);}
+  .lock-card{width:min(420px,92%);background:var(--bg-1);border:1px solid var(--line-2);border-radius:10px;padding:36px 32px;text-align:center;box-shadow:0 20px 80px rgba(0,0,0,.7);}
+  .lock-badge{width:54px;height:54px;border-radius:50%;border:1px solid var(--accent-dim);color:var(--accent);display:grid;place-items:center;margin:0 auto 20px;font-size:22px;}
+  .lock h1{font-family:var(--type);font-size:22px;margin:0 0 6px;}
+  .lock p{color:var(--txt-dim);font-size:13px;margin:0 0 24px;}
+  .lock input{width:100%;background:var(--bg);border:1px solid var(--line-2);color:var(--txt);font-family:var(--mono);font-size:15px;letter-spacing:.15em;text-align:center;padding:13px;border-radius:5px;outline:none;}
+  .lock input:focus{border-color:var(--accent-dim);}
+  .lock button{margin-top:14px;width:100%;background:var(--accent);color:#06222a;border:0;font-family:var(--mono);font-weight:700;letter-spacing:.15em;text-transform:uppercase;font-size:12px;padding:13px;border-radius:5px;cursor:pointer;}
+  .lock .err{color:var(--red);font-family:var(--mono);font-size:11px;margin-top:12px;min-height:14px;letter-spacing:.05em;}
+
+  /* Header */
+  .head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:26px;}
+  .head h1{font-family:var(--type);font-size:26px;margin:0;color:var(--txt);font-weight:400;line-height:1.15;}
+  .head h1 .a{color:var(--accent);}
+  .head .meta{font-family:var(--mono);font-size:12px;color:var(--txt-dim);margin-top:10px;letter-spacing:.04em;}
+  .head .meta .live{color:var(--green);}
+  .head .meta b{color:var(--txt-2);font-weight:500;}
+
+  /* Stat cards */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
+  .card{background:var(--bg-1);border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+  .card .l{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt-dim);}
+  .card .v{font-size:38px;font-weight:700;line-height:1.1;margin-top:8px;font-family:var(--serif);}
+  .card.accent .v{color:var(--accent);}
+  .card.green .v{color:var(--green);}
+  .card.amber .v{color:var(--amber);}
+
+  .tiers{display:grid;grid-template-columns:1.4fr repeat(4,1fr) 1fr;gap:14px;margin-bottom:22px;}
+  .tcard{background:var(--bg-1);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .tcard .l{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt-dim);}
+  .tcard .v{font-size:26px;font-weight:700;margin-top:6px;font-family:var(--serif);}
+  .tcard .s{font-family:var(--mono);font-size:10px;color:var(--txt-dim);margin-top:2px;}
+  .tcard.lead{border-color:var(--accent-dim);}
+  .tcard.lead .v{color:var(--accent);}
+  .tcard.confirmed .v{color:var(--green);} .tcard.confirmed .l{color:var(--green);}
+  .tcard.probable .v{color:var(--accent);}
+  .tcard.inconclusive .v{color:var(--amber);}
+  .tcard.insufficient .v{color:var(--txt-2);}
+  .tcard.meet .v{color:var(--accent);}
+
+  /* Actions */
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;align-items:center;}
+  .btn{background:var(--bg-2);border:1px solid var(--line-2);color:var(--txt);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .btn:hover{border-color:var(--accent-dim);background:var(--bg-3);}
+  .btn.primary{background:var(--accent);color:#06222a;border-color:var(--accent);font-weight:700;}
+  .btn.primary:hover{background:var(--accent-bright);}
+  .toggle{margin-left:auto;display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;color:var(--txt-dim);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+  .switch{width:38px;height:20px;border-radius:11px;background:var(--bg-3);border:1px solid var(--line-2);position:relative;transition:.2s;}
+  .switch::after{content:'';position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;background:var(--txt-dim);transition:.2s;}
+  .toggle.on .switch{background:rgba(45,212,208,.25);border-color:var(--accent-dim);}
+  .toggle.on .switch::after{left:19px;background:var(--accent);}
+
+  /* Panels */
+  .panel{background:var(--bg-1);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:22px;}
+  .panel h2{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 18px;display:flex;align-items:center;gap:9px;}
+
+  /* Leaderboard */
+  .lb-row{display:grid;grid-template-columns:54px 70px 1fr auto;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid var(--line);}
+  .lb-row:last-child{border-bottom:0;}
+  .lb-rank{font-family:var(--type);font-size:22px;}
+  .lb-row:nth-child(1) .lb-rank{color:var(--accent);}
+  .lb-team{font-family:var(--mono);font-size:18px;font-weight:600;}
+  .lb-meta{display:flex;flex-direction:column;gap:3px;}
+  .lb-meta .nm{font-size:13px;color:var(--txt-2);}
+  .lb-meta .pts{font-family:var(--mono);font-size:11px;color:var(--green);}
+  .lb-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:520px;}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:4px 9px;border-radius:11px;border:1px solid var(--line-2);color:var(--txt-2);background:var(--bg-2);white-space:nowrap;}
+  .tag.lit{border-color:var(--accent-dim);color:var(--accent);}
+  .tag.meet{border-color:var(--green);color:var(--green);}
+  .tag.tier{border-color:var(--amber);color:var(--amber);}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;}
+  thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim);font-weight:400;text-align:left;padding:0 14px 12px;border-bottom:1px solid var(--line-2);}
+  tbody td{padding:13px 14px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle;}
+  tbody tr:hover{background:var(--bg-2);}
+  .rank{font-family:var(--type);font-size:16px;color:var(--txt-dim);}
+  .team{font-family:var(--mono);font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+  .demo-dot{width:7px;height:7px;border-radius:50%;background:var(--txt-faint);}
+  .stage{font-family:var(--mono);font-size:11px;color:var(--txt-2);letter-spacing:.04em;}
+  .stage.done{color:var(--green);}
+  .scorecell{font-family:var(--mono);}
+  .scorecell .m{color:var(--txt-faint);font-size:11px;}
+  .total{font-family:var(--mono);font-weight:700;font-size:15px;}
+  .pill{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid var(--line-2);color:var(--txt-2);}
+  .pill.confirmed{border-color:var(--green);color:var(--green);}
+  .pill.probable{border-color:var(--accent-dim);color:var(--accent);}
+  .pill.inconclusive{border-color:var(--amber);color:var(--amber);}
+  .pill.insufficient{border-color:var(--line-2);color:var(--txt-dim);}
+  .deal{font-family:var(--mono);color:var(--accent);}
+  .meet-y{color:var(--green);} .meet-n{color:var(--txt-faint);}
+  .upd{font-family:var(--mono);font-size:11px;color:var(--txt-dim);}
+
+  /* Modal */
+  .veil{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:grid;place-items:center;padding:40px;}
+  .modal{background:var(--bg-1);border:1px solid var(--line-2);border-radius:10px;max-width:560px;width:100%;max-height:84vh;overflow:auto;padding:26px 28px;box-shadow:0 20px 80px rgba(0,0,0,.7);}
+  .modal h3{font-family:var(--type);font-size:20px;margin:0 0 4px;}
+  .modal .sub{color:var(--txt-dim);font-size:12px;margin-bottom:18px;}
+  .modal .x{float:right;background:none;border:0;color:var(--txt-dim);font-size:22px;cursor:pointer;}
+  .code-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);}
+  .code-row .t{font-family:var(--mono);font-size:14px;}
+  .code-row .c{font-family:var(--mono);font-size:16px;letter-spacing:.25em;color:var(--accent);}
+
+  .empty{color:var(--txt-dim);font-size:13px;text-align:center;padding:30px;font-family:var(--mono);}
+  @media (max-width:1100px){.stats{grid-template-columns:repeat(2,1fr);}.tiers{grid-template-columns:repeat(3,1fr);}.lb-tags{display:none;}}
+</style>
+</head>
+<body>
+<div id="lock" class="lock">
+  <div class="lock-card">
+    <div class="lock-badge">🔒</div>
+    <h1>Case Command Center</h1>
+    <p>Restricted · facilitator access only</p>
+    <input id="pw" type="password" placeholder="ACCESS CODE" autocomplete="off" />
+    <button id="pwbtn">Unlock</button>
+    <div class="err" id="pwerr"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+  <div class="head">
+    <div>
+      <h1>Case Command Center <span class="a">— SignalPursuits Ops</span></h1>
+      <div class="meta"><b id="teamCount">0</b> teams registered · <span class="live">● live</span> · last refresh <b id="refreshTime">—</b></div>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <div class="tiers" id="tierStats"></div>
+
+  <div class="actions">
+    <button class="btn" id="csvBtn">⬇ Export CSV</button>
+    <button class="btn" id="codeBtn">🔑 Phase 2 Access Codes</button>
+    <button class="btn primary" id="refreshBtn">⟳ Refresh</button>
+    <div class="toggle on" id="demoToggle"><span class="switch"></span> Demo data</div>
+  </div>
+
+  <div class="panel">
+    <h2>◆ Top Performers</h2>
+    <div id="leaderboard"></div>
+  </div>
+
+  <div class="panel">
+    <h2>▦ Live Team Tracker</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Team</th><th>Stage</th><th>Contact</th>
+          <th>Phase 1</th><th>Discovery</th><th>Total</th><th>Tier</th><th>Deal</th><th>Meeting</th><th>Last Update</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+
+<script>
+(function(){
+  const ADMIN_PASSCODE = "DELTA-OPS";   // change me to rotate access
+
+  const D = window.HEIST_DATA;
+  const TIERS = D.SCORING.tiers;
+  const PERSONAS = D.PERSONAS.filter(p=>p.level!=="decoy");
+
+  // ───────── Data: real feed + simulated demo teams ─────────
+  let demoOn = true;
+  let demoTeams = {};
+  const STAGES_FLOW = ["Investigation","Hypothesis","Persons of Interest","Outreach","Cold Call","Phase 1 Filed","Contact Review","Pre-Call Plan","Discovery Call","Recommendation","Findings"];
+
+  function tierFor(total){ return (TIERS.find(t=>total>=t.threshold)||TIERS[TIERS.length-1]); }
+  function rid(n){ return Math.floor(Math.random()*n); }
+  function pick(a){ return a[rid(a.length)]; }
+
+  function makeDemoTeam(){
+    const finished = Math.random()<0.55;
+    const persona = pick(PERSONAS);
+    let phase1 = 120+rid(280);
+    let phase2 = finished ? 80+rid(270) : (Math.random()<0.5? rid(180):0);
+    const stageIdx = finished ? STAGES_FLOW.length-1 : rid(STAGES_FLOW.length-1);
+    if(!finished) phase2 = stageIdx<6 ? 0 : rid(180);
+    const total = phase1+phase2;
+    return {
+      teamId: String(100+rid(900)),
+      stage: STAGES_FLOW[stageIdx],
+      finished,
+      persona: persona.name, personaTier: persona.level,
+      phase1, phase1Max:400, phase2, phase2Max:350, total,
+      tier: finished? tierFor(total).name : "—",
+      deal: finished? tierFor(total).deal : "—",
+      meetingEarned: Math.random()<0.6,
+      ice:{ implication: rid(100), champion: rid(100), economicBuyer: rid(100) },
+      updated: Date.now()-rid(900000), startedAt: Date.now()-rid(3600000),
+      _demo:true,
+    };
+  }
+  function seedDemo(n){ demoTeams={}; for(let i=0;i<n;i++){ const t=makeDemoTeam(); demoTeams[t.teamId]=t; } }
+
+  function realTeams(){ try{ return JSON.parse(localStorage.getItem("cf-teams")||"{}"); }catch(e){ return {}; } }
+
+  function allTeams(){
+    const real = realTeams();
+    const merged = {};
+    if(demoOn) Object.assign(merged, demoTeams);
+    Object.assign(merged, real); // real overrides demo on id collision
+    Object.keys(real).forEach(k=>{ merged[k]._demo=false; });
+    return Object.values(merged);
+  }
+
+  // ───────── Render ─────────
+  function fmtAgo(ts){ const s=Math.floor((Date.now()-ts)/1000); if(s<60)return s+"s ago"; if(s<3600)return Math.floor(s/60)+"m ago"; return Math.floor(s/3600)+"h ago"; }
+
+  function render(){
+    const teams = allTeams().sort((a,b)=>b.total-a.total);
+    const finished = teams.filter(t=>t.finished);
+    const inProg = teams.filter(t=>!t.finished);
+    const avg = teams.length? Math.round(teams.reduce((s,t)=>s+t.total,0)/teams.length):0;
+    const leader = teams[0];
+    const meetings = teams.filter(t=>t.meetingEarned).length;
+    const countBy = name => finished.filter(t=>t.tier===name).length;
+
+    document.getElementById("teamCount").textContent = teams.length;
+    document.getElementById("refreshTime").textContent = new Date().toLocaleTimeString();
+
+    document.getElementById("stats").innerHTML = [
+      ["Teams Registered", teams.length, ""],
+      ["In Progress", inProg.length, "accent"],
+      ["Finished", finished.length, "green"],
+      ["Avg Score", avg, ""],
+    ].map(([l,v,c])=>`<div class="card ${c}"><div class="l">${l}</div><div class="v">${v}</div></div>`).join("");
+
+    document.getElementById("tierStats").innerHTML = `
+      <div class="tcard lead"><div class="l">Leader</div><div class="v">${leader?("#"+leader.teamId):"—"}</div><div class="s">${leader?leader.total+" pts":""}</div></div>
+      <div class="tcard confirmed"><div class="l">Confirmed</div><div class="v">${countBy("Confirmed")}</div></div>
+      <div class="tcard probable"><div class="l">Probable</div><div class="v">${countBy("Probable")}</div></div>
+      <div class="tcard inconclusive"><div class="l">Inconclusive</div><div class="v">${countBy("Inconclusive")}</div></div>
+      <div class="tcard insufficient"><div class="l">Insufficient</div><div class="v">${countBy("Insufficient")}</div></div>
+      <div class="tcard meet"><div class="l">Meetings Earned</div><div class="v">${meetings}</div></div>`;
+
+    // Leaderboard top 3
+    document.getElementById("leaderboard").innerHTML = teams.slice(0,3).map((t,i)=>{
+      const tags=[];
+      if(t.ice.implication>=60) tags.push('<span class="tag lit">Implication</span>');
+      if(t.ice.champion>=60) tags.push('<span class="tag lit">Champion</span>');
+      if(t.ice.economicBuyer>=60) tags.push('<span class="tag lit">Economic Buyer</span>');
+      if(t.meetingEarned) tags.push('<span class="tag meet">Meeting Earned</span>');
+      if(t.finished) tags.push(`<span class="tag tier">${t.tier} · ${t.deal}</span>`);
+      return `<div class="lb-row">
+        <div class="lb-rank">#${i+1}</div>
+        <div class="lb-team">${t.teamId}</div>
+        <div class="lb-meta"><span class="nm">${t.persona}</span><span class="pts">${t.total} pts · ${t.stage}</span></div>
+        <div class="lb-tags">${tags.join("")||'<span class="tag">In progress</span>'}</div>
+      </div>`;
+    }).join("") || '<div class="empty">No teams yet.</div>';
+
+    // Table
+    document.getElementById("tbody").innerHTML = teams.map((t,i)=>`
+      <tr>
+        <td class="rank">${i+1}</td>
+        <td><div class="team"><span class="${t._demo?'demo-dot':'live-dot'}"></span>${t.teamId}</div></td>
+        <td><span class="stage ${t.finished?'done':''}">${t.finished?'✓ ':''}${t.stage}</span></td>
+        <td>${t.persona}</td>
+        <td class="scorecell">${t.phase1}<span class="m">/${t.phase1Max}</span></td>
+        <td class="scorecell">${t.phase2}<span class="m">/${t.phase2Max}</span></td>
+        <td class="total">${t.total}</td>
+        <td>${t.finished?`<span class="pill ${t.tier.toLowerCase()}">${t.tier}</span>`:'<span class="pill">—</span>'}</td>
+        <td class="deal">${t.deal}</td>
+        <td>${t.meetingEarned?'<span class="meet-y">✓ yes</span>':'<span class="meet-n">—</span>'}</td>
+        <td class="upd">${fmtAgo(t.updated)}</td>
+      </tr>`).join("") || '<tr><td colspan="11" class="empty">No teams yet — start a game (or enable Demo data).</td></tr>';
+  }
+
+  // ───────── Access code generator (mirrors the game) ─────────
+  function accessCode(teamId, quality){
+    const seed=(teamId||"TEAM")+":"+(quality||50);
+    let h=0; for(let i=0;i<seed.length;i++) h=((h<<5)-h+seed.charCodeAt(i))|0;
+    const chars="ABCDEFGHJKLMNPQRSTUVWXYZ234679"; let out="",n=Math.abs(h);
+    for(let i=0;i<6;i++){ out+=chars[n%chars.length]; n=Math.floor(n/chars.length)+17*(i+1); }
+    return out;
+  }
+  function showCodes(){
+    const teams=allTeams().filter(t=>STAGES_FLOW.indexOf(t.stage)>=5).sort((a,b)=>a.teamId-b.teamId);
+    const rows=teams.map(t=>`<div class="code-row"><span class="t">Team ${t.teamId}<span style="color:var(--txt-dim)"> · ${t.persona}</span></span><span class="c">${accessCode(t.teamId,t.ice.implication)}</span></div>`).join("")||'<div class="empty">No teams have cleared Phase 1 yet.</div>';
+    document.getElementById("modalRoot").innerHTML=`<div class="veil" id="veil"><div class="modal"><button class="x" id="mx">×</button><h3>Phase 2 Access Codes</h3><div class="sub">Re-entry codes for teams that cleared Phase 1.</div>${rows}</div></div>`;
+    document.getElementById("mx").onclick=()=>document.getElementById("modalRoot").innerHTML="";
+    document.getElementById("veil").onclick=e=>{ if(e.target.id==="veil") document.getElementById("modalRoot").innerHTML=""; };
+  }
+
+  function exportCSV(){
+    const teams=allTeams().sort((a,b)=>b.total-a.total);
+    const head=["Rank","Team","Stage","Contact","Phase1","Phase2","Total","Tier","Deal","MeetingEarned","Source"];
+    const rows=teams.map((t,i)=>[i+1,t.teamId,t.stage,t.persona,t.phase1,t.phase2,t.total,t.tier,t.deal,t.meetingEarned?"yes":"no",t._demo?"demo":"live"]);
+    const csv=[head,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+    const blob=new Blob([csv],{type:"text/csv"}); const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob); a.download="case-command-"+new Date().toISOString().slice(0,10)+".csv"; a.click();
+  }
+
+  // ───────── Boot + live updates ─────────
+  function boot(){
+    seedDemo(16);
+    render();
+    document.getElementById("refreshBtn").onclick=render;
+    document.getElementById("csvBtn").onclick=exportCSV;
+    document.getElementById("codeBtn").onclick=showCodes;
+    const dt=document.getElementById("demoToggle");
+    dt.onclick=()=>{ demoOn=!demoOn; dt.classList.toggle("on",demoOn); render(); };
+
+    // live: react to game telemetry
+    try{ const ch=new BroadcastChannel("cf-admin"); ch.onmessage=()=>render(); }catch(e){}
+    window.addEventListener("storage",e=>{ if(e.key==="cf-teams") render(); });
+
+    // demo drift: nudge a few demo teams every 5s so the board feels live
+    setInterval(()=>{
+      if(!demoOn) { render(); return; }
+      const ids=Object.keys(demoTeams);
+      for(let k=0;k<3 && ids.length;k++){
+        const t=demoTeams[pick(ids)];
+        if(t.finished) continue;
+        const i=STAGES_FLOW.indexOf(t.stage);
+        if(i<STAGES_FLOW.length-1 && Math.random()<0.5){
+          t.stage=STAGES_FLOW[i+1];
+          if(i+1<6) t.phase1=Math.min(400,t.phase1+rid(40));
+          else { t.phase2=Math.min(350,t.phase2+rid(50)); }
+          if(t.stage==="Findings"){ t.finished=true; t.total=t.phase1+t.phase2; t.tier=tierFor(t.total).name; t.deal=tierFor(t.total).deal; }
+          else t.total=t.phase1+t.phase2;
+          t.updated=Date.now();
+        }
+      }
+      render();
+    },5000);
+  }
+
+  // ───────── Access control (client-side gate; not linked from the game) ─────────
+  function unlock(){ document.getElementById("lock").style.display="none"; document.getElementById("app").style.display="block"; boot(); }
+  const qsKey = new URLSearchParams(location.search).get("key");
+  if (qsKey === ADMIN_PASSCODE || sessionStorage.getItem("cf-admin-auth") === ADMIN_PASSCODE) {
+    sessionStorage.setItem("cf-admin-auth", ADMIN_PASSCODE); unlock();
+  } else {
+    const pw=document.getElementById("pw"), btn=document.getElementById("pwbtn"), err=document.getElementById("pwerr");
+    const tryUnlock=()=>{ if(pw.value.trim()===ADMIN_PASSCODE){ sessionStorage.setItem("cf-admin-auth",ADMIN_PASSCODE); unlock(); } else { err.textContent="Incorrect code."; pw.value=""; } };
+    btn.onclick=tryUnlock; pw.onkeydown=e=>{ if(e.key==="Enter") tryUnlock(); }; pw.focus();
+  }
+})();
+</script>
+</body>
+</html>

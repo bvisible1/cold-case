@@ -9,6 +9,8 @@ const _TopBar           = window.TopBar;
 const _RoomClock        = window.RoomClock;
 const _LandingScreen    = window.LandingScreen;
 const _IntroScreen      = window.IntroScreen;
+const _TransitionScreen = window.TransitionScreen;
+const _Room2TransitionScreen = window.Room2TransitionScreen;
 const _BriefingScreen   = window.BriefingScreen;
 const _SceneCardScreen  = window.SceneCardScreen;
 const _ResearchScreen   = window.ResearchScreen;
@@ -18,7 +20,9 @@ const _OutreachScreen   = window.OutreachScreen;
 const _ColdCallScreen   = window.ColdCallScreen;
 const _Room1CompleteScreen = window.Room1CompleteScreen;
 const _PreCallScreen    = window.PreCallScreen;
+const _ContactReviewScreen = window.ContactReviewScreen;
 const _DiscoveryScreen  = window.DiscoveryScreen;
+const _ClosingScreen    = window.ClosingScreen;
 const _SolutionScreen   = window.SolutionScreen;
 const _VaultScreen      = window.VaultScreen;
 
@@ -29,6 +33,7 @@ const STORAGE_KEY = "case-file-state";
 const INITIAL = {
   screen: "landing",
   teamId: "",
+  playId: "",
   // research
   researchNotes: "",
   agentLog: [],
@@ -81,6 +86,22 @@ function App() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (e) {}
+    // Emit telemetry for the admin dashboard (localStorage feed + BroadcastChannel).
+    // This is the single swap-point for a real backend later.
+    try {
+      if (state.teamId && window.HEIST_DATA.summarizeTeam) {
+        const rec = window.HEIST_DATA.summarizeTeam(state);
+        if (rec) {
+          rec.startedAt = state.startedAt || rec.updated;
+          const FEED = "cf-teams";
+          let feed = {};
+          try { feed = JSON.parse(localStorage.getItem(FEED) || "{}"); } catch (e) {}
+          feed[rec.teamId] = rec;
+          localStorage.setItem(FEED, JSON.stringify(feed));
+          try { new BroadcastChannel("cf-admin").postMessage({ type: "team", rec }); } catch (e) {}
+        }
+      }
+    } catch (e) {}
   }, [state]);
 
   // Navigate
@@ -94,7 +115,6 @@ function App() {
   const inRoom1 = state.screen.startsWith("room1");
   const inRoom2 = state.screen.startsWith("room2");
   const showRoomClock = inRoom1 || inRoom2;
-  const roomClockTotal = inRoom1 ? 45 * 60 : (inRoom2 ? 30 * 60 : null);
   const roomKey = inRoom1 ? "room1ClockStart" : inRoom2 ? "room2ClockStart" : null;
 
   useEffectApp(() => {
@@ -110,11 +130,11 @@ function App() {
     return () => clearInterval(id);
   }, [showRoomClock]);
 
-  const roomSecondsLeft = useMemoApp(() => {
-    if (!showRoomClock || !roomKey || !state[roomKey] || !roomClockTotal) return null;
-    const elapsed = Math.floor((now - state[roomKey]) / 1000);
-    return Math.max(0, roomClockTotal - elapsed);
-  }, [showRoomClock, roomKey, state, now, roomClockTotal]);
+  // Elapsed case time (counts up — no limit)
+  const roomElapsed = useMemoApp(() => {
+    if (!showRoomClock || !roomKey || !state[roomKey]) return null;
+    return Math.max(0, Math.floor((now - state[roomKey]) / 1000));
+  }, [showRoomClock, roomKey, state, now]);
 
   // Admin skip — advance to next state with sensible defaults
   const adminSkip = () => {
@@ -150,6 +170,7 @@ function App() {
   switch (state.screen) {
     case "landing":          screenEl = <_LandingScreen state={state} nav={nav} />; break;
     case "intro":            screenEl = <_IntroScreen state={state} nav={nav} />; break;
+    case "transition":       screenEl = <_TransitionScreen state={state} nav={nav} />; break;
     case "briefing":         screenEl = <_BriefingScreen state={state} nav={nav} />; break;
     case "scene-1":          screenEl = <_SceneCardScreen state={state} nav={nav} sceneKey="scene-1" next="room1-research" />; break;
     case "room1-research":   screenEl = <_ResearchScreen state={state} nav={nav} setStepTimerSeconds={setStepSeconds} />; break;
@@ -158,22 +179,25 @@ function App() {
     case "room1-outreach":   screenEl = <_OutreachScreen state={state} nav={nav} />; break;
     case "room1-coldcall":   screenEl = <_ColdCallScreen state={state} nav={nav} difficulty={tweaks.difficulty} />; break;
     case "room1-complete":   screenEl = <_Room1CompleteScreen state={state} nav={nav} />; break;
-    case "scene-2":          screenEl = <_SceneCardScreen state={state} nav={nav} sceneKey="scene-2" next="room2-precall" />; break;
+    case "room2-transition": screenEl = <_Room2TransitionScreen state={state} nav={nav} />; break;
+    case "scene-2":          screenEl = <_SceneCardScreen state={state} nav={nav} sceneKey="scene-2" next="room2-contact" />; break;
+    case "room2-contact":    screenEl = <_ContactReviewScreen state={state} nav={nav} />; break;
     case "room2-precall":    screenEl = <_PreCallScreen state={state} nav={nav} setStepTimerSeconds={setStepSeconds} />; break;
     case "room2-discovery":  screenEl = <_DiscoveryScreen state={state} nav={nav} difficulty={tweaks.difficulty} />; break;
+    case "room2-closing":    screenEl = <_ClosingScreen state={state} nav={nav} />; break;
     case "room2-solution":   screenEl = <_SolutionScreen state={state} nav={nav} />; break;
     case "vault":            screenEl = <_VaultScreen state={state} nav={nav} />; break;
     default:                 screenEl = <_LandingScreen state={state} nav={nav} />;
   }
 
   // Hide topbar/clock for full-bleed cinematic screens
-  const fullBleed = ["intro", "scene-1", "scene-2"].includes(state.screen);
+  const fullBleed = ["landing", "briefing", "room1-research", "room1-persona", "room1-outreach", "room1-coldcall", "room2-precall", "room2-solution", "intro", "transition", "room2-transition", "scene-1", "scene-2"].includes(state.screen);
 
   return (
     <>
       {!fullBleed && <_TopBar state={state} screen={state.screen} />}
       {showRoomClock && !fullBleed && (
-        <_RoomClock secondsLeft={roomSecondsLeft} label={inRoom1 ? "// Phase 01 case clock" : "// Phase 02 case clock"} />
+        <_RoomClock seconds={roomElapsed} label={inRoom1 ? "// Phase 01 · case open" : "// Discovery · case open"} />
       )}
       <main className="main">
         {screenEl}

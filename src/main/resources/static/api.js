@@ -101,16 +101,18 @@ window.HEIST_API = (() => {
 
   // Score the conversation so far (used at end of cold call / discovery)
   async function scoreConversation({ transcript, mode, persona }) {
-    const sys = `You are a sales training scoring engine. Analyze this ${mode} conversation transcript with persona ${persona.name} (${persona.title}).
+    const sys = `You are a sales training scoring engine. The rep represents Dynatrace (a unified observability + security platform) and is working Meridian Capital Group — a Category III regional bank mid-integration, recovering from a public mobile-banking outage, with monitoring tool sprawl (Splunk + IBM Instana), an AWS/Kubernetes buildout, and a prior Dynatrace evaluation that went cold. Strong reps tie discovery to those realities (earlier detection/MTTD, MTTR, tool consolidation cost, OCC/Category III exam readiness, instrumenting AI workloads) rather than pitching features.
+
+Analyze this ${mode} conversation transcript with persona ${persona.name} (${persona.title}).
 
 Transcript:
 ${transcript.map(m => `${m.role === "user" ? "Rep" : persona.name}: ${m.content}`).join("\n")}
 
 Score these dimensions 0-100 each:
-- implication: did the rep probe consequences / what NOT solving means?
+- implication: did the rep probe consequences / what NOT solving means (e.g. a repeat outage during the OCC exam, the cost of tool sprawl, stalled AI rollout)?
 - champion: did the rep build rapport / earn trust with this contact?
-- economicBuyer: did the rep surface budget / decision authority / process?
-- quality: overall conversational quality (avoided clichés, asked specific questions, listened)
+- economicBuyer: did the rep surface budget / decision authority / process (CIO/CTO/CFO, the lifted freeze, the prior evaluation)?
+- quality: overall conversational quality (avoided clichés, asked specific researched questions, listened)
 
 Also determine:
 - meetingEarned: true if the persona agreed to a follow-up meeting (cold call only). For discovery, true if a clear next step was earned.
@@ -131,16 +133,17 @@ Return ONLY JSON:
 
   // Simple research-agent chat (not full streaming — single-turn replies based on scenario)
   async function researchAgent(question) {
-    const sys = `You are a research assistant helping a sales rep research Delta Air Lines. Be concise (2-4 sentences). What you know:
-- Delta Air Lines: ~$58B revenue (FY2024), ~100,000 employees, ~900 aircraft, 7 major US hubs.
-- July 2024 CrowdStrike outage was the worst for Delta of any airline: ~7,000 cancellations, ~$500M financial impact, ongoing litigation and DOT scrutiny.
-- Board greenlit a multi-year resilience and modernization program. CIO Rahul Samant publicly committed to a 5× MTTR improvement.
-- Hybrid cloud: Microsoft Azure is the strategic primary (since 2018), AWS for select workloads, ops-critical workloads still on-prem at the Atlanta OCC.
-- Storage estate: four primary platforms, ~25% of arrays 5+ years old, several past end-of-support.
-- Backup success rate ~91% vs 99% target; last full restore test took 11 hours.
-- Key personas: Sarah Chen (VP, Global Data Infrastructure) → reports to CIO Rahul Samant. Michael Torres (Director, Data Platform Engineering) → reports to Sarah. Marcus Webb (Manager, Storage Infrastructure) → reports to Michael.
-- Open hiring: Principal Architect AI Infrastructure, Director Hybrid Cloud Engineering, Senior SRE (OCC), Manager Storage Operations.
-- The rep represents NetApp. Competition in the room: Pure Storage, Dell, HPE.
+    const sys = `You are a research assistant helping a sales rep research Meridian Capital Group (a fictitious training account). Be concise (2-4 sentences). What you know:
+- Meridian Capital Group: ~$4.8B net revenue (FY2025), ~14,200 employees, $310B total assets, 420+ branches across the US Southeast & Mid-Atlantic. HQ Charlotte, NC. Mid-tier regional commercial bank, wealth management, and capital markets.
+- March 14, 2026: a ~6-hour mobile banking outage caused by a failed payments-middleware deployment — not detected until customers were impacted. Covered by Charlotte Business Journal and American Banker.
+- Crossed $100B total assets in Q3 2025, so it is now a Category III institution under enhanced OCC examination (began January 2026) of technology risk, incident response, and operational resilience.
+- Heritage Southern acquisition (2023) is ~70% integrated. Dual core banking: FIS Modern Banking Platform (primary) + legacy Fiserv Premier (migrating, final 40% of branches by Q4 2026). This dual stack drives fragmented pipelines, inconsistent logging, and monitoring blind spots.
+- Monitoring today: IBM Instana (from Heritage) + Splunk (enterprise log management) + point tools. Job postings reference 'next-generation observability platforms' and OpenTelemetry — an active evaluation.
+- Meridian Forward Phase 3: AWS-first cloud-native buildout (Kubernetes, Terraform, ArgoCD), a real-time payments hub, the 'Merit' AI assistant, zero-trust. AI efficiency target of ~$80M annual gains by 2027.
+- Prior Dynatrace deal: a POC ran Nov 2024–Jan 2025 (shortlisted with Datadog; Dynatrace scored higher on AI causal analysis and Kubernetes observability). It stalled in April 2025 after a Q1 NII miss triggered a 90-day IT spend freeze. No rejection — went quiet ~13 months ago. The freeze has since lifted.
+- Leadership: CIO Robert Callahan (ex-Wells Fargo, the original economic buyer). First-ever CTO Brian Sorrell (ex-Capital One, May 2026; an observability-first proponent who used Dynatrace at Capital One). CISO Kevin Landers (since June 2025). CFO Thomas Greer.
+- Playable personas: Rachel Morgan (VP, Infrastructure & Platform Engineering) → reports to CTO Brian Sorrell. Daniel Hughes (Director, Site Reliability Engineering) → reports to Rachel. Priya Natarajan (Manager, Observability & Monitoring) → reports to Daniel.
+- The rep represents Dynatrace (unified observability + security platform). Competition in the room: Datadog, Splunk (Cisco), IBM Instana.
 
 Rep's question:
 """

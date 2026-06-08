@@ -1,259 +1,243 @@
-// data.js — Delta Air Lines scenario, NetApp personas, AI prompts, scoring config.
-// Cold-case sales training simulation.
+// data.js — Meridian Capital Group scenario, Dynatrace seller, AI prompts, scoring config.
+// Cold-case sales training simulation (SignalPursuits build).
+// FICTITIOUS TRAINING ACCOUNT — Meridian Capital and all personnel are fabricated for training.
 
 window.HEIST_DATA = (() => {
 
   // ───────────────── SCENARIO ─────────────────
   const SCENARIO = {
-    account: "Delta Air Lines",
-    industry: "Commercial aviation · global hub-and-spoke carrier",
-    revenue: "~$58B revenue (FY2024) · ~100,000 employees · ~900 aircraft · 7 major US hubs",
+    account: "Meridian Capital Group",
+    industry: "Banking & financial services · regional commercial bank, wealth management & capital markets",
+    revenue: "~$4.8B net revenue (FY2025) · ~14,200 employees · $310B total assets · 420+ branches across the US Southeast & Mid-Atlantic",
     burningPlatform: [
-      "July 2024 CrowdStrike outage hit Delta hardest of any airline — ~7,000 cancellations, ~$500M financial impact, ongoing class actions and DOT scrutiny.",
-      "Board greenlit a multi-year resilience and modernization program; storage layer is on the critical path.",
-      "~25% of storage arrays are 5+ years old; several past end-of-support across three primary US data centers and the Atlanta Operations Control Center.",
-      "Four storage platforms across Microsoft Azure (primary cloud), AWS (select), on-prem in ATL/MSP, and legacy edge — visible operational drag and cost creep.",
-      "OCC restore time benchmarked at ~12 hours vs a 1–2 hour target (10× best-in-class peers). Board demanding a 5× MTTR improvement.",
-      "Backup success rate 91% against a 99% target; limited immutable copies for ops-critical workloads as aviation ransomware risk rises.",
-      "Long-running Microsoft Azure relationship (announced 2018) plus AWS for select workloads; key tension is that OCC and most ops-critical workloads still run on-prem — and that's where CrowdStrike pain was felt.",
-      "Active hiring spike for SRE, hybrid-cloud and AI infrastructure roles.",
+      "March 14, 2026: a 6-hour mobile banking outage caused by a failed payments-middleware deployment — not detected until customers were already impacted. Covered by Charlotte Business Journal and American Banker.",
+      "Crossed $100B in total assets in Q3 2025, so Meridian is now a 'Category III' institution. OCC enhanced examination of technology risk, incident response, and operational resilience began January 2026.",
+      "Heritage Southern acquisition (2023) is ~70% integrated. A dual core-banking estate (FIS Modern Banking Platform + legacy Fiserv Premier) creates fragmented deployment pipelines, inconsistent logging, and monitoring blind spots. Final 40% of branches migrate by Q4 2026.",
+      "Tool sprawl: IBM Instana (inherited from Heritage) + Splunk (enterprise log management) + point tools. Q1–Q2 2026 job postings reference both Splunk and 'next-generation observability platforms' — consistent with an active evaluation.",
+      "Meridian Forward Phase 3 — AWS-first cloud-native buildout (Kubernetes, Terraform, ArgoCD), a real-time payments hub, an AI assistant ('Merit'), and zero-trust. Monitoring needs are climbing fast.",
+      "AI efficiency commitment of $80M annual gains by 2027 (CIO investor day, Feb 2026). AI workloads — Merit, fraud models, credit underwriting — need observability the legacy tools weren't built for.",
+      "Net-interest-margin compression is pushing growth toward digital fee income (wealth, treasury), so digital reliability is now a revenue issue — a Friday-night outage hits fee revenue directly.",
+      "Cold history: Dynatrace ran a POC Nov 2024–Jan 2025 (shortlisted with Datadog; scored higher on AI causal analysis and Kubernetes observability). It stalled in April 2025 when a Q1 NII miss triggered a 90-day IT spend freeze. No rejection — it just went quiet ~13 months ago. The freeze has since lifted.",
+      "New leadership: first-ever CTO Brian Sorrell (ex-Capital One, May 2026) is an observability-first proponent who used Dynatrace at Capital One; new CISO Kevin Landers in role since June 2025.",
     ],
     initiatives: [
-      "Resilience Modernization (post-CrowdStrike) — 5× MTTR improvement, ransomware-resilient restore, consolidated control plane.",
-      "Operations Intelligence Platform — sub-minute ops data, predictive disruption modeling, unified data fabric.",
-      "Fleet & MRO Data Modernization — real-time fleet telemetry; AI-driven predictive maintenance at scale.",
-      "SkyMiles & Customer Data Unification — unified customer 360; near-real-time personalization; richer Amex co-brand value.",
-      "Hybrid Cloud Consolidation — consistent data services across Azure, AWS, on-prem; right-sized OpEx.",
+      "Heritage Southern integration & $180M cost-synergy target — core banking consolidation onto FIS by Q4 2026.",
+      "Meridian Forward Phase 3 — real-time payments hub, 'Merit' AI assistant, zero-trust, cloud-native on AWS.",
+      "Category III compliance & operational-resilience infrastructure — a top capital-allocation priority for the next 18 months.",
+      "Wealth management & fee-income growth — targeting 40% non-interest income by 2027, increasingly dependent on digital platform reliability.",
+      "AI-assisted banking — credit underwriting, fraud detection, the 'Merit' virtual assistant; $80M efficiency target by 2027.",
     ],
-    productYouAreSelling: "NetApp — unified, hybrid-cloud data services across Azure, AWS, and on-prem; ransomware-resilient restore; consistent data plane and tooling across clouds.",
-    icp: "Large enterprise hybrid-cloud estates with ops-critical workloads on-prem and AI/analytics workloads on Azure or AWS.",
-    yourCompany: "NetApp",
-    yourTitle: "Strategic Account Executive",
+    productYouAreSelling: "Dynatrace — a unified observability + security platform: OneAgent full-stack auto-instrumentation, Davis AI for deterministic causal root-cause (not just correlation), logs + APM + infrastructure + RUM + application security in one platform, OpenTelemetry-native ingestion, Kubernetes observability, and AI observability — consolidating 10+ legacy monitoring tools.",
+    icp: "Large regulated enterprises ($1B+ revenue, 5,000+ employees, Global 2000 / Fortune 1000) with hybrid + multicloud estates, heavy monitoring tool sprawl, active Kubernetes buildouts, and resilience/compliance pressure — exactly a Category III regional bank mid-integration.",
+    yourCompany: "Dynatrace",
+    yourTitle: "Enterprise Account Executive — Financial Services",
     timeMinutes: 45,
     competition: [
-      { name: "Pure Storage", pitch: "Evergreen//One STaaS, Flash-only simplicity, DirectFlash for AI.", weakness: "Limited unified file+object story · cloud-tier capabilities lag · higher TCO at multi-PB scale." },
-      { name: "Dell Technologies", pitch: "PowerStore + PowerMax for tier-1, PowerProtect for backup, long incumbency in airline IT.", weakness: "Disjointed product portfolio · slow innovation post-merger · weaker hybrid-cloud data services." },
-      { name: "HPE", pitch: "Alletra + GreenLake, hybrid-cloud as-a-service narrative, Aruba-tied resilience story.", weakness: "GreenLake consumption complexity · limited native Azure integration depth · smaller proven ops-critical footprint." },
+      { name: "Datadog", pitch: "Broad SaaS observability, fast onboarding, developer-loved dashboards and integrations — and the vendor shortlisted alongside Dynatrace in the 2024 POC.", weakness: "Cost unpredictability at scale (host + custom-metric pricing) · correlation-based alerting vs deterministic causal AI · weaker automatic topology across hybrid + mainframe estates." },
+      { name: "Splunk (Cisco)", pitch: "Incumbent enterprise log management at Meridian, SIEM/security tie-in, AppDynamics APM under Cisco.", weakness: "High ingest cost · logs and APM remain siloed · slow path to unified causal observability · integration uncertainty post-Cisco." },
+      { name: "IBM Instana", pitch: "Incumbent APM inherited from the Heritage Southern team, automatic tracing, lower entry cost.", weakness: "Narrow platform breadth (limited logs/security/AI) · smaller ecosystem · weaker Kubernetes-at-scale and causal-AI story." },
     ],
   };
 
   // ───────────────── PERSONAS ─────────────────
-  // 3 in-game characters (Sarah Chen, Michael Torres, Marcus Webb) + decoys.
+  // 3 in-game characters (Rachel Morgan, Daniel Hughes, Priya Natarajan) + decoys.
+  // Org context above them: CIO Robert Callahan → CTO Brian Sorrell → VP Rachel Morgan → Director Daniel Hughes → Manager Priya Natarajan.
   const PERSONAS = [
     {
       id: "sarah",
       level: "executive",
-      name: "Sarah Chen",
-      title: "VP, Global Data Infrastructure",
-      company: "Delta Air Lines",
-      reportsTo: "Rahul Samant (EVP & CIO)",
-      tenure: "3 years at Delta · prior VP Infra at another Fortune 100 global ops org",
-      location: "Atlanta, GA",
-      kpis: ["Platform uptime", "Storage TCO", "Data availability", "Recovery time objective (RTO)", "Infrastructure scalability"],
+      name: "Rachel Morgan",
+      title: "VP, Infrastructure & Platform Engineering",
+      company: "Meridian Capital Group",
+      reportsTo: "Brian Sorrell (CTO), who reports to Robert Callahan (CIO)",
+      tenure: "4 years at Meridian · prior infrastructure leadership at a top-10 US bank",
+      location: "Charlotte, NC",
+      kpis: ["Platform availability / uptime", "Operational resilience (incident frequency & MTTR)", "Technology cost & tool consolidation", "Cloud migration progress (Meridian Forward)", "Audit & regulatory readiness"],
       pains: [
-        "Owns the post-CrowdStrike resilience response with personal board exposure.",
-        "Four storage platforms across Azure, AWS, on-prem create operational drag.",
-        "12-hour OCC restore time vs 1–2 hour target — biggest open board item.",
-        "Board demanding ROI clarity on the multi-billion modernization program.",
-        "Ransomware risk rising for aviation; needs immutable, recovery-tested architecture.",
-        "AI/ML on operations and MRO stalled by fragmented data plane.",
-        "Talent: AI infra and SRE roles open; can't run change without bench.",
+        "Owns operational resilience just as the OCC opens its first enhanced Category III exam of technology controls.",
+        "Dual core-banking estate (FIS + Fiserv) during the Heritage integration means fragmented monitoring and blind spots.",
+        "The March 2026 mobile outage — 6 hours, a failed middleware deploy — went undetected until customers felt it. Board-visible.",
+        "10+ monitoring tools (Splunk + IBM Instana + point tools): cost creep and no single pane of glass.",
+        "Meridian Forward's AWS / Kubernetes buildout is accelerating and monitoring isn't keeping up.",
+        "Under pressure to show ROI on the $600M Meridian Forward technology program.",
+        "New CTO Brian Sorrell is pushing an observability-first culture — expectations are rising fast.",
       ],
-      personality: "Composed. Board-savvy. Speaks in transformation outcomes and quantified business impact. Will not engage with feature lists. Tests vendors by how they connect technical wins to the board narrative. Polite but unforgiving with clichés — will end a call with a thank-you, not a fight.",
+      personality: "Composed. Board-aware. Speaks in resilience, cost, and regulatory outcomes — not features. Will not engage with feature lists. Tests vendors by whether they connect technical wins to OCC exposure and cost consolidation. Polite but unforgiving with clichés — will end a call with a thank-you, not a fight.",
       sentenceCap: 4,
-      delegatesTo: "Michael Torres (Director, Data Platform Engineering) for anything operational or tooling-specific",
+      delegatesTo: "Daniel Hughes (Director, SRE) for anything operational or tooling-specific; CTO Sorrell / CIO Callahan and CFO Greer for the budget envelope",
       iceCeilings: {
-        implication: "high — can speak to board pressure, regulatory exposure, customer-trust impact, fleet recovery economics",
-        champion: "self — can sponsor at the EVP/CIO level if convinced; gates access to Rahul",
-        economicBuyer: "shared — has program-level discretion; CFO Dan Janki and CIO Rahul Samant gate the multi-year envelope",
+        implication: "high — can speak to OCC exam exposure, board attention post-outage, the cost of dual-stack complexity, and NIM pressure on digital revenue",
+        champion: "self — can sponsor up to CTO/CIO if convinced; gates access upward",
+        economicBuyer: "shared — has program-level discretion; CIO Callahan and CFO Greer gate the Meridian Forward envelope",
       },
       trustLayers: {
-        L1: "Cordial and brief. Asks why this conversation should happen now. 2-minute clock running.",
-        L2: "Earned by: a research-backed opening that ties to CrowdStrike, the multi-billion modernization program, or board-level resilience SLAs. Will share program shape, the 5× MTTR target, and what's been ruled out.",
-        L3: "Earned by: implication questions on what NOT solving means (board exposure, regulatory follow-on, customer-trust dollars, fleet recovery economics). Will share what 'good' looks like in 12 months, who else is in the room when capital is approved, and what would have to be true to displace the current direction.",
+        L1: "Cordial and brief. Asks why this conversation should happen now. A short clock is running.",
+        L2: "Earned by: a research-backed opening that ties to the March outage, the Category III exam, the dual-core integration, or Meridian Forward. Will share program shape, the tool-sprawl reality, and her resilience targets.",
+        L3: "Earned by: implication questions on what NOT solving means (a repeat outage during the exam window, a regulatory finding, the cost of a 10-tool estate, a stalled AI rollout). Will share what 'good' looks like in 12 months, who is in the room when budget is approved, and what would have to be true to change the current direction.",
       },
       clicheDefenses: [
-        "If they say 'I just wanted to learn about your business': 'You can read our 10-K. What's the hypothesis?'",
-        "If they ask 'what keeps you up at night': 'A 12-hour OCC restore time. You already knew that. Try a real question.'",
-        "If they flip a question back ('what do you think?'): 'I'm not interviewing you to consult you. Make your point.'",
+        "If they say 'I just wanted to learn about your business': 'You can read our investor day deck. What's your hypothesis?'",
+        "If they ask 'what keeps you up at night': 'A six-hour outage during an OCC exam. You already knew that. Ask me something real.'",
+        "If they flip a question back ('what do you think?'): 'I'm not here to do your discovery for you. Make your point.'",
       ],
-      photoInitials: "SC",
+      photoInitials: "RM",
       tag: "VP TIER · ECONOMIC INFLUENCE",
+      bio: "Technology executive with 18+ years in enterprise infrastructure. Reports to CTO Brian Sorrell and presents operational-resilience strategy to Meridian's leadership. Owns the platform estate across the FIS/Fiserv dual-core environment and the Meridian Forward cloud buildout. Leading the response to the March mobile outage as the OCC's first Category III exam gets underway.",
+      reviewFocus: ["Operational resilience under the new Category III OCC exam", "Detecting bad deploys before customers feel them (post-March outage)", "Consolidating 10+ monitoring tools into one platform"],
     },
     {
       id: "michael",
       level: "director",
-      name: "Michael Torres",
-      title: "Director, Data Platform Engineering",
-      company: "Delta Air Lines",
-      reportsTo: "Sarah Chen (VP, Global Data Infrastructure)",
-      tenure: "5 years at Delta · came up through SRE at a major SaaS before joining",
-      location: "Atlanta, GA",
-      kpis: ["Uptime SLA", "MTTR", "Storage utilization", "Sprint velocity", "Ops ticket volume"],
+      name: "Daniel Hughes",
+      title: "Director, Site Reliability Engineering",
+      company: "Meridian Capital Group",
+      reportsTo: "Rachel Morgan (VP, Infrastructure & Platform Engineering)",
+      tenure: "5 years at Meridian · came up through platform engineering",
+      location: "Charlotte, NC",
+      kpis: ["Uptime SLA", "MTTR", "Change / deployment success rate", "Alert noise vs signal", "On-call load"],
       pains: [
-        "Managing four different storage platforms across Azure, AWS, on-prem, and legacy edge.",
-        "22-person team stretched across 24/7 ops for 290+ destinations.",
-        "Zero-downtime migration mandate while remediating CrowdStrike findings.",
-        "Tooling sprawl: each platform has its own CLI, API, alerting.",
-        "MTTR targets cut in half post-CrowdStrike — current process won't get there.",
-        "Vendor support response inconsistent across legacy arrays.",
-        "Pressure to move workloads to Azure without breaking the OCC dependency.",
+        "Two parallel deployment pipelines across FIS and Fiserv during the integration.",
+        "The March outage root-cause took too long — Instana + Splunk never surfaced the failed deploy early.",
+        "Alert fatigue across 10+ tools; the team chases noise instead of signal.",
+        "The Kubernetes / Terraform / ArgoCD buildout under Meridian Forward needs instrumentation his current stack can't give.",
+        "Team stretched thin across the integration and the new cloud at the same time.",
+        "Mandated to cut MTTR but the current tooling can't get there.",
+        "OpenTelemetry pipelines are half-built on the Splunk collector.",
       ],
-      personality: "Practical operator. Skeptical of vision slides. Engages on day-2 operations, integration specifics, and honest trade-offs. Has heard every cloud pitch — wants to know what breaks at 2am. Friendly enough but will protect his team's bandwidth.",
+      personality: "Practical operator. Skeptical of vision slides. Engages on day-2 operations, integration specifics, and honest trade-offs. Has heard every observability pitch — wants to know what breaks at 2am. Friendly enough, but protects his team's bandwidth.",
       sentenceCap: 5,
-      delegatesTo: "Marcus Webb (Manager, Storage Infrastructure) for array-level ops; Sarah for strategy or budget",
+      delegatesTo: "Priya Natarajan (Manager, Observability) for tool-level detail; Rachel for strategy or budget",
       iceCeilings: {
-        implication: "medium-high — team burnout, broken handoffs, MTTR delta, escalation cost, capacity planning misses",
+        implication: "medium-high — team burnout, broken handoffs, the MTTR delta, the exam risk of a repeat outage, the Meridian Forward timeline",
         champion: "strong potential — sits in the seat where the pain is most operational",
-        economicBuyer: "no — punts everything financial up to Sarah",
+        economicBuyer: "no — punts anything financial up to Rachel",
       },
       trustLayers: {
         L1: "Friendly but guarded. Vague answers about 'we have some tooling' until you prove you understand his world.",
-        L2: "Earned by: specific questions about hybrid ops, day-2 reality, integration with his existing stack — OR by referencing what Sarah is accountable for. Will share team size, tooling sprawl, what the OCC dependency actually looks like.",
-        L3: "Earned by: implication questions about how the four-platform reality affects MTTR, team retention, and the Azure migration timeline. Will share specific failure modes, which platforms can't be killed yet, and what would have to be in a pilot for him to recommend it to Sarah.",
+        L2: "Earned by: specific questions about dual-pipeline ops, day-2 reality, or integration with his existing Instana/Splunk stack — OR by referencing what Rachel is accountable for. Will share team size, tool sprawl, and what the dual-core reality actually looks like.",
+        L3: "Earned by: implication questions about how the fragmented estate affects MTTR, team retention, and the migration timeline. Will share specific failure modes, which tools can't be killed yet, and what would have to be in a proof-of-value for him to recommend it to Rachel.",
       },
       clicheDefenses: [
         "If they say 'how can I help you': 'You can ask me a real question instead of selling.'",
-        "If they ask 'what are your biggest pain points': 'I don't have pain points. I have a 22-person team and four platforms. Be specific.'",
-        "If they reframe ('what I'm hearing is...'): 'You're not hearing me yet. I haven't said anything specific.'",
+        "If they ask 'what are your biggest pain points': 'I don't have pain points. I have two core systems and ten dashboards. Be specific.'",
+        "If they reframe ('what I'm hearing is...'): 'You're not hearing me yet. I haven't told you anything specific.'",
       ],
-      photoInitials: "MT",
+      photoInitials: "DH",
       tag: "DIRECTOR TIER · TECHNICAL BUYER",
+      bio: "Hands-on engineering leader who came up through platform engineering. Reports to VP Rachel Morgan and runs the SRE team holding reliability together across two core-banking systems mid-integration. Owns the day-2 reality of fragmented pipelines and the mandate to cut MTTR while the Kubernetes buildout accelerates.",
+      reviewFocus: ["Cutting MTTR across the dual-core estate", "Killing alert noise across 10+ monitoring tools", "Instrumenting the Meridian Forward Kubernetes workloads"],
     },
     {
       id: "marcus",
       level: "manager",
-      name: "Marcus Webb",
-      title: "Manager, Storage Infrastructure",
-      company: "Delta Air Lines",
-      reportsTo: "Michael Torres (Director, Data Platform Engineering)",
-      tenure: "8 years at Delta · came over from a storage vendor side before that",
-      location: "Atlanta, GA",
-      kpis: ["Uptime SLA", "Backup success rate", "Storage utilization", "Ticket resolution time"],
+      name: "Priya Natarajan",
+      title: "Manager, Observability & Monitoring Operations",
+      company: "Meridian Capital Group",
+      reportsTo: "Daniel Hughes (Director, Site Reliability Engineering)",
+      tenure: "7 years at Meridian · ran monitoring through the Heritage acquisition",
+      location: "Charlotte, NC",
+      kpis: ["Uptime SLA", "Mean time to detect (MTTD)", "Alert volume / false positives", "Dashboard coverage", "Incident ticket resolution time"],
       pains: [
-        "Four legacy arrays past end-of-support — multi-week lead time on replacement parts.",
-        "Team of 6 managing four different storage platforms with different CLIs and alerting.",
-        "Backup success rate 91% vs 99% target — fixing failed jobs on weekends.",
-        "Last full restore test took 11 hours; CrowdStrike review demands sub-2.",
-        "Vendor escalations for legacy arrays routinely drag past SLA.",
-        "Capacity planning is reactive — discovers shortages mid-quarter.",
-        "Days a month chasing spare parts across hub sites.",
+        "Babysitting Splunk and IBM Instana with two different alerting models.",
+        "The March outage detection gap — no early signal on the middleware deploy.",
+        "Weekends spent chasing false alerts and failed log pipelines.",
+        "Dual-core logging is inconsistent across the merged estate.",
+        "No unified trace across legacy .NET / Java apps and the new Kubernetes workloads.",
+        "Splunk ingest cost keeps climbing; finance keeps asking why.",
+        "Dashboards are built and maintained by hand.",
       ],
-      personality: "Hands-on. Burned-out from on-call grind. BS detector calibrated by years on the vendor side himself. Engages on numbers — backup success, restore times, support SLAs. Bored by 'transformation' language. Polite until he's not.",
+      personality: "Hands-on. Burned out from the on-call grind. BS detector sharp from years in the trenches. Engages on numbers — MTTD, alert volume, ingest cost, restore times. Bored by 'transformation' language. Polite until she's not.",
       sentenceCap: 6,
-      delegatesTo: "Michael for anything strategic or budget-related",
+      delegatesTo: "Daniel for anything strategic or budget-related",
       iceCeilings: {
-        implication: "low-medium — can describe day-of-incident behavior and ops-grind cost; not board-level",
-        champion: "weak — can advocate but isn't in the room when capital is approved",
+        implication: "low-medium — can describe day-of-incident behavior and the ops-grind cost; not board-level",
+        champion: "weak — can advocate but isn't in the room when budget is approved",
         economicBuyer: "no",
       },
       trustLayers: {
         L1: "Curt. 'What do you need?' Vendor allergy is strong.",
-        L2: "Earned by: showing you actually understand backup posture, restore testing, parts logistics. Will share what's broken, how often, and what he's escalated.",
-        L3: "Earned by: asking what would have to be true for him to recommend a proof-of-value to Michael. Will share which array is the worst, what the team tried last time, and what a real first-step engagement should look like.",
+        L2: "Earned by: showing you actually understand detection gaps, alert noise, log ingest, and trace coverage. Will share what's broken, how often, and what she's escalated.",
+        L3: "Earned by: asking what would have to be true for her to recommend a proof-of-value to Daniel. Will share which tool is the worst, what the team tried last time, and what a real first step should look like.",
       },
       clicheDefenses: [
-        "If they pitch 'AI-powered' anything: 'Cool. What model. What latency. What happens to my backup window.'",
-        "If they ask 'what tools are you using': 'Read our re:Invent talk. I'm not your sales engineer.'",
-        "If they say 'we work with airlines like you': 'Name three. By workload, not logo.'",
+        "If they pitch 'AI-powered' anything: 'Cool. Causal or correlation? What's my false-positive rate? What happens to my ingest bill.'",
+        "If they ask 'what tools are you using': 'Read our job postings. I'm not your sales engineer.'",
+        "If they say 'we work with banks like you': 'Name three. By workload, not logo.'",
       ],
-      photoInitials: "MW",
+      photoInitials: "PN",
       tag: "MANAGER TIER · USER BUYER",
+      bio: "Observability operator who has run monitoring through the Heritage acquisition, so she spots a pitch instantly. Reports to Director Daniel Hughes and owns detection, dashboards, and the Splunk/Instana stack everyone leans on until it misses something. Still cleaning up after the March deploy that nobody caught in time.",
+      reviewFocus: ["Mean-time-to-detect on deploys (the March miss)", "Alert noise and false positives across Splunk + Instana", "Splunk ingest cost climbing every quarter"],
     },
     // Decoys — visible but ruled out
     {
       id: "decoy-1",
       level: "decoy",
       name: "Janelle Forrester",
-      title: "VP, Customer Experience",
-      company: "Delta Air Lines",
-      decoyReason: "CX owns the customer-facing layer, not the storage and resilience stack.",
+      title: "VP, Digital Channels & Mobile Banking",
+      company: "Meridian Capital Group",
+      decoyReason: "Owns the customer-facing app experience — where the outage was felt — but not the platform and observability stack underneath it.",
       photoInitials: "JF",
     },
     {
       id: "decoy-2",
       level: "decoy",
       name: "Theo Vance",
-      title: "Director, SkyMiles Loyalty",
-      company: "Delta Air Lines",
-      decoyReason: "Loyalty is a downstream consumer of the data plane, not the buyer for the platform under it.",
+      title: "Director, Wealth Management Technology",
+      company: "Meridian Capital Group",
+      decoyReason: "A downstream consumer of the platform; not the buyer for the observability infrastructure beneath it.",
       photoInitials: "TV",
     },
     {
       id: "decoy-3",
       level: "decoy",
       name: "Priya Anand",
-      title: "VP, TechOps Engineering",
-      company: "Delta Air Lines",
-      decoyReason: "TechOps owns the aircraft and MRO side — adjacent to the program, but not the storage owner.",
+      title: "Director, Technology Risk & Compliance",
+      company: "Meridian Capital Group",
+      decoyReason: "Drives the OCC / Category III review and security questionnaires — reviews vendors rather than owning the platform decision.",
       photoInitials: "PA",
     },
   ];
 
   // ───────────────── INVESTIGATION TOOLS ─────────────────
   const RESEARCH_TOOLS = [
-    {
-      id: "earnings",
-      name: "Earnings Transcript",
-      desc: "Q4 2024 earnings call — listen for the resilience narrative.",
-      kind: "audio",
-    },
-    {
-      id: "web",
-      name: "Public Web Search",
-      desc: "News, press releases, CrowdStrike fallout coverage.",
-      kind: "web",
-    },
-    {
-      id: "linkedin",
-      name: "LinkedIn Intelligence",
-      desc: "Profiles, recent posts, org chart changes, headcount trends.",
-      kind: "linkedin",
-    },
-    {
-      id: "agent",
-      name: "Research Agent",
-      desc: "Ask the AI agent anything about Delta.",
-      kind: "agent",
-    },
-    {
-      id: "jobs",
-      name: "Job Postings",
-      desc: "What roles are they hiring? Strong signal of priorities.",
-      kind: "jobs",
-    },
+    { id: "earnings", name: "Earnings Transcript", desc: "Q1 2026 earnings call — listen for the technology-spend and resilience narrative.", kind: "audio" },
+    { id: "web", name: "Public Web Search", desc: "News, the mobile outage coverage, the CTO appointment, investor day.", kind: "web" },
+    { id: "linkedin", name: "LinkedIn Intelligence", desc: "Profiles, recent posts, org-chart changes, headcount trends.", kind: "linkedin" },
+    { id: "agent", name: "Research Agent", desc: "Ask the AI agent anything about Meridian Capital.", kind: "agent" },
+    { id: "jobs", name: "Job Postings", desc: "What roles are they hiring? A strong signal of priorities.", kind: "jobs" },
   ];
 
   const RESEARCH_CONTENT = {
     earnings: {
-      title: "Q4 2024 Earnings — selected excerpts",
+      title: "Q1 2026 Earnings — selected excerpts (April 22, 2026)",
       transcript: [
-        { speaker: "Ed Bastian, CEO", text: "The July CrowdStrike event cost us approximately $500 million and reinforced our commitment to operational resilience. We are accelerating modernization of the data and operations platforms that underpin the Atlanta OCC." },
-        { speaker: "Dan Janki, CFO", text: "We expect multi-year capital investment in resilience and hybrid-cloud modernization to be the largest non-fleet capex line over the planning horizon. ROI is being measured against MTTR, customer compensation expense, and avoided cancellations." },
-        { speaker: "Analyst", text: "Can you size the operations restore-time improvement you're targeting coming out of the CrowdStrike review?" },
-        { speaker: "Ed Bastian, CEO", text: "We're targeting a five-times improvement in recovery time across ops-critical workloads. That includes consolidation of our storage and data platforms across Azure, AWS, and on-prem." },
-        { speaker: "Dan Janki, CFO", text: "We continue to manage cloud OpEx growth tightly. The goal is consistent data services across our hybrid estate, not a single-cloud destination." },
+        { speaker: "David Halberstam, CEO", text: "Meridian Forward continues to be our growth engine. In a market where digital experience is the differentiator for regional banks, the reliability of our platforms is a board-level priority." },
+        { speaker: "Thomas Greer, CFO", text: "Technology and operations spend rose roughly $40 million year over year, driven largely by the complexity of running dual core-banking environments through the Heritage integration period. Compliance infrastructure is a top capital-allocation priority over the next 18 months." },
+        { speaker: "Analyst", text: "After the March outage, how are you thinking about operational resilience as you move into the Category III examination cycle?" },
+        { speaker: "Robert Callahan, CIO", text: "We're investing to detect and resolve issues before customers ever see them, and to instrument the AI initiatives we committed to — roughly $80 million in efficiency gains by 2027. That requires observability our legacy tools weren't built for." },
+        { speaker: "Thomas Greer, CFO", text: "We expect consolidation of overlapping tools to help offset some of that spend as the integration completes." },
       ],
     },
     web: [
-      { url: "wsj.com / 2024-08-08", title: "Delta blames CrowdStrike for ~$500M Q3 hit; CEO calls for resilience overhaul", snip: "Delta Air Lines said the July global IT outage drove approximately 7,000 cancellations and a roughly $500 million financial impact. Ed Bastian framed the response as a multi-year resilience and modernization program." },
-      { url: "reuters.com / 2024-10-22", title: "Delta sues CrowdStrike; modernization plan accelerates", snip: "Delta filed suit in Georgia. The airline separately briefed analysts on accelerated investment in hybrid-cloud data infrastructure and operational restore-time targets." },
-      { url: "linkedin.com/in/rahul-samant-cio", title: "Rahul Samant — Post: 'Resilience is a design principle, not a recovery step'", snip: "Multi-cloud strategy stands. The question is whether our data plane is consistent enough across Azure, AWS, and on-prem to survive the next event. We are accelerating the answer." },
-      { url: "delta.com/careers", title: "Delta Careers — open roles", snip: "Director, Hybrid Cloud Engineering · Senior SRE (OCC) · Principal Architect, AI Infrastructure · Manager, Storage Operations · Staff Data Platform Engineer." },
-      { url: "reagonaviation.com / 2025-02-14", title: "Aviation IT Summit: Sarah Chen on rebuilding the data fabric under the OCC", snip: "Chen described the constraint: a strategic Azure direction, an AWS footprint for select data-science workloads, and ops-critical systems that have to stay on-prem at the OCC for the foreseeable future." },
+      { url: "charlottebusinessjournal.com / 2026-03-15", title: "Meridian Capital suffers Friday-night mobile banking outage", snip: "Meridian Capital's mobile banking was down roughly six hours Friday evening. The bank attributed the disruption to a failed deployment in its payments middleware layer. Customers reported being unable to access accounts during the outage window." },
+      { url: "americanbanker.com / 2026-05-06", title: "Meridian Capital names first-ever Chief Technology Officer", snip: "Meridian Capital appointed Brian Sorrell, a 12-year Capital One technology veteran, as its first CTO, reporting to CIO Robert Callahan. Sorrell is known for an observability-first engineering culture." },
+      { url: "meridiancapital.com/investors / 2026-02-18", title: "Investor Day: 'Meridian Forward Phase 3' roadmap", snip: "CIO Robert Callahan presented an AWS-first infrastructure strategy, a real-time payments hub, the 'Merit' AI assistant, and a zero-trust cloud buildout — with AI initiatives targeted to deliver $80M in annual efficiency gains by 2027." },
+      { url: "sec.gov / Meridian 10-K FY2025", title: "Meridian discloses Category III regulatory status", snip: "Having crossed $100B in total assets, Meridian is subject to enhanced examination as a Category III institution for the first time, including heightened review of technology risk management and operational resilience." },
+      { url: "linkedin.com/in/rachel-morgan-meridian", title: "Rachel Morgan — Post: 'Detection is a design choice, not a postmortem'", snip: "We're investing so a bad deploy surfaces in our tooling before it ever reaches a customer. Running two core systems through an integration makes that harder — and more important." },
     ],
     jobs: [
-      { title: "Principal Architect, AI Infrastructure", team: "Data Platform Engineering", postedDays: 12, signal: "New req. Owns the unified data-fabric blueprint for operations + MRO." },
-      { title: "Director, Hybrid Cloud Engineering", team: "Global Data Infrastructure", postedDays: 26, signal: "Reports up to Sarah Chen. Tells you the org is investing in hybrid as a first-class function — not migrating away from on-prem." },
-      { title: "Senior SRE (OCC) — 4 open", team: "Operations Control Center", postedDays: 38, signal: "Bench expansion. Direct response to the post-CrowdStrike MTTR mandate." },
-      { title: "Manager, Storage Operations", team: "Storage Infrastructure", postedDays: 51, signal: "Backfill below Marcus Webb. Capacity is the constraint." },
+      { title: "Observability Engineer", team: "Site Reliability Engineering", postedDays: 9, signal: "Explicit signal of an active observability investment. References 'next-generation observability platforms' and OpenTelemetry." },
+      { title: "Senior Platform Engineer (Kubernetes, Terraform, ArgoCD)", team: "Platform Engineering", postedDays: 18, signal: "Confirms the Meridian Forward cloud-native buildout — workloads that will need instrumentation." },
+      { title: "Site Reliability Engineer — 3 open", team: "Site Reliability Engineering", postedDays: 27, signal: "Bench expansion, a direct response to the post-outage resilience mandate under Daniel Hughes." },
+      { title: "Manager, Monitoring & Incident Response", team: "Observability & Monitoring Operations", postedDays: 44, signal: "Backfill / expansion under Priya Natarajan — detection and incident response is a live gap." },
     ],
     agent: {
       seedQs: [
-        "What was Delta's stated financial impact from the CrowdStrike outage?",
-        "Who owns the post-CrowdStrike modernization program at Delta?",
-        "What's the public posture on Azure vs AWS vs on-prem?",
-        "Which roles is Delta hiring that signal where the program is going?",
+        "What caused Meridian's March 2026 mobile outage, and why does it matter?",
+        "Why did the original Dynatrace deal go cold, and has anything changed?",
+        "What regulatory pressure is Meridian under after crossing $100B in assets?",
+        "What monitoring tools does Meridian use today, and are they evaluating others?",
       ],
     },
   };
@@ -265,7 +249,7 @@ Scenario: ${SCENARIO.account} (${SCENARIO.industry}).
 What you know about the account from research:
 - ${SCENARIO.burningPlatform.join("\n- ")}
 
-Active strategic initiatives at Delta:
+Active strategic initiatives at ${SCENARIO.account}:
 - ${SCENARIO.initiatives.join("\n- ")}
 
 You are selling: ${SCENARIO.productYouAreSelling}
@@ -273,11 +257,11 @@ Your title: ${SCENARIO.yourTitle} at ${SCENARIO.yourCompany}.
 ICP: ${SCENARIO.icp}
 
 Competition in the room:
-${SCENARIO.competition.map(c => `- ${c.name}: pitching ${c.pitch} · weakness at Delta: ${c.weakness}`).join("\n")}
+${SCENARIO.competition.map(c => `- ${c.name}: pitching ${c.pitch} · weakness at ${SCENARIO.account}: ${c.weakness}`).join("\n")}
 `.trim();
 
   const JUDGE_PROMPTS = {
-    hypothesis: ({ submission }) => `You are an expert sales training coach evaluating a sales rep's account-research hypothesis on Delta Air Lines.
+    hypothesis: ({ submission }) => `You are an expert sales training coach evaluating a sales rep's account-research hypothesis on ${SCENARIO.account}.
 
 ${SCENARIO_SUMMARY}
 
@@ -287,15 +271,15 @@ ${submission}
 """
 
 Evaluate against these criteria:
-1. Did they identify a SPECIFIC initiative (post-CrowdStrike resilience, OCC restore time, hybrid-cloud data plane, fleet/MRO data, SkyMiles unification)?
-2. Did they reference concrete evidence (earnings call, CrowdStrike financial impact, job postings, Rahul Samant's posture, Sarah Chen's public commentary)?
+1. Did they identify a SPECIFIC trigger or initiative (the March 2026 outage, the Category III / OCC exam, the dual-core FIS/Fiserv integration, Meridian Forward cloud-native buildout, the AI/Merit rollout, the stalled prior evaluation)?
+2. Did they reference concrete evidence (the Q1 2026 earnings call, the outage coverage, the CTO appointment, investor day, job postings)?
 3. Did they predict business consequences, not just describe the initiative?
-4. Did they connect to a buyer's KPI (MTTR, restore time, backup success, board narrative, customer-comp expense, OpEx control)?
+4. Did they connect to a buyer's KPI (MTTR/MTTD, deployment success, tool-consolidation cost, OCC exam readiness, board attention, digital fee revenue)?
 
 COACHING STYLE — IMPORTANT:
 - Be PRESCRIPTIVE: name the specific principle or technique the rep should apply.
 - DO NOT give away the answer. Don't tell them what to write or which evidence to cite.
-- Point to a category, not the specifics. E.g. "Tie your hypothesis to a board-level KPI, not a tactical one" (good) vs "Cite the $500M CrowdStrike impact" (too revealing).
+- Point to a category, not the specifics. E.g. "Tie your hypothesis to a board-level or regulatory consequence, not a tactical one" (good) vs "Cite the March outage" (too revealing).
 - One concrete improvement, named in 1-2 sentences. No lists.
 
 Return ONLY valid JSON in this exact format:
@@ -306,7 +290,7 @@ Return ONLY valid JSON in this exact format:
 }
 Strong: hits 3-4 criteria. Developing: 2 criteria. Weak: 0-1 criteria.`,
 
-    outreach: ({ submission, channel, personaName, personaTitle }) => `You are an expert sales training coach evaluating a sales rep's outbound message to a Delta Air Lines stakeholder.
+    outreach: ({ submission, channel, personaName, personaTitle }) => `You are an expert sales training coach evaluating a sales rep's outbound message to a ${SCENARIO.account} stakeholder.
 
 ${SCENARIO_SUMMARY}
 
@@ -319,11 +303,11 @@ ${submission}
 """
 
 Evaluate against:
-1. Specificity — does it reference something only Delta would care about right now?
+1. Specificity — does it reference something only ${SCENARIO.account} would care about right now?
 2. Brevity — under 100 words is ideal.
 3. Hook — opens with a reason to read, not a vendor intro.
-4. CTA — clear, low-friction ask (15 min, paid assessment, posture review).
-5. Avoids clichés ("touching base", "circling back", "quick question", "synergy", generic value props, leading with NetApp features).
+4. CTA — clear, low-friction ask (15 min, a resilience/observability assessment, a posture review).
+5. Avoids clichés ("touching base", "circling back", "quick question", "synergy", generic value props, leading with Dynatrace features).
 
 COACHING STYLE — IMPORTANT:
 - PRESCRIPTIVE: name the specific principle to apply (e.g. "lead with their world, not yours").
@@ -344,7 +328,7 @@ Outcome rules:
 - "delegated" if tier is developing OR message addresses wrong altitude. Reply punts to a more appropriate contact (typically downward — VP punts to Director; Director punts to Manager).
 - "declined" if tier is weak or message uses clichés. Reply is curt or no-thanks.`,
 
-    precall: ({ submission, personaName, personaTitle }) => `You are an expert sales training coach evaluating a rep's pre-call discovery plan for a Delta Air Lines meeting.
+    precall: ({ submission, personaName, personaTitle }) => `You are an expert sales training coach evaluating a rep's pre-call discovery plan for a ${SCENARIO.account} meeting.
 
 ${SCENARIO_SUMMARY}
 Meeting with: ${personaName} — ${personaTitle}
@@ -355,10 +339,10 @@ ${submission}
 """
 
 Evaluate against SPIN/discovery best practice for this scenario:
-1. Situation questions are SPECIFIC to Delta (hybrid estate, OCC, hubs) — not 'tell me about your business'.
-2. Problem questions probe known symptoms (CrowdStrike, MTTR, four-platform reality, backup posture) — not generic pain.
-3. Implication questions exist and connect to a KPI / board-level consequence.
-4. Need-payoff framing references what success looks like (5× MTTR, unified data plane, OpEx control).
+1. Situation questions are SPECIFIC to Meridian (dual-core estate, Meridian Forward, the merged application portfolio) — not 'tell me about your business'.
+2. Problem questions probe known symptoms (the March outage, MTTR/MTTD, tool sprawl, detection gaps) — not generic pain.
+3. Implication questions exist and connect to a KPI / regulatory / board-level consequence.
+4. Need-payoff framing references what success looks like (earlier detection, consolidated tooling, instrumented AI workloads, exam readiness).
 5. Includes a hypothesis to test, not just open-ended questions.
 
 COACHING STYLE — IMPORTANT:
@@ -373,7 +357,7 @@ Return ONLY JSON:
   "coach": "Name the technique or SPIN stage to strengthen. Do not write questions for them."
 }`,
 
-    closing: ({ submission, callTranscript }) => `You are an expert sales training coach evaluating a rep's solution recommendation after a discovery call with a Delta Air Lines stakeholder.
+    closing: ({ submission, callTranscript }) => `You are an expert sales training coach evaluating a rep's solution recommendation after a discovery call with a ${SCENARIO.account} stakeholder.
 
 ${SCENARIO_SUMMARY}
 
@@ -388,8 +372,8 @@ ${submission}
 Evaluate:
 1. Does it tie back to what was actually said on the call (not generic)?
 2. Does it land on a specific pain → consequence → recommendation arc?
-3. Does it propose a concrete next step (paid assessment, posture review, proof-of-value)?
-4. Does it avoid NetApp feature-vomit?
+3. Does it propose a concrete next step (a proof-of-value, a resilience/observability assessment, a posture review)?
+4. Does it avoid Dynatrace feature-vomit?
 
 COACHING STYLE — IMPORTANT:
 - PRESCRIPTIVE: name the specific structural principle to apply.
@@ -415,9 +399,9 @@ Return ONLY JSON:
       ? "DIFFICULTY: EASY. Give the benefit of the doubt — promote one trust level after one decent question. Reveal information slightly more readily. Still defend against clichés."
       : "DIFFICULTY: HARD. Stay tightly in character. Require multiple specific, research-backed questions to advance trust. Punish clichés ruthlessly. Default to short, guarded answers.";
 
-    return `You are role-playing as ${persona.name}, ${persona.title} at ${persona.company} (Delta Air Lines).
+    return `You are role-playing as ${persona.name}, ${persona.title} at ${persona.company}.
 
-This is a training simulation for a NetApp sales rep. Stay strictly in character. You are NOT the AI assistant; you are this person. Never break character. Never say "as an AI". If asked who you are, you are ${persona.name}.
+This is a training simulation for a Dynatrace sales rep. Stay strictly in character. You are NOT the AI assistant; you are this person. Never break character. Never say "as an AI". If asked who you are, you are ${persona.name}.
 
 CONTEXT — what you know about the situation:
 ${SCENARIO_SUMMARY}
@@ -440,7 +424,7 @@ HARD RULES:
 - You delegate: ${persona.delegatesTo}. If asked questions outside your scope, punt.
 - Never proactively volunteer information that hasn't been earned.
 - Never role-play as the rep. Never write the rep's lines.
-- Never volunteer NetApp's value prop or compare vendors. If asked about competition (Pure, Dell, HPE), be neutral — those are the rep's problem, not yours.
+- Never volunteer Dynatrace's value prop or compare vendors. If asked about competition (Datadog, Splunk, IBM Instana), be neutral — those are the rep's problem, not yours.
 
 TRUST LAYERS — what you reveal when:
 L1 (default): ${persona.trustLayers.L1}
@@ -476,17 +460,81 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
     outcomePoints: { accepted: 80, delegated: 40, declined: 10 },
     iceWeight: { implication: 40, champion: 40, economicBuyer: 30, quality: 40 },
     tiers: [
-      { threshold: 650, name: "Confirmed",    deal: "$32M TCV",  desc: "Case solved. Multi-year program-level deal, exec sponsorship secured, champion in place." },
-      { threshold: 500, name: "Probable",     deal: "$14M TCV",  desc: "Strong working theory. Pilot scoped, expansion path clear, champion intact." },
-      { threshold: 350, name: "Inconclusive", deal: "$4M TCV",   desc: "Departmental engagement. Hypothesis partly proven. Champion is enthusiastic but exposed." },
-      { threshold: 0,   name: "Insufficient", deal: "$800K TCV", desc: "Toehold only. Insufficient evidence to expand. Renewal will be a fight." },
+      { threshold: 650, name: "Confirmed",    deal: "$1.5M ARR",  desc: "Case solved. Multi-year platform deal, CIO/CTO sponsorship secured, champion in place." },
+      { threshold: 500, name: "Probable",     deal: "$700K ARR",  desc: "Strong working theory. Proof-of-value scoped, expansion path clear, champion intact." },
+      { threshold: 350, name: "Inconclusive", deal: "$200K ARR",  desc: "Departmental engagement. Hypothesis partly proven. Champion is enthusiastic but exposed." },
+      { threshold: 0,   name: "Insufficient", deal: "$60K ARR",   desc: "Toehold only. Insufficient evidence to expand. Renewal will be a fight." },
     ],
   };
+
+  // ───────────────── SHARED SCORING HELPERS ─────────────────
+  // Single source of truth for the vault AND the admin telemetry.
+  function computeBreakdown(state) {
+    state = state || {};
+    const rows = [];
+    const hypoTier = (state.hypothesisEval && state.hypothesisEval.tier) || null;
+    rows.push({ label: "Hypothesis", val: hypoTier ? (SCORING.tierPoints[hypoTier] || 0) : 0, max: 100, phase: 1 });
+    const targetPersona = PERSONAS.find(p => p.id === (state.targetPersona || "")) || null;
+    rows.push({ label: "Person of Interest", val: targetPersona ? (SCORING.personaPoints[targetPersona.level] || 0) : 0, max: 100, phase: 1 });
+    const outreachTier = (state.outreachEval && state.outreachEval.tier) || null;
+    const outcome = (state.outreachEval && state.outreachEval.outcome) || null;
+    rows.push({ label: "Outreach", val: outreachTier ? Math.round((SCORING.tierPoints[outreachTier] || 0) * 0.5 + (SCORING.outcomePoints[outcome] || 0) * 0.5) : 0, max: 100, phase: 1 });
+    const cs = state.coldCallScore || null;
+    rows.push({ label: "Cold Call", val: cs ? Math.round((cs.implication || 0) * 0.25 + (cs.champion || 0) * 0.25 + (cs.quality || 0) * 0.3 + (cs.meetingEarned ? 80 : 20) * 0.2) : 0, max: 100, phase: 1 });
+    const precallTier = (state.precallEval && state.precallEval.tier) || null;
+    rows.push({ label: "Pre-Call Plan", val: precallTier ? (SCORING.tierPoints[precallTier] || 0) : 0, max: 100, phase: 2 });
+    const ds = state.discoveryScore || null;
+    rows.push({ label: "Discovery Call", val: ds ? Math.round((ds.implication || 0) * SCORING.iceWeight.implication / 100 + (ds.champion || 0) * SCORING.iceWeight.champion / 100 + (ds.economicBuyer || 0) * SCORING.iceWeight.economicBuyer / 100 + (ds.quality || 0) * SCORING.iceWeight.quality / 100) : 0, max: 150, phase: 2 });
+    const solTier = (state.solutionEval && state.solutionEval.tier) || null;
+    rows.push({ label: "Theory of the Case", val: solTier ? (SCORING.tierPoints[solTier] || 0) : 0, max: 100, phase: 2 });
+    const total = rows.reduce((s, r) => s + r.val, 0);
+    const phase1 = rows.filter(r => r.phase === 1).reduce((s, r) => s + r.val, 0);
+    const phase2 = rows.filter(r => r.phase === 2).reduce((s, r) => s + r.val, 0);
+    const tier = SCORING.tiers.find(t => total >= t.threshold) || SCORING.tiers[SCORING.tiers.length - 1];
+    return { rows, total, phase1, phase2, tier };
+  }
+
+  // Human-readable stage from the current screen
+  const STAGE_LABELS = {
+    "landing": "Intake", "intro": "Briefing", "transition": "Briefing", "briefing": "Case File",
+    "scene-1": "Phase 1", "room1-research": "Investigation", "room1-hypothesis": "Hypothesis",
+    "room1-persona": "Persons of Interest", "room1-outreach": "Outreach", "room1-coldcall": "Cold Call",
+    "room1-complete": "Phase 1 Filed", "scene-2": "Discovery", "room2-contact": "Contact Review",
+    "room2-precall": "Pre-Call Plan", "room2-discovery": "Discovery Call", "room2-closing": "Closing", "room2-solution": "Recommendation",
+    "vault": "Findings",
+  };
+
+  // Compact per-team record for the admin dashboard
+  function summarizeTeam(state) {
+    if (!state || !state.teamId) return null;
+    const b = computeBreakdown(state);
+    const persona = PERSONAS.find(p => p.id === (state.discoveryPersonaId || state.coldCallPersonaId || state.targetPersona || "")) || null;
+    const finished = state.screen === "vault";
+    const cs = state.coldCallScore || {};
+    const ds = state.discoveryScore || {};
+    return {
+      teamId: state.teamId,
+      screen: state.screen,
+      stage: STAGE_LABELS[state.screen] || state.screen,
+      finished,
+      persona: persona ? persona.name : "—",
+      personaTier: persona ? persona.level : "—",
+      phase1: b.phase1, phase1Max: 400,
+      phase2: b.phase2, phase2Max: 350,
+      total: b.total,
+      tier: finished ? b.tier.name : "—",
+      deal: finished ? b.tier.deal : "—",
+      meetingEarned: !!cs.meetingEarned,
+      ice: { implication: ds.implication || cs.implication || 0, champion: ds.champion || cs.champion || 0, economicBuyer: ds.economicBuyer || cs.economicBuyer || 0 },
+      updated: Date.now(),
+    };
+  }
 
   // ───────────────── SCREEN SEQUENCE ─────────────────
   const SCREENS = [
     "landing",
     "intro",
+    "transition",
     "briefing",
     "scene-1",
     "room1-research",
@@ -495,15 +543,19 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
     "room1-outreach",
     "room1-coldcall",
     "room1-complete",
+    "room2-transition",
     "scene-2",
+    "room2-contact",
     "room2-precall",
     "room2-discovery",
+    "room2-closing",
     "room2-solution",
     "vault",
   ];
   const SCREEN_LABELS = {
     "landing":          { kicker: "00 // INTAKE",         label: "Intake" },
     "intro":            { kicker: "01 // OPENING",        label: "Opening" },
+    "transition":       { kicker: "01 // OPENING",        label: "Transition" },
     "briefing":         { kicker: "02 // CASE FILE",      label: "Case File" },
     "scene-1":          { kicker: "03 // PHASE 01",       label: "Phase 1" },
     "room1-research":   { kicker: "03 // PHASE 01",       label: "Investigation" },
@@ -512,10 +564,13 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
     "room1-outreach":   { kicker: "03 // PHASE 01",       label: "Outreach" },
     "room1-coldcall":   { kicker: "03 // PHASE 01",       label: "Cold Call" },
     "room1-complete":   { kicker: "03 // PHASE 01",       label: "Filed" },
-    "scene-2":          { kicker: "04 // PHASE 02",       label: "Phase 2" },
-    "room2-precall":    { kicker: "04 // PHASE 02",       label: "Pre-Brief" },
-    "room2-discovery":  { kicker: "04 // PHASE 02",       label: "Interview" },
-    "room2-solution":   { kicker: "04 // PHASE 02",       label: "Recommendation" },
+    "room2-transition": { kicker: "04 // DISCOVERY",       label: "Transition" },
+    "scene-2":          { kicker: "04 // DISCOVERY",       label: "Discovery" },
+    "room2-contact":    { kicker: "04 // DISCOVERY",       label: "Your Contact" },
+    "room2-precall":    { kicker: "04 // DISCOVERY",       label: "Pre-Call Plan" },
+    "room2-discovery":  { kicker: "04 // DISCOVERY",       label: "Discovery Call" },
+    "room2-closing":    { kicker: "04 // DISCOVERY",       label: "Closing" },
+    "room2-solution":   { kicker: "04 // DISCOVERY",       label: "Recommendation" },
     "vault":            { kicker: "05 // FINDINGS",       label: "Findings" },
   };
 
@@ -523,12 +578,12 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
     "scene-1": {
       num: "PHASE 01",
       title: "Reopen the file.",
-      desc: "Forty-five minutes. One account. Old information, fresh eyes. Establish the pattern. Identify the persons of interest. Earn a sit-down before the window closes again.",
+      desc: "One account that went cold thirteen months ago. Old information, fresh evidence. Establish the pattern, identify the persons of interest, and earn a sit-down before the trail goes cold again.",
     },
     "scene-2": {
-      num: "PHASE 02",
-      title: "The interview.",
-      desc: "The meeting is on the calendar. Trust is not. Fifteen minutes to test your theory of the case — or close the file with a polite handshake and a thin recommendation.",
+      num: "DISCOVERY",
+      title: "The discovery call.",
+      desc: "The meeting is on the calendar. Trust is not. Test your theory of the case — or close the file with a polite handshake and a thin recommendation.",
     },
   };
 
@@ -540,6 +595,9 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
     JUDGE_PROMPTS,
     characterPrompt,
     SCORING,
+    computeBreakdown,
+    summarizeTeam,
+    STAGE_LABELS,
     SCREENS,
     SCREEN_LABELS,
     SCENE_CARDS,

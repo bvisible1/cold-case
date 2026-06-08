@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Intel — Dynatrace</title>
+<style>
+  :root{
+    --li:#4aa3ec; --li-deep:#0a66c2;
+    --bg:#0c1620; --bg-1:#10202d; --bg-2:#16293a; --line:#23394d;
+    --txt:#e7eef5; --txt-2:#9fb2c4; --dim:#6f8499;
+    --green:#3aa76d; --amber:#d9a14a; --red:#d95a6b;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:14px;line-height:1.5;}
+  .topbar{display:flex;align-items:center;gap:10px;padding:12px 20px;background:linear-gradient(180deg,#0c3a6b,#0a2c4f);border-bottom:1px solid var(--line);}
+  .in{width:26px;height:26px;border-radius:5px;background:#fff;color:var(--li-deep);font-weight:800;font-size:15px;display:grid;place-items:center;font-family:var(--sans);}
+  .topbar .brand{font-weight:700;}
+  .topbar .tab{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#9cc8f0;}
+  .cover{height:84px;background:linear-gradient(120deg,#0a66c2,#1b3a5c 60%,#0a2c4f);position:relative;}
+  .company{padding:0 20px 16px;border-bottom:1px solid var(--line);background:var(--bg-1);display:flex;gap:16px;}
+  .logo{width:72px;height:72px;border-radius:10px;background:linear-gradient(135deg,#6c4bd6,#2bd4c9);border:3px solid var(--bg-1);margin-top:-28px;display:grid;place-items:center;font-weight:800;font-size:26px;color:#06121c;flex:0 0 auto;}
+  .company h1{margin:8px 0 2px;font-size:22px;}
+  .company .meta{color:var(--txt-2);font-size:13px;}
+  .company .stats{margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.05em;}
+  .company .stats b{color:var(--li);font-weight:600;}
+  .wrap{padding:18px 20px;display:grid;gap:18px;}
+  .card{background:var(--bg-1);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .card h2{margin:0;padding:12px 16px;font-size:12px;font-family:var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--li);border-bottom:1px solid var(--line);background:var(--bg-2);}
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
+  .person{background:var(--bg-1);padding:14px 16px;display:flex;gap:12px;}
+  .pic{width:46px;height:46px;border-radius:50%;background:#26405a;display:grid;place-items:center;font-weight:700;color:#bcd6ef;flex:0 0 auto;}
+  .person .nm{font-weight:600;}
+  .person .ti{color:var(--txt-2);font-size:12px;line-height:1.35;}
+  .badge{display:inline-block;margin-top:5px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:9px;border:1px solid var(--line);color:var(--dim);}
+  .badge.new{color:var(--green);border-color:var(--green);}
+  .badge.gone{color:var(--red);border-color:var(--red);}
+  .post{padding:14px 16px;border-bottom:1px solid var(--line);}
+  .post:last-child{border-bottom:0;}
+  .post .head{display:flex;gap:10px;align-items:center;margin-bottom:8px;}
+  .post .pic{width:36px;height:36px;font-size:13px;}
+  .post .nm{font-weight:600;font-size:13px;}
+  .post .sub{color:var(--dim);font-size:11px;font-family:var(--mono);}
+  .post .body{font-size:13px;line-height:1.6;color:var(--txt);}
+  .post .react{margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.08em;}
+  .post .react b{color:var(--li);}
+  .rows .r{display:flex;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline;}
+  .rows .r:last-child{border-bottom:0;}
+  .rows .r .tg{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--li);min-width:96px;}
+  .rows .r .tx{color:var(--txt);}
+  .up{color:var(--green);} .down{color:var(--red);}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="in">in</span>
+    <span class="brand">LinkedIn</span>
+    <span class="tab">Company Intelligence</span>
+  </div>
+
+  <div class="cover"></div>
+  <div class="company">
+    <div class="logo">DT</div>
+    <div>
+      <h1>Dynatrace</h1>
+      <div class="meta">Software Development · Waltham, Massachusetts · 5,001-10,000 employees</div>
+      <div class="stats"><b>248,000</b> followers · <b>+18%</b> headcount growth (YoY) · <b>~5,000</b> on platform</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <h2>Leadership — Watchlist</h2>
+      <div class="people">
+        <div class="person"><div class="pic">DW</div><div><div class="nm">Devon Wu</div><div class="ti">Chief Information Officer</div><span class="badge new">● Joined 7 mo ago</span></div></div>
+        <div class="person"><div class="pic">SL</div><div><div class="nm">Sasha Lindgren</div><div class="ti">Director, Platform Engineering</div><span class="badge new">● New org</span></div></div>
+        <div class="person"><div class="pic">PN</div><div><div class="nm">Priya Natarajan</div><div class="ti">Sr. Manager, FinOps</div><span class="badge">Cost &amp; efficiency</span></div></div>
+        <div class="person"><div class="pic">MR</div><div><div class="nm">Marcus Reyes</div><div class="ti">VP, Infrastructure (former)</div><span class="badge gone">● Departed</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Recent Posts</h2>
+      <div class="post">
+        <div class="head"><div class="pic">DW</div><div><div class="nm">Devon Wu</div><div class="sub">CIO · 4 days ago</div></div></div>
+        <div class="body">"Consolidation isn't a cost-cutting exercise — it's a design principle. This quarter we're holding every tool to one bar: does it earn its place on the platform? If it can't show ROI, it goes."</div>
+        <div class="react"><b>1,204</b> reactions · <b>96</b> comments</div>
+      </div>
+      <div class="post">
+        <div class="head"><div class="pic">SL</div><div><div class="nm">Sasha Lindgren</div><div class="sub">Director, Platform Eng · 2 wk ago</div></div></div>
+        <div class="body">"Standing up a Platform Engineering function from scratch. Priority one: kill the integration debt we inherited from the last two acquisitions. If your data plane isn't unified, nothing downstream is trustworthy."</div>
+        <div class="react"><b>540</b> reactions · <b>38</b> comments</div>
+      </div>
+      <div class="post">
+        <div class="head"><div class="pic">PN</div><div><div class="nm">Priya Natarajan</div><div class="sub">Sr. Manager, FinOps · 3 wk ago</div></div></div>
+        <div class="body">"Every renewal is now a justification event. We're not anti-spend — we're anti-surprise. Show me the unit economics or don't book the meeting."</div>
+        <div class="react"><b>312</b> reactions · <b>21</b> comments</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Org Signals</h2>
+      <div class="rows">
+        <div class="r"><span class="tg">Headcount</span><span class="tx"><span class="up">▲ +18% YoY</span> — concentrated in Platform Eng, FinOps, and SRE.</span></div>
+        <div class="r"><span class="tg">New Reqs</span><span class="tx">Principal Architect, Data Platform · Staff SRE · FinOps Lead — building cost &amp; reliability muscle.</span></div>
+        <div class="r"><span class="tg">Departures</span><span class="tx"><span class="down">▼</span> VP Infrastructure (your prior champion) left last quarter. Backfill not named.</span></div>
+        <div class="r"><span class="tg">Reorg</span><span class="tx">New Platform Engineering org reporting into the CIO — centralizing tooling decisions.</span></div>
+        <div class="r"><span class="tg">Read</span><span class="tx">Decision power has moved up and centralized. Win the CIO's consolidation thesis or don't play.</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

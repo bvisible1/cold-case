@@ -12,6 +12,9 @@ target/
 # OS
 .DS_Store
 
+# Docs / decks (not part of the app)
+*.pptx
+
 # Local env / secrets — NEVER commit your API key
 .env
 *.env

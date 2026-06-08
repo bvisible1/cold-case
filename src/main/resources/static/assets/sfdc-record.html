@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SFDC — Dynatrace</title>
+<style>
+  :root{
+    --sf:#1b96ff; --sf-deep:#0b5cab;
+    --bg:#0c1620; --bg-1:#10202d; --bg-2:#16293a; --line:#23394d;
+    --txt:#e7eef5; --txt-2:#9fb2c4; --dim:#6f8499;
+    --green:#3aa76d; --amber:#d9a14a; --red:#d95a6b;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:14px;line-height:1.5;}
+  a{color:var(--sf);text-decoration:none;}
+  .topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;background:linear-gradient(180deg,#0e3a66,#0b2a4a);border-bottom:1px solid var(--line);}
+  .cloud{width:30px;height:20px;background:var(--sf);border-radius:12px;position:relative;flex:0 0 auto;}
+  .cloud::before{content:'';position:absolute;width:14px;height:14px;background:var(--sf);border-radius:50%;top:-6px;left:5px;}
+  .cloud::after{content:'';position:absolute;width:10px;height:10px;background:var(--sf);border-radius:50%;top:-3px;left:16px;}
+  .topbar .brand{font-weight:700;letter-spacing:.02em;}
+  .topbar .tab{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#9cc8f0;}
+  .hero{padding:20px;border-bottom:1px solid var(--line);background:var(--bg-1);display:flex;gap:18px;align-items:flex-start;}
+  .av{width:54px;height:54px;border-radius:8px;background:linear-gradient(135deg,#6c4bd6,#2bd4c9);display:grid;place-items:center;font-weight:700;font-size:20px;color:#06121c;flex:0 0 auto;}
+  .hero .kind{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+  .hero h1{margin:2px 0 4px;font-size:24px;}
+  .hero .sub{color:var(--txt-2);font-size:13px;}
+  .pill{display:inline-block;margin-left:8px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--txt-2);vertical-align:middle;}
+  .pill.cold{color:var(--red);border-color:var(--red);}
+  .highlights{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-bottom:1px solid var(--line);}
+  .hl{background:var(--bg-1);padding:12px 16px;}
+  .hl .l{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;}
+  .hl .v{font-size:14px;font-weight:600;}
+  .wrap{padding:20px;display:grid;gap:20px;}
+  .card{background:var(--bg-1);border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .card h2{margin:0;padding:12px 16px;font-size:12px;font-family:var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--sf);border-bottom:1px solid var(--line);background:var(--bg-2);display:flex;align-items:center;gap:8px;}
+  .card h2 .ct{margin-left:auto;color:var(--dim);}
+  table{width:100%;border-collapse:collapse;}
+  th,td{text-align:left;padding:10px 16px;border-bottom:1px solid var(--line);font-size:13px;}
+  th{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);font-weight:400;}
+  tr:last-child td{border-bottom:0;}
+  td .nm{font-weight:600;}
+  td .mi{color:var(--dim);font-size:12px;}
+  .stage{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:4px;}
+  .stage.won{color:var(--green);border:1px solid var(--green);}
+  .stage.lost{color:var(--red);border:1px solid var(--red);}
+  .stage.open{color:var(--amber);border:1px solid var(--amber);}
+  .amt{font-family:var(--mono);}
+  .tl{padding:4px 0;}
+  .ev{display:flex;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);}
+  .ev:last-child{border-bottom:0;}
+  .ev .dot{width:10px;height:10px;border-radius:50%;background:var(--sf);margin-top:5px;flex:0 0 auto;box-shadow:0 0 0 3px rgba(27,150,255,.15);}
+  .ev .when{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;}
+  .ev .what{font-size:13px;margin-top:2px;}
+  .ev .who{color:var(--txt-2);font-size:12px;}
+  .note{padding:14px 16px;border-bottom:1px solid var(--line);}
+  .note:last-child{border-bottom:0;}
+  .note .meta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px;}
+  .note .body{font-size:13px;color:var(--txt);line-height:1.6;}
+  .flag{color:var(--amber);}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="cloud"></span>
+    <span class="brand">Salesforce</span>
+    <span class="tab">Account · Detail</span>
+  </div>
+
+  <div class="hero">
+    <div class="av">DT</div>
+    <div>
+      <div class="kind">Account</div>
+      <h1>Dynatrace, Inc. <span class="pill cold">● Cold / Dormant</span></h1>
+      <div class="sub">NYSE: DT · Software Intelligence &amp; Observability · Waltham, MA</div>
+    </div>
+  </div>
+
+  <div class="highlights">
+    <div class="hl"><div class="l">Account Owner</div><div class="v">Unassigned <span class="flag">⚑</span></div></div>
+    <div class="hl"><div class="l">Type</div><div class="v">Customer — Lapsed</div></div>
+    <div class="hl"><div class="l">Annual Revenue</div><div class="v">~$1.7B</div></div>
+    <div class="hl"><div class="l">Employees</div><div class="v">~5,000</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <h2>Contacts <span class="ct">4 records</span></h2>
+      <table>
+        <thead><tr><th>Name</th><th>Title</th><th>Status</th><th>Last Activity</th></tr></thead>
+        <tbody>
+          <tr><td><div class="nm">Marcus Reyes</div><div class="mi">m.reyes@dynatrace.com</div></td><td>VP, Infrastructure <span class="mi">(former champion)</span></td><td><span class="stage lost">Departed</span></td><td>16 mo ago</td></tr>
+          <tr><td><div class="nm">Sasha Lindgren</div><div class="mi">s.lindgren@dynatrace.com</div></td><td>Director, Platform Eng</td><td><span class="stage open">Active</span></td><td>No touch</td></tr>
+          <tr><td><div class="nm">Priya Natarajan</div><div class="mi">p.natarajan@dynatrace.com</div></td><td>Sr. Manager, FinOps</td><td><span class="stage open">Active</span></td><td>No touch</td></tr>
+          <tr><td><div class="nm">Devon Wu</div><div class="mi">d.wu@dynatrace.com</div></td><td>CIO <span class="mi">(joined 7 mo ago)</span></td><td><span class="stage open">New</span></td><td>Never contacted</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Opportunities <span class="ct">3 records · $1.28M lifetime</span></h2>
+      <table>
+        <thead><tr><th>Opportunity</th><th>Stage</th><th>Amount</th><th>Close Date</th></tr></thead>
+        <tbody>
+          <tr><td><div class="nm">Observability data-tiering pilot</div><div class="mi">Dept · sponsored by M. Reyes</div></td><td><span class="stage won">Closed Won</span></td><td class="amt">$180,000</td><td>FY2022 · Q3</td></tr>
+          <tr><td><div class="nm">Platform expansion — Phase 2</div><div class="mi">Enterprise · multi-year</div></td><td><span class="stage lost">Closed Lost</span></td><td class="amt">$1,100,000</td><td>FY2023 · Q4</td></tr>
+          <tr><td><div class="nm">Renewal / re-engagement</div><div class="mi">No active sponsor</div></td><td><span class="stage open">Stalled</span></td><td class="amt">—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Activity Timeline <span class="ct">recent</span></h2>
+      <div class="tl">
+        <div class="ev"><div class="dot"></div><div><div class="when">14 MONTHS AGO</div><div class="what">Last logged activity — QBR follow-up email, no reply.</div><div class="who">Logged by: prior AE (rolled off territory)</div></div></div>
+        <div class="ev"><div class="dot"></div><div><div class="when">FY2023 · Q4</div><div class="what">Phase 2 expansion marked Closed Lost — "no decision, budget frozen."</div><div class="who">Competitor: incumbent point tools retained</div></div></div>
+        <div class="ev"><div class="dot"></div><div><div class="when">FY2023 · Q2</div><div class="what">Champion Marcus Reyes flagged as "at risk" — reorg rumored.</div><div class="who">Note added by SE</div></div></div>
+        <div class="ev"><div class="dot"></div><div><div class="when">FY2022 · Q3</div><div class="what">Data-tiering pilot Closed Won. Strong technical validation, never expanded.</div><div class="who">Sponsor: Marcus Reyes</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Deal Notes</h2>
+      <div class="note"><div class="meta">AE NOTE · 16 MO AGO</div><div class="body">"Technical win was real — Davis AI integration impressed the platform team. We lost momentum when Reyes went quiet. If he leaves, we lose our only thread. <span class="flag">Need a new entry point above Platform Eng.</span>"</div></div>
+      <div class="note"><div class="meta">SE NOTE · FY2023</div><div class="body">"They build, they don't buy core data tech. Anything we bring has to slot under their consolidation story, not compete with the Davis platform. Lead with TCO + integration debt from acquisitions."</div></div>
+      <div class="note"><div class="meta">SYSTEM · RE-ENTRY FLAG</div><div class="body">New CIO (Devon Wu) onboarded 7 months ago with a consolidation + ROI mandate. Net-new Platform Engineering org. <span class="flag">Account ripe for re-open — but the old playbook is dead.</span></div></div>
+    </div>
+  </div>
+</body>
+</html>
