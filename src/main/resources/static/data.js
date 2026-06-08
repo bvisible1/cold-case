@@ -582,10 +582,10 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
   // ───────────────── SCREEN SEQUENCE ─────────────────
   const SCREENS = [
     "landing",
-    "intro",
-    "transition",
-    "briefing",
     "signin-video",
+    "intro",
+    "briefing",
+    "transition",
     "scene-1",
     "room1-research",
     "room1-hypothesis",

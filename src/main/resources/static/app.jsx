@@ -198,7 +198,7 @@ function App() {
   return (
     <>
       {!fullBleed && <_TopBar state={state} screen={state.screen} />}
-      {showRoomClock && !fullBleed && (
+      {showRoomClock && state.screen !== "room1-coldcall" && (
         <_RoomClock seconds={roomElapsed} label={inRoom1 ? "// Phase 01 · case open" : "// Discovery · case open"} />
       )}
       <main className="main">

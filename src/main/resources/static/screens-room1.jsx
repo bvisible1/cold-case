@@ -17,7 +17,7 @@ function LandingScreen({ state, nav }) {
   const newPlayId = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + "-" + Math.random().toString(36).slice(2));
   const start = () => {
     if (!teamId.trim()) return;
-    nav("intro", { teamId: teamId.trim().toUpperCase(), startedAt: Date.now(), playId: newPlayId() });
+    nav("signin-video", { teamId: teamId.trim().toUpperCase(), startedAt: Date.now(), playId: newPlayId() });
   };
   const resume = () => {
     if (!accessCode.trim() || !teamId.trim()) return;
@@ -76,11 +76,11 @@ function LandingScreen({ state, nav }) {
 // ─────────────────────────────────────────────────────────
 function IntroScreen({ state, nav }) {
   useEffectR1(() => {
-    const t = setTimeout(() => nav("transition"), 6000);
+    const t = setTimeout(() => nav("briefing"), 6000);
     return () => clearTimeout(t);
   }, []);
   return (
-    <div className="intro-stage" onClick={() => nav("transition")}>
+    <div className="intro-stage" onClick={() => nav("briefing")}>
       <div className="intro-vignette"></div>
       <div className="intro-card">
         <div className="meta">— CASE FILE OPENED —</div>
@@ -97,7 +97,7 @@ function IntroScreen({ state, nav }) {
 // ─────────────────────────────────────────────────────────
 function TransitionScreen({ state, nav }) {
   const vidRef = useRefR1(null);
-  const go = () => nav("briefing");
+  const go = () => nav("scene-1");
   useEffectR1(() => {
     const v = vidRef.current;
     if (!v) return;
@@ -125,7 +125,7 @@ function TransitionScreen({ state, nav }) {
 // ─────────────────────────────────────────────────────────
 function SigninVideoScreen({ state, nav }) {
   const vidRef = useRefR1(null);
-  const go = () => nav("scene-1");
+  const go = () => nav("intro");
   useEffectR1(() => {
     const v = vidRef.current;
     if (!v) return;
@@ -180,7 +180,7 @@ function Room2TransitionScreen({ state, nav }) {
 // BRIEFING (exact dossier image with functional overlays)
 // ─────────────────────────────────────────────────────────
 function BriefingScreen({ state, nav }) {
-  const proceed = () => nav("signin-video");
+  const proceed = () => nav("transition");
   return (
     <div className="brf">
       <div className="brf-grain"></div>
@@ -655,6 +655,56 @@ function OutreachScreen({ state, nav }) {
     coldCallPersonaId = persona.level === "executive" ? "michael" : "marcus";
   }
 
+  // ─── Dedicated response screen (reply on top, feedback below) ───
+  if (eval_) {
+    const unread = eval_.outcome === "declined";
+    const proceed = eval_.outcome === "accepted" || eval_.outcome === "delegated";
+    const first = persona.name.split(" ")[0];
+    return (
+      <div className="p2-stage">
+        <div className="p2-grain"></div>
+        <div className="p2-wrap" style={{ maxWidth: 760 }}>
+          <header className="p2-head">
+            <div className="p2-phase">Phase 01 · Outreach Response</div>
+            <h1 className="p2-htitle">{unread ? "No reply." : "You got a response."}</h1>
+            <p className="p2-hsub">{unread ? "Your message didn't earn a read." : `Here's how ${first} responded — and how it read.`}</p>
+          </header>
+
+          {unread ? (
+            <div style={{ border: "1px dashed var(--border-2)", borderRadius: 6, padding: "18px 20px", background: "rgba(255,255,255,.015)" }}>
+              <div className="mono" style={{ fontSize: 12, letterSpacing: ".12em", color: "var(--text-dim)", marginBottom: 8 }}>📭 MESSAGE UNREAD</div>
+              <div style={{ fontFamily: "var(--serif)", fontSize: 15, color: "var(--text-2)", lineHeight: 1.55 }}>Nothing in your note gave {persona.name} a reason to open it — zero relevance to their world, so it went straight past. No reply.</div>
+            </div>
+          ) : (
+            <div style={{ border: "1px solid var(--border-2)", borderRadius: 6, padding: "18px 20px", background: "rgba(45,212,208,.03)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                <span className="ot-av" style={{ width: 34, height: 34, borderRadius: "50%", background: "var(--bg-3)", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 700, color: "var(--accent)" }}>{persona.photoInitials}</span>
+                <span style={{ flex: 1 }}><b style={{ color: "var(--text)" }}>{persona.name}</b><span style={{ color: "var(--text-dim)" }}> · {persona.title}</span></span>
+                <span className={"ot-outcome " + eval_.outcome} style={{ fontFamily: "var(--mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: eval_.outcome === "accepted" ? "var(--green)" : "var(--amber)" }}>{eval_.outcome}</span>
+              </div>
+              {eval_.replyText && <div style={{ fontFamily: "var(--serif)", fontSize: 15, color: "var(--text)", lineHeight: 1.6 }}>{eval_.replyText}</div>}
+            </div>
+          )}
+
+          <div className={"eval-card " + (eval_.tier || "developing")} style={{ marginTop: 18 }}>
+            <div className="tier">Assessment · {eval_.tier}</div>
+            <div className="feedback">{eval_.feedback}</div>
+            {eval_.coach && <div className="coach">Coach: {eval_.coach}</div>}
+          </div>
+
+          <div className="p2-actions">
+            <button className={"btn " + (proceed ? "btn-ghost" : "btn-primary")} onClick={() => nav("room1-persona", { outreachChannel: channel, outreachSubject: subject, outreachBody: body, outreachEval: null })}>↩ Pick a Persona</button>
+            {proceed &&
+            <button className="btn btn-primary" onClick={() => nav("room1-coldcall", {
+              outreachChannel: channel, outreachSubject: subject, outreachBody: body, outreachEval: eval_, coldCallPersonaId
+            })}>
+              {coldCallPersonaId !== persona.id ? "Proceed (Delegated) →" : "Place Cold Call →"}
+            </button>}
+          </div>
+        </div>
+      </div>);
+  }
+
   return (
     <div className="exact-landing">
       <div className="exact-frame exact-frame-outreach">
@@ -730,35 +780,6 @@ function OutreachScreen({ state, nav }) {
           </div>
         }
 
-        {/* Reply / evaluation modal after send */}
-        {eval_ &&
-        <div className="invest-veil">
-            <div className="invest-modal thin-scroll">
-              <button className="modal-x" onClick={() => setEval(null)}>×</button>
-              <div className="kicker">// Response received</div>
-              <div className={"ot-reply-from " + eval_.outcome}>
-                <span className="av">{persona.photoInitials}</span>
-                <span className="who"><b>{persona.name}</b><span className="dim"> · {persona.title}</span></span>
-                <span className={"ot-outcome " + eval_.outcome}>{eval_.outcome}</span>
-              </div>
-              {eval_.replyText && <div className="ot-reply-body">{eval_.replyText}</div>}
-              <div className={"eval-card " + (eval_.tier || "developing")} style={{ marginTop: 16 }}>
-                <div className="tier">Assessment · {eval_.tier}</div>
-                <div className="feedback">{eval_.feedback}</div>
-                {eval_.coach && <div className="coach">Coach: {eval_.coach}</div>}
-              </div>
-              <div className="invest-modal-foot">
-                <button className="btn btn-ghost" onClick={() => setEval(null)}>Revise</button>
-                <button className="btn btn-primary" onClick={() => nav("room1-coldcall", {
-                outreachChannel: channel, outreachSubject: subject, outreachBody: body,
-                outreachEval: eval_, coldCallPersonaId
-              })}>
-                  {coldCallPersonaId !== persona.id ? "Proceed (Delegated) →" : "Place Cold Call →"}
-                </button>
-              </div>
-            </div>
-          </div>
-        }
       </div>
     </div>);
 
@@ -780,7 +801,7 @@ function ColdCallScreen({ state, nav, difficulty }) {
   const [typing, setTyping] = useStateR1("");
   const [ending, setEnding] = useStateR1(false);
   const [scored, setScored] = useStateR1(null);
-  const [timeLeft, setTimeLeft] = useStateR1(448); // 07:28
+  const [timeLeft, setTimeLeft] = useStateR1(480); // 08:00
   const logRef = useRefR1(null);
   const tickRef = useRefR1({});
 
