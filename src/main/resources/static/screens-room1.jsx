@@ -17,7 +17,7 @@ function LandingScreen({ state, nav }) {
   const newPlayId = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + "-" + Math.random().toString(36).slice(2));
   const start = () => {
     if (!teamId.trim()) return;
-    nav("signin-video", { teamId: teamId.trim().toUpperCase(), startedAt: Date.now(), playId: newPlayId() });
+    nav("intro", { teamId: teamId.trim().toUpperCase(), startedAt: Date.now(), playId: newPlayId() });
   };
   const resume = () => {
     if (!accessCode.trim() || !teamId.trim()) return;
@@ -125,7 +125,7 @@ function TransitionScreen({ state, nav }) {
 // ─────────────────────────────────────────────────────────
 function SigninVideoScreen({ state, nav }) {
   const vidRef = useRefR1(null);
-  const go = () => nav("intro");
+  const go = () => nav("scene-1");
   useEffectR1(() => {
     const v = vidRef.current;
     if (!v) return;
@@ -180,7 +180,7 @@ function Room2TransitionScreen({ state, nav }) {
 // BRIEFING (exact dossier image with functional overlays)
 // ─────────────────────────────────────────────────────────
 function BriefingScreen({ state, nav }) {
-  const proceed = () => nav("scene-1");
+  const proceed = () => nav("signin-video");
   return (
     <div className="brf">
       <div className="brf-grain"></div>
