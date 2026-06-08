@@ -58,72 +58,72 @@
   const PROFILES = {
     rachel: {
       name: "Rachel Morgan", initials:"RM", face:"face-rachel.png",
-      headline: "VP, Global Data Infrastructure at Delta Air Lines",
-      meta: "Atlanta, GA · 500+ connections · <b>3 mutual</b> (incl. 1 at NetApp)",
-      about: "Accountable for the data platform and storage strategy behind Delta's operations. Since last summer I've been laser-focused on one question the board keeps asking: when the next outage hits, how fast do we recover? Resilience isn't a project anymore — it's the mandate. Previously led infrastructure at a Fortune 100 global operations org.",
+      headline: "VP, Infrastructure & Platform Engineering at Meridian Capital Group",
+      meta: "Charlotte, NC &middot; 500+ connections &middot; <b>2 mutual</b>",
+      about: "Accountable for the platform and operational resilience behind Meridian's banking estate. Since the March outage, the question I keep getting from leadership &mdash; and now the OCC &mdash; is simple: when a deploy goes wrong, how fast do we know, before customers do? Resilience isn't a project anymore, it's the mandate. Previously led infrastructure at a top-10 US bank.",
       experience: [
-        { ico:"DAL", role:"VP, Global Data Infrastructure", co:"Delta Air Lines", dur:"3 yrs" },
-        { ico:"PRV", role:"VP, Infrastructure", co:"(prior Fortune 100 ops org)", dur:"5 yrs" },
+        { ico:"MCG", role:"VP, Infrastructure & Platform Engineering", co:"Meridian Capital Group", dur:"4 yrs" },
+        { ico:"PRV", role:"VP, Infrastructure", co:"(prior top-10 US bank)", dur:"6 yrs" },
       ],
       posts: [
-        { when:"POSTED · 1 WEEK AGO", body:"\u201cResilience is a board-level conversation now. After last summer, &lsquo;good enough&rsquo; infrastructure stopped being acceptable. We&rsquo;re targeting a 5x improvement in recovery time across ops-critical workloads — and yes, that number came from the boardroom, not from IT.\u201d", react:"<b>2,140</b> reactions · <b>180</b> comments" },
-        { when:"RESHARED · 2 WEEKS AGO", body:"Resharing our CIO Rahul Samant&rsquo;s post: &lsquo;Resilience is a design principle, not a recovery step.&rsquo; This is exactly the lens we&rsquo;re applying to every infrastructure decision this year.", react:"<b>640</b> reactions" },
-        { when:"SPOKE AT · AVIATION IT SUMMIT 2026", body:"Grateful to have shared the stage to talk about rebuilding the data fabric under the Operations Control Center — the constraint nobody outside aviation appreciates: the OCC can&rsquo;t move to the cloud, so the data plane has to be consistent across Azure, AWS, and on-prem.", react:"<b>410</b> reactions" },
+        { when:"POSTED &middot; 1 WEEK AGO", body:"&ldquo;Operational resilience is a board-level conversation now. After March, &lsquo;the dashboard didn&rsquo;t catch it&rsquo; stopped being an acceptable answer. We&rsquo;re investing so a bad deploy surfaces in our tooling before a single customer feels it &mdash; and yes, the urgency came from the boardroom, not from IT.&rdquo;", react:"<b>1,940</b> reactions &middot; <b>150</b> comments" },
+        { when:"RESHARED &middot; 2 WEEKS AGO", body:"Resharing our new CTO Brian Sorrell&rsquo;s first post: &lsquo;Detection is a design choice, not a postmortem.&rsquo; Exactly the lens we&rsquo;re applying across the platform this year.", react:"<b>520</b> reactions" },
+        { when:"SPOKE AT &middot; REGIONAL BANK TECH FORUM 2026", body:"Grateful to talk about running observability across two core-banking systems mid-integration &mdash; the constraint nobody outside banking appreciates: you can&rsquo;t take the core down, so detection has to be consistent across FIS, Fiserv, and the new cloud.", react:"<b>360</b> reactions" },
       ],
       details: [
-        { k:"Volunteers", v:"Mentor, Women in STEM — Atlanta chapter (great rapport angle, not a sales angle)." },
-        { k:"Posted req", v:"Her org is hiring a Director, Hybrid Cloud Engineering — she's building, not migrating away from on-prem." },
-        { k:"Reads as", v:"Speaks in board outcomes, not features. Lead with the 5x MTTR mandate and what a miss costs." },
+        { k:"Volunteers", v:"Mentor, Women in Tech &mdash; Charlotte chapter (great rapport angle, not a sales angle)." },
+        { k:"Posted req", v:"Her org is hiring an Observability Engineer and SREs &mdash; she's building the function, not outsourcing it." },
+        { k:"Reads as", v:"Speaks in board and regulatory outcomes, not features. Lead with the exam exposure and what a repeat outage costs." },
       ],
-      chips: ["Hybrid cloud","Operational resilience","Forecast/MTTR","Board reporting","Data platform strategy"],
+      chips: ["Operational resilience","Observability","MTTR / detection","Category III readiness","Platform consolidation"],
     },
     daniel: {
       name: "Daniel Hughes", initials:"DH", face:"face-daniel.png",
-      headline: "Director, Data Platform Engineering at Delta Air Lines",
-      meta: "Atlanta, GA · 500+ connections · <b>2 mutual</b>",
-      about: "I run the team that keeps Delta's data platforms alive 24/7 across 290+ destinations. Came up through SRE. I care about day-2 reality, not vision slides — what breaks at 2am and how fast we fix it. Right now that means wrangling four storage platforms across Azure, AWS, on-prem, and legacy edge while we cut MTTR in half.",
+      headline: "Director, Site Reliability Engineering at Meridian Capital Group",
+      meta: "Charlotte, NC &middot; 500+ connections &middot; <b>2 mutual</b>",
+      about: "I run the team that keeps Meridian's banking platforms reliable 24/7 across 420+ branches. Came up through platform engineering. I care about day-2 reality, not vision slides &mdash; what breaks at 2am and how fast we catch it. Right now that means wrangling two core-banking systems and ten monitoring tools while we cut MTTR and stand up Kubernetes.",
       experience: [
-        { ico:"DAL", role:"Director, Data Platform Engineering", co:"Delta Air Lines", dur:"5 yrs" },
-        { ico:"SAAS", role:"Staff SRE", co:"(major SaaS)", dur:"4 yrs" },
+        { ico:"MCG", role:"Director, Site Reliability Engineering", co:"Meridian Capital Group", dur:"5 yrs" },
+        { ico:"PLT", role:"Staff Platform Engineer", co:"(prior fintech)", dur:"4 yrs" },
       ],
       posts: [
-        { when:"POSTED · 5 DAYS AGO", body:"\u201cManaging four different storage platforms isn&rsquo;t a strategy, it&rsquo;s a tax. Four CLIs, four alerting models, four on-call runbooks. My 22-person team pays that tax every single night. If your &lsquo;platform&rsquo; adds a fifth, we&rsquo;re not talking.\u201d", react:"<b>820</b> reactions · <b>96</b> comments" },
-        { when:"COMMENTED · 2 WEEKS AGO", body:"On a thread about zero-downtime migration: &lsquo;The migration is the easy part. The hard part is doing it while you&rsquo;re also remediating findings from last year&rsquo;s outage. Nobody hands you a maintenance window in aviation.&rsquo;", react:"<b>210</b> reactions" },
-        { when:"POSTED · 1 MONTH AGO", body:"We&rsquo;re hiring a Principal Architect, Data Platform to own the unified data-fabric blueprint. If you&rsquo;ve actually unified hybrid storage at scale (not on a slide), my DMs are open.", react:"<b>330</b> reactions" },
+        { when:"POSTED &middot; 5 DAYS AGO", body:"&ldquo;Running ten monitoring tools isn&rsquo;t a strategy, it&rsquo;s a tax. Splunk here, Instana there, a dozen dashboards &mdash; and the March deploy still slipped through. My team pays that tax every night. If your &lsquo;platform&rsquo; adds an eleventh tool, we&rsquo;re not talking.&rdquo;", react:"<b>760</b> reactions &middot; <b>88</b> comments" },
+        { when:"COMMENTED &middot; 2 WEEKS AGO", body:"On a thread about core migrations: &lsquo;The migration is the easy part. The hard part is doing it while you&rsquo;re also under an OCC exam. Nobody hands you a maintenance window in banking.&rsquo;", react:"<b>230</b> reactions" },
+        { when:"POSTED &middot; 1 MONTH AGO", body:"We&rsquo;re hiring SREs and an Observability Engineer who&rsquo;s actually instrumented Kubernetes at scale (not on a slide). If that&rsquo;s you, my DMs are open.", react:"<b>300</b> reactions" },
       ],
       details: [
-        { k:"Personal", v:"Marathon runner — posts splits from the Atlanta Marathon (rapport, used carefully)." },
-        { k:"Tell", v:"Allergic to 'AI-powered' hand-waving. Respects specifics: latency, rate limits, failure modes." },
+        { k:"Personal", v:"Cyclist &mdash; posts weekend rides around Charlotte (rapport, used carefully)." },
+        { k:"Tell", v:"Allergic to 'AI-powered' hand-waving. Respects specifics: false-positive rates, trace coverage, failure modes." },
         { k:"Reads as", v:"Win him with a 'day in the life' of his team, not an outcomes pitch. He gates the technical yes to Rachel." },
       ],
-      chips: ["SRE","Hybrid ops","MTTR","Zero-downtime migration","Tooling consolidation"],
+      chips: ["SRE","Day-2 ops","MTTR","Kubernetes","Tool consolidation"],
     },
     priya: {
       name: "Priya Natarajan", initials:"PN", face:"face-priya.png",
-      headline: "Manager, Storage Infrastructure at Delta Air Lines",
-      meta: "Atlanta, GA · 500+ connections · <b>1 mutual</b>",
-      about: "I keep the storage running — backups, restores, capacity, the legacy arrays everyone forgets about until they fail. Spent years on the vendor side before this, so I can smell a pitch from a mile away. Tell me what your thing actually does on a Tuesday, not what it does in a keynote.",
+      headline: "Manager, Observability & Monitoring Operations at Meridian Capital Group",
+      meta: "Charlotte, NC &middot; 500+ connections &middot; <b>1 mutual</b>",
+      about: "I keep the monitoring running &mdash; detection, dashboards, the Splunk and Instana stacks everyone leans on until something slips. I ran monitoring straight through the Heritage acquisition, so I can smell a pitch from a mile away. Tell me what your thing actually does on a Tuesday, not what it does in a keynote.",
       experience: [
-        { ico:"DAL", role:"Manager, Storage Infrastructure", co:"Delta Air Lines", dur:"8 yrs" },
-        { ico:"VND", role:"Sr. Storage Engineer", co:"(storage vendor)", dur:"6 yrs" },
+        { ico:"MCG", role:"Manager, Observability & Monitoring Operations", co:"Meridian Capital Group", dur:"7 yrs" },
+        { ico:"OPS", role:"Monitoring / NOC Lead", co:"(prior regional bank)", dur:"5 yrs" },
       ],
       posts: [
-        { when:"POSTED · 3 DAYS AGO", body:"\u201cSpent the weekend chasing failed backup jobs again. A 91% success rate is not a number I can live with when the target is 99%. Four of our arrays are past end-of-support and parts take weeks. This is the unglamorous reality behind every &lsquo;resilience&rsquo; headline.\u201d", react:"<b>540</b> reactions · <b>72</b> comments" },
-        { when:"ASKED · STORAGE COMMUNITY · 3 WEEKS AGO", body:"Question for the group: what are people actually using for immutable, ransomware-resilient backups on ops-critical workloads? Our last full restore test took 11 hours. I need that under two. Real answers only.", react:"<b>160</b> reactions" },
-        { when:"POSTED · 6 WEEKS AGO", body:"Six people, four storage platforms, 24/7. We don&rsquo;t need another dashboard. We need fewer things to babysit.", react:"<b>290</b> reactions" },
+        { when:"POSTED &middot; 3 DAYS AGO", body:"&ldquo;Spent the weekend chasing false alerts again. When the one that mattered &mdash; the March deploy &mdash; didn&rsquo;t page anyone until customers were already locked out, that&rsquo;s the number that keeps me up. Two alerting models, two tools, no single source of truth. This is the unglamorous reality behind every &lsquo;resilience&rsquo; headline.&rdquo;", react:"<b>510</b> reactions &middot; <b>70</b> comments" },
+        { when:"ASKED &middot; OBSERVABILITY COMMUNITY &middot; 3 WEEKS AGO", body:"Question for the group: what are people actually using to catch a bad deploy before customers do, across a mixed estate &mdash; legacy .NET/Java plus new Kubernetes? Our mean-time-to-detect on that March change was way too long. Real answers only.", react:"<b>150</b> reactions" },
+        { when:"POSTED &middot; 6 WEEKS AGO", body:"Two tools, ten dashboards, a climbing Splunk bill. We don&rsquo;t need another dashboard. We need fewer things to babysit and faster detection.", react:"<b>280</b> reactions" },
       ],
       details: [
-        { k:"Personal", v:"Film photography hobbyist — posts black-and-white street shots on weekends." },
-        { k:"Tell", v:"Ex-vendor. She'll test your technical claims immediately. Bring numbers, not adjectives." },
-        { k:"Reads as", v:"Earn her with backup/restore specifics. She can champion a proof-of-value up to Daniel." },
+        { k:"Personal", v:"Film photography hobbyist &mdash; posts black-and-white street shots on weekends." },
+        { k:"Tell", v:"Ex-operator. She'll test your technical claims immediately. Bring numbers, not adjectives." },
+        { k:"Reads as", v:"Earn her with detection / alert-noise / ingest-cost specifics. She can champion a proof-of-value up to Daniel." },
       ],
-      chips: ["Backup & recovery","Immutable / ransomware","Capacity planning","Legacy arrays","Restore testing"],
+      chips: ["Detection / MTTD","Alert noise","Log ingest cost","Trace coverage","Splunk + Instana"],
     },
   };
 
   const p = new URLSearchParams(location.search).get('p') || 'rachel';
   const d = PROFILES[p] || PROFILES.rachel;
-  document.title = d.name + " · LinkedIn";
+  document.title = d.name + " &middot; LinkedIn";
   document.getElementById('app').innerHTML = `
     <div class="topbar"><span class="in">in</span><span class="brand">LinkedIn</span><span class="tab">Profile</span></div>
     <div class="cover"></div>
@@ -138,7 +138,7 @@
       <div class="card"><h2>About</h2><div class="about">${d.about}</div></div>
       <div class="card"><h2>Activity</h2>${d.posts.map(x=>`<div class="post"><div class="when">${x.when}</div><div class="body">${x.body}</div><div class="react">${x.react}</div></div>`).join('')}</div>
       <div class="card"><h2>Experience</h2>${d.experience.map(x=>`<div class="exp"><div class="ico">${x.ico}</div><div><div class="role">${x.role}</div><div class="co">${x.co}</div><div class="dur">${x.dur}</div></div></div>`).join('')}</div>
-      <div class="card"><h2>Intel — read the room</h2>${d.details.map(x=>`<div class="det"><span class="k">${x.k}</span><span>${x.v}</span></div>`).join('')}</div>
+      <div class="card"><h2>Intel &mdash; read the room</h2>${d.details.map(x=>`<div class="det"><span class="k">${x.k}</span><span>${x.v}</span></div>`).join('')}</div>
       <div class="card"><h2>Topics they engage with</h2><div class="chips">${d.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div></div>
     </div>`;
 </script>

@@ -208,73 +208,73 @@ function SceneCardScreen({ state, nav, sceneKey, next }) {
 // ─────────────────────────────────────────────────────────
 const INVESTIGATION = [
 { id: "past-opps", cat: "PRIOR DEALS", title: "Past closed opportunities", q: "What did they buy before?", findings: [
-  { src: "CRM · closed-won", text: "FY2022 — a departmental observability pilot, ~$180K. Closed-won but never expanded; the sponsor has since left." },
-  { src: "CRM · closed-lost", text: "FY2023 — platform expansion, ~$1.1M. Lost to 'no decision' when budget froze during the macro pullback." },
-  { src: "Signal", text: "No active opportunity in 18 months. This is a cold account — the relationship has gone quiet." }]
+  { src: "CRM · closed-lost", text: "FY2025 — an observability & security POC, ~$520K. Shortlisted with Datadog and favored, then lost to 'no decision' when a 90-day IT spend freeze hit after a Q1 earnings miss." },
+  { src: "CRM · history", text: "First engaged Nov 2024 after a branch-cutover incident the incumbent monitoring missed. No closed-won — this account has never bought from us." },
+  { src: "Signal", text: "No active opportunity in ~13 months. This is a cold account — the relationship went quiet, not hostile." }]
 },
 { id: "leadership", cat: "PEOPLE", title: "Leadership changes", q: "Who's new or moved on?", findings: [
-  { src: "LinkedIn", text: "A new CIO joined ~7 months ago from a hyperscaler, with a mandate to consolidate tooling and prove ROI." },
-  { src: "Press", text: "The long-time VP of Infrastructure — your prior champion — departed last quarter." },
-  { src: "Org", text: "A net-new 'Platform Engineering' function was stood up under the new CIO." }]
+  { src: "LinkedIn", text: "First-ever CTO, Brian Sorrell, joined ~1 month ago from Capital One — known to have used Dynatrace there." },
+  { src: "Press", text: "Your prior champion, VP of Infrastructure Greg Halloran, left the company last year." },
+  { src: "Org", text: "CIO Robert Callahan — the original economic buyer — is still in seat; a new CISO, Kevin Landers, came in mid-2025." }]
 },
 { id: "earnings", cat: "FINANCIALS", title: "Earnings & financial performance", q: "How are they performing?", findings: [
-  { src: "Q4 FY2024 call", text: "~$1.7B revenue; ARR growth decelerating into the low-20s%. The Street is focused on margin and free cash flow." },
-  { src: "CFO commentary", text: "Guided to disciplined opex and 'doing more with the platform we already have.' Cost scrutiny is high." },
-  { src: "Signal", text: "An efficiency narrative means budget exists for consolidation that lowers TCO — not net-new spend." }]
+  { src: "Q1 2026 call", text: "~$4.8B net revenue; technology & ops spend up ~$40M YoY, driven by the complexity of running two core-banking systems through the Heritage integration." },
+  { src: "CFO commentary", text: "Compliance infrastructure named a top capital-allocation priority for the next 18 months; tool consolidation flagged as a way to offset spend." },
+  { src: "Signal", text: "Budget exists for resilience and consolidation that lowers risk and cost — not open-ended net-new spend." }]
 },
 { id: "strategic", cat: "STRATEGY", title: "Strategic initiatives", q: "What are they focused on?", findings: [
-  { src: "Earnings", text: "Three pillars: AI-powered automation, platform consolidation, and land-and-expand in the enterprise." },
-  { src: "Analyst day", text: "A public goal to unify observability, security, and business analytics on a single data plane." },
-  { src: "Signal", text: "A 'one platform' strategy means they punish point solutions. Lead with consolidation, not features." }]
+  { src: "Investor day", text: "'Meridian Forward' — a $600M, AWS-first program: a real-time payments hub, a 'Merit' AI assistant, and zero-trust." },
+  { src: "Commitment", text: "$80M in AI-driven efficiency gains targeted by 2027; wealth & fee income growth to 40% of revenue." },
+  { src: "Signal", text: "Every initiative now rides on digital reliability. Tie your story to keeping Meridian Forward up — not features." }]
 },
 { id: "tech", cat: "TECH", title: "Technology investments", q: "Where are they betting?", findings: [
-  { src: "Engineering blog", text: "Heavy investment in their causal-AI engine and a data lakehouse for observability at massive scale." },
-  { src: "Job posts", text: "Hiring for Rust, large-scale storage, and GPU / AI-infra roles — building, not buying, their core data tech." },
-  { src: "Signal", text: "They respect technical depth. Generic 'AI-powered' claims get shut down fast." }]
+  { src: "Job posts", text: "Kubernetes, Terraform, and ArgoCD across a new cloud-native buildout — workloads with no mature monitoring yet." },
+  { src: "Architecture", text: "A dual core-banking estate — FIS Modern Banking + legacy Fiserv Premier — mid-migration, with inconsistent logging between them." },
+  { src: "Signal", text: "They live in day-2 operational reality. Generic 'AI-powered' claims get shut down — bring specifics." }]
 },
 { id: "mna", cat: "M&A", title: "M&A activity", q: "Are they buying or being acquired?", findings: [
-  { src: "Press", text: "Acquired two smaller security + AI-tooling startups in the last 18 months to fill platform gaps." },
-  { src: "Analyst", text: "Seen as an acquirer, not a target. Healthy balance sheet with an active tuck-in strategy." },
-  { src: "Signal", text: "Integration debt from those deals is real pain around unifying data across merged stacks." }]
+  { src: "Press", text: "Acquired Heritage Southern (2023, ~doubled the branch count) and a wealth RIA, Covington (2025)." },
+  { src: "Analyst", text: "An acquirer, not a target — but carrying real integration debt across merged application stacks." },
+  { src: "Signal", text: "Integration debt = fragmented pipelines and monitoring blind spots. That's the wedge." }]
 },
 { id: "news", cat: "PRESS", title: "News & press coverage", q: "What's in the headlines?", findings: [
-  { src: "TechCrunch", text: "Named a Leader in the latest observability rankings; PR is pushing the 'unified platform' story hard." },
-  { src: "Trade press", text: "Customer case studies emphasize cost takeout and tool rationalization." },
-  { src: "Signal", text: "They sell consolidation to their own customers — mirror that language back to them." }]
+  { src: "Charlotte Business Journal", text: "A 6-hour mobile-banking outage on March 14, 2026 — a failed payments-middleware deploy, undetected until customers felt it." },
+  { src: "American Banker", text: "Named its first-ever CTO and is moving into its first Category III OCC examination cycle." },
+  { src: "Signal", text: "The outage is a fresh, dated incident — a concrete reason to re-open without referencing the dead deal." }]
 },
 { id: "hiring", cat: "HIRING", title: "Hiring trends", q: "What roles are they adding?", findings: [
-  { src: "Careers page", text: "A spike in Platform Engineering, FinOps, and Site Reliability roles across US hubs." },
-  { src: "Job posts", text: "A new 'Principal Architect, Data Platform' req that owns the unified data-fabric blueprint." },
-  { src: "Signal", text: "FinOps + SRE hiring means they're industrializing cost control and reliability. That's your wedge." }]
+  { src: "Careers page", text: "An 'Observability Engineer' req referencing 'next-generation observability platforms' and OpenTelemetry." },
+  { src: "Job posts", text: "SRE and a 'Manager, Monitoring & Incident Response' backfill — detection and response is understaffed." },
+  { src: "Signal", text: "Hiring for observability + incident response means an active evaluation is already underway. That's your wedge." }]
 },
 { id: "industry", cat: "MARKET", title: "Industry & market shifts", q: "What external forces matter?", findings: [
-  { src: "Market", text: "Observability and security are converging; buyers are collapsing 5-7 tools down to 1-2 platforms." },
-  { src: "Macro", text: "Budget scrutiny across all software — every renewal is now a justification event." },
-  { src: "Signal", text: "The external story (consolidation, cost, AI) is the same story they tell. Align to it." }]
+  { src: "Regulation", text: "Crossing $100B in assets triggered Category III status — enhanced OCC scrutiny of tech controls and operational resilience." },
+  { src: "Market", text: "Observability and security are converging; banks are collapsing 5-7 monitoring tools into 1-2 platforms." },
+  { src: "Signal", text: "The external pressure (resilience, regulation, consolidation) is exactly their internal pressure. Align to it." }]
 }];
 
 const INVEST_POS = [21.5, 29, 36.2, 43.7, 50.8, 57.7, 64.4, 71.1, 77.8];
 
 const RIGHT_TOOLS = [
 { id: "sfdc", cat: "CRM RECORD", title: "SFDC Record", q: "Account details, ownership, pipeline history, and prior engagements.", html: "assets/sfdc-record.html", pos: { left: "70.4%", top: "18.4%", width: "20.2%", height: "14.2%" }, findings: [
-  { src: "Account", text: "Owner: unassigned — the last AE rolled off. Tier: Enterprise. Segment: Software / Tech." },
-  { src: "Pipeline history", text: "Two small closed-won deals; one closed-lost ($1.1M, 'no decision'). No open opportunities." },
-  { src: "Engagement", text: "Last logged activity was 14 months ago. The account is dormant — this is a re-entry." }]
+  { src: "Account", text: "Owner: unassigned — the last AE (Paul Nettles) rolled off. Tier: Enterprise. Segment: Banking & Financial Services." },
+  { src: "Pipeline history", text: "One closed-lost POC ($520K, 'no decision / budget freeze'). Two open plays: revive the deal, or net-new whitespace." },
+  { src: "Engagement", text: "Last logged activity ~13 months ago. The account is dormant — this is a re-entry." }]
 },
 { id: "ir", cat: "INVESTOR RELATIONS", title: "Investor Relations", q: "Financials, investor presentations, earnings calls, and shareholder comms.", pos: { left: "70.4%", top: "34.4%", width: "20.2%", height: "18.2%" }, findings: [
-  { src: "10-K", text: "~$1.7B revenue; subscription is ~80% of the mix; net revenue retention softening but still >110%." },
-  { src: "Earnings call", text: "Management emphasized free-cash-flow margin expansion and 'platform efficiency' for customers." },
-  { src: "Investor deck", text: "The TAM story centers on consolidating observability, security, and business analytics." }]
+  { src: "10-K", text: "Now a Category III institution after crossing $100B in assets — subject to enhanced OCC examination for the first time." },
+  { src: "Earnings call", text: "Q1 2026 — tech & ops spend up ~$40M YoY on dual-core complexity; compliance infrastructure a top capital priority." },
+  { src: "Investor deck", text: "'Meridian Forward' centers on cloud modernization, a real-time payments hub, and ~$80M in AI efficiency by 2027." }]
 },
 { id: "news2", cat: "PRESS", title: "In the News", q: "The latest news, press releases, and market coverage.", pos: { left: "70.4%", top: "53.6%", width: "20.2%", height: "15.6%" }, findings: [
-  { src: "Press release", text: "Launched new AI-automation capabilities, positioned squarely against point-tool sprawl." },
-  { src: "Coverage", text: "Analysts flag competitive pressure from platform rivals on pricing and packaging." },
-  { src: "Signal", text: "Their public narrative is 'do more with one platform.' Mirror it back to them." }]
+  { src: "Press", text: "The March 2026 mobile-banking outage tied to a failed middleware deploy — board-level attention to resilience." },
+  { src: "Coverage", text: "First-ever CTO appointed; the bank is entering its first Category III exam cycle." },
+  { src: "Signal", text: "Lead with the outage and the exam — fresh, dated, and squarely about detection." }]
 },
 { id: "li", cat: "LINKEDIN", title: "LinkedIn Intelligence", q: "Leadership profiles, recent posts, org changes, and company activity.", html: "assets/linkedin-intel.html", pos: { left: "70.4%", top: "70.6%", width: "20.2%", height: "15.0%" }, findings: [
-  { src: "Profiles", text: "A new CIO (ex-hyperscaler) and a freshly built Platform Engineering org reporting into them." },
-  { src: "Recent posts", text: "The CIO is posting about 'consolidation as a design principle' and ROI accountability." },
-  { src: "Org changes", text: "The VP of Infrastructure — your prior champion — has departed; the backfill isn't named yet." }]
+  { src: "Profiles", text: "New CTO Brian Sorrell (ex-Capital One, an observability-first leader) and CIO Robert Callahan, the original economic buyer." },
+  { src: "Recent posts", text: "Rachel Morgan (VP, Infra & Platform Eng) posting that 'detection is a design choice, not a postmortem.'" },
+  { src: "Org changes", text: "Your prior champion, VP Greg Halloran, has departed; Rachel Morgan now owns the platform org." }]
 }];
 
 
