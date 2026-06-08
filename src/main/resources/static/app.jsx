@@ -9,6 +9,7 @@ const _TopBar           = window.TopBar;
 const _RoomClock        = window.RoomClock;
 const _LandingScreen    = window.LandingScreen;
 const _IntroScreen      = window.IntroScreen;
+const _SigninVideoScreen = window.SigninVideoScreen;
 const _TransitionScreen = window.TransitionScreen;
 const _Room2TransitionScreen = window.Room2TransitionScreen;
 const _BriefingScreen   = window.BriefingScreen;
@@ -169,6 +170,7 @@ function App() {
   let screenEl = null;
   switch (state.screen) {
     case "landing":          screenEl = <_LandingScreen state={state} nav={nav} />; break;
+    case "signin-video":     screenEl = <_SigninVideoScreen state={state} nav={nav} />; break;
     case "intro":            screenEl = <_IntroScreen state={state} nav={nav} />; break;
     case "transition":       screenEl = <_TransitionScreen state={state} nav={nav} />; break;
     case "briefing":         screenEl = <_BriefingScreen state={state} nav={nav} />; break;
@@ -191,7 +193,7 @@ function App() {
   }
 
   // Hide topbar/clock for full-bleed cinematic screens
-  const fullBleed = ["landing", "briefing", "room1-research", "room1-persona", "room1-outreach", "room1-coldcall", "room2-precall", "room2-solution", "intro", "transition", "room2-transition", "scene-1", "scene-2"].includes(state.screen);
+  const fullBleed = ["landing", "briefing", "room1-research", "room1-persona", "room1-outreach", "room1-coldcall", "room2-precall", "room2-solution", "intro", "signin-video", "transition", "room2-transition", "scene-1", "scene-2"].includes(state.screen);
 
   return (
     <>

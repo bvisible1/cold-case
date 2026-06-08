@@ -103,6 +103,9 @@ window.HEIST_API = (() => {
   async function scoreConversation({ transcript, mode, persona }) {
     const sys = `You are a sales training scoring engine. The rep represents Dynatrace (a unified observability + security platform) and is working Meridian Capital Group — a Category III regional bank mid-integration, recovering from a public mobile-banking outage, with monitoring tool sprawl (Splunk + IBM Instana), an AWS/Kubernetes buildout, and a prior Dynatrace evaluation that went cold. Strong reps tie discovery to those realities (earlier detection/MTTD, MTTR, tool consolidation cost, OCC/Category III exam readiness, instrumenting AI workloads) rather than pitching features.
 
+${(window.HEIST_DATA && window.HEIST_DATA.SCORING_REFERENCE) || ""}
+FOCUS for a live conversation: especially EXECUTIVE ENGAGEMENT (Feature Pivot, Generic Opener, Wrong Altitude), DISCOVERY DEPTH (Surface Pain, Unasked Implication, No Compelling Event), VALUE TRANSLATION (IT-Speak to a business buyer; capability pitch to a strategic buyer), and STAKEHOLDER ARCHITECTURE (Missing Economic Buyer). Name any failure modes the rep commits in the "failures" array.
+
 Analyze this ${mode} conversation transcript with persona ${persona.name} (${persona.title}).
 
 Transcript:
@@ -126,7 +129,8 @@ Return ONLY JSON:
   "quality": 0-100,
   "meetingEarned": true | false,
   "endedEarly": true | false,
-  "summary": "2-sentence read of the conversation."
+  "summary": "2-sentence read of the conversation.",
+  "failures": ["exact failure-mode names from the catalog that the rep showed in this conversation; [] if none"]
 }`;
     return await evaluate(sys);
   }

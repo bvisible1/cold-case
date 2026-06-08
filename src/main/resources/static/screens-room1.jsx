@@ -17,7 +17,7 @@ function LandingScreen({ state, nav }) {
   const newPlayId = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + "-" + Math.random().toString(36).slice(2));
   const start = () => {
     if (!teamId.trim()) return;
-    nav("intro", { teamId: teamId.trim().toUpperCase(), startedAt: Date.now(), playId: newPlayId() });
+    nav("signin-video", { teamId: teamId.trim().toUpperCase(), startedAt: Date.now(), playId: newPlayId() });
   };
   const resume = () => {
     if (!accessCode.trim() || !teamId.trim()) return;
@@ -115,6 +115,34 @@ function TransitionScreen({ state, nav }) {
   return (
     <div className="transition-stage" onClick={go}>
       <video ref={vidRef} className="transition-video" src="assets/prospecting-transition.mp4" autoPlay playsInline></video>
+      <div className="transition-skip">tap anywhere to skip →</div>
+    </div>);
+
+}
+
+// ─────────────────────────────────────────────────────────
+// SIGN-IN VIDEO (plays right after the landing / sign-in screen)
+// ─────────────────────────────────────────────────────────
+function SigninVideoScreen({ state, nav }) {
+  const vidRef = useRefR1(null);
+  const go = () => nav("intro");
+  useEffectR1(() => {
+    const v = vidRef.current;
+    if (!v) return;
+    let done = false;
+    const onEnd = () => { if (!done) { done = true; go(); } };
+    v.addEventListener("ended", onEnd);
+    v.addEventListener("error", onEnd);
+    const fallback = setTimeout(onEnd, 60000);
+    v.muted = false;
+    v.volume = 1;
+    const p = v.play && v.play();
+    if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
+    return () => { v.removeEventListener("ended", onEnd); v.removeEventListener("error", onEnd); clearTimeout(fallback); };
+  }, []);
+  return (
+    <div className="transition-stage" onClick={go}>
+      <video ref={vidRef} className="transition-video" src="assets/intro-transition.mp4" autoPlay playsInline></video>
       <div className="transition-skip">tap anywhere to skip →</div>
     </div>);
 
@@ -970,7 +998,7 @@ function Room1CompleteScreen({ state, nav }) {
 }
 
 Object.assign(window, {
-  LandingScreen, IntroScreen, TransitionScreen, Room2TransitionScreen, BriefingScreen, SceneCardScreen,
+  LandingScreen, IntroScreen, SigninVideoScreen, TransitionScreen, Room2TransitionScreen, BriefingScreen, SceneCardScreen,
   ResearchScreen, HypothesisScreen, PersonaSelectScreen, LinkedInModal,
   OutreachScreen, ColdCallScreen, Room1CompleteScreen
 });

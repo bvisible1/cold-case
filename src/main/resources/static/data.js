@@ -260,10 +260,27 @@ Competition in the room:
 ${SCENARIO.competition.map(c => `- ${c.name}: pitching ${c.pitch} · weakness at ${SCENARIO.account}: ${c.weakness}`).join("\n")}
 `.trim();
 
+  // ───────────────── SCORING REFERENCE (judges only — never shown to personas) ─────────────────
+  // What "good" looks like (Dynatrace value prop) + the catalog of common rep failures.
+  const SELLER_PROFILE = `WHAT GOOD POSITIONING LOOKS LIKE — the rep represents Dynatrace (NYSE: DT): a single AI-powered observability + security PLATFORM (not point tools). Core platform: OneAgent auto-instrumentation, Grail data lakehouse, Smartscape live topology, and Davis hypermodal AI for DETERMINISTIC causal root-cause (not just correlation). Capabilities span infrastructure & application observability (PurePath distributed tracing), AI observability, digital experience (RUM/synthetic/session replay), application security, log management (a consolidation play vs Splunk/Elastic), and agentic AIOps (Dynatrace Intelligence). Sold as one consumption subscription (DPS) — median enterprise ACV ~$183K, lands >$200K. The strongest reps lead with a PLATFORM + business outcome (detect a bad deploy before customers do, consolidate 10+ tools, cut MTTD/MTTR, pass the exam), NOT a feature tour.`;
+
+  const FAILURE_TAXONOMY = `COMMON REP FAILURE MODES — name any the rep commits and reward the opposite "right behavior":
+EXECUTIVE ENGAGEMENT — Feature Pivot (turns a strategic exec conversation into a demo); Generic Opener (opens with company background or generic discovery any vendor could ask); Wrong Altitude (pitched too low/technical or too high/vague for the buyer's decision frame); Vanishing Executive (accepts being delegated downward without re-earning the exec).
+DISCOVERY DEPTH — Surface Pain (documents symptoms but never the business impact/root cause); Unasked Implication (never builds the cost of doing nothing); Missing Success Metric (no customer-stated definition of winning); No Compelling Event (interest mistaken for urgency — no date-tied driver).
+STAKEHOLDER ARCHITECTURE — Single-Threaded (deal rides on one contact); Lightweight Champion (enthusiastic ally without political weight); Missing Economic Buyer (never reaches the budget owner); Quiet Influencer (security/procurement/legal veto engaged too late).
+VALUE TRANSLATION — IT-Speak to Business Buyer (technical talk to a business buyer who needs outcomes); Capability Pitch to Strategic Buyer (feature list answering a vision question).
+DEAL DISCIPLINE — Vague Next Steps (no specific, dated, owned next step); Unconfirmed Mutual Plan (a plan the customer never agreed to).
+WRITTEN COMMUNICATION — Buried Ask (the request is hidden under context); Overwritten Email (too long/dense/sales-toned); Mistuned Document (right content, wrong reader/altitude).`;
+
+  const SCORING_REFERENCE = `${SELLER_PROFILE}\n\n${FAILURE_TAXONOMY}`;
+
   const JUDGE_PROMPTS = {
     hypothesis: ({ submission }) => `You are an expert sales training coach evaluating a sales rep's account-research hypothesis on ${SCENARIO.account}.
 
 ${SCENARIO_SUMMARY}
+
+${SCORING_REFERENCE}
+FOCUS for this step (account-research hypothesis): especially DISCOVERY DEPTH (Surface Pain, Unasked Implication, No Compelling Event) and VALUE TRANSLATION. When you coach, if the rep commits a failure mode above, NAME the specific one (e.g. "Surface Pain") and nudge toward its right behavior — still as a question, never the answer. List the failure names you detected in the "failures" array.
 
 The rep's hypothesis:
 """
@@ -287,13 +304,17 @@ Return ONLY valid JSON in this exact format:
 {
   "tier": "strong" | "developing" | "weak",
   "feedback": "1-2 sentences. Conversational read of the hypothesis quality. Don't echo their text.",
-  "coach": "1-2 sentences. Name the specific technique/principle to apply next. Don't write their hypothesis for them."
+  "coach": "1-2 sentences. Name the specific technique/principle to apply next. Don't write their hypothesis for them.",
+  "failures": ["exact failure-mode names from the catalog that this hypothesis shows; [] if none"]
 }
 Strong: hits 3-4 criteria. Developing: 2 criteria. Weak: 0-1 criteria.`,
 
     outreach: ({ submission, channel, personaName, personaTitle }) => `You are an expert sales training coach evaluating a sales rep's outbound message to a ${SCENARIO.account} stakeholder.
 
 ${SCENARIO_SUMMARY}
+
+${SCORING_REFERENCE}
+FOCUS for this step (outbound message): especially WRITTEN COMMUNICATION (Buried Ask, Overwritten Email, Mistuned Document) and EXECUTIVE ENGAGEMENT (Generic Opener, Wrong Altitude). If the rep commits a failure mode above, name it and list it in "failures".
 
 Target persona: ${personaName} — ${personaTitle}
 Channel: ${channel}
@@ -322,7 +343,8 @@ Return ONLY valid JSON:
   "coach": "Name the single most important technique to apply. Don't write the message for them.",
   "outcome": "accepted" | "delegated" | "declined",
   "replyText": "A short, in-character reply from ${personaName} matching the outcome (3-5 sentences). This IS in-character dialogue, not coaching — it can be specific.",
-  "delegateTo": "manager" | "director" | null
+  "delegateTo": "manager" | "director" | null,
+  "failures": ["exact failure-mode names from the catalog that this message shows; [] if none"]
 }
 Outcome rules:
 - "accepted" only if tier is strong AND message is well-researched and altitude-appropriate. Reply confirms a 15 min call.
@@ -332,6 +354,10 @@ Outcome rules:
     precall: ({ submission, personaName, personaTitle }) => `You are an expert sales training coach evaluating a rep's pre-call discovery plan for a ${SCENARIO.account} meeting.
 
 ${SCENARIO_SUMMARY}
+
+${SCORING_REFERENCE}
+FOCUS for this step (pre-call discovery plan): especially DISCOVERY DEPTH (Surface Pain, Unasked Implication, Missing Success Metric, No Compelling Event) and STAKEHOLDER ARCHITECTURE (Missing Economic Buyer, Lightweight Champion). If the rep commits a failure mode above, name it and list it in "failures".
+
 Meeting with: ${personaName} — ${personaTitle}
 
 The rep's plan:
@@ -357,12 +383,16 @@ Return ONLY JSON:
 {
   "tier": "strong" | "developing" | "weak",
   "feedback": "Short read of the plan. 1-2 sentences.",
-  "coach": "Name the technique or SPIN stage to strengthen. Do not write questions for them."
+  "coach": "Name the technique or SPIN stage to strengthen. Do not write questions for them.",
+  "failures": ["exact failure-mode names from the catalog that this plan shows; [] if none"]
 }`,
 
     closing: ({ submission, callTranscript }) => `You are an expert sales training coach evaluating a rep's solution recommendation after a discovery call with a ${SCENARIO.account} stakeholder.
 
 ${SCENARIO_SUMMARY}
+
+${SCORING_REFERENCE}
+FOCUS for this step (solution recommendation): especially DEAL DISCIPLINE (Vague Next Steps, Unconfirmed Mutual Plan), Missing Success Metric, and VALUE TRANSLATION (positioning the platform + a business outcome, not a feature list). If the rep commits a failure mode above, name it and list it in "failures".
 
 What happened on the call (summary of transcript):
 ${callTranscript}
@@ -386,7 +416,8 @@ Return ONLY JSON:
 {
   "tier": "strong" | "developing" | "weak",
   "feedback": "Short read of the recommendation. 1-2 sentences.",
-  "coach": "Name the technique to apply. Do not write the recommendation."
+  "coach": "Name the technique to apply. Do not write the recommendation.",
+  "failures": ["exact failure-mode names from the catalog that this recommendation shows; [] if none"]
 }`,
   };
 
@@ -514,7 +545,7 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
 
   // Human-readable stage from the current screen
   const STAGE_LABELS = {
-    "landing": "Intake", "intro": "Briefing", "transition": "Briefing", "briefing": "Case File",
+    "landing": "Intake", "signin-video": "Briefing", "intro": "Briefing", "transition": "Briefing", "briefing": "Case File",
     "scene-1": "Phase 1", "room1-research": "Investigation", "room1-hypothesis": "Hypothesis",
     "room1-persona": "Persons of Interest", "room1-outreach": "Outreach", "room1-coldcall": "Cold Call",
     "room1-complete": "Phase 1 Filed", "scene-2": "Discovery", "room2-contact": "Contact Review",
@@ -551,6 +582,7 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
   // ───────────────── SCREEN SEQUENCE ─────────────────
   const SCREENS = [
     "landing",
+    "signin-video",
     "intro",
     "transition",
     "briefing",
@@ -572,6 +604,7 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
   ];
   const SCREEN_LABELS = {
     "landing":          { kicker: "00 // INTAKE",         label: "Intake" },
+    "signin-video":     { kicker: "00 // INTAKE",         label: "Briefing" },
     "intro":            { kicker: "01 // OPENING",        label: "Opening" },
     "transition":       { kicker: "01 // OPENING",        label: "Transition" },
     "briefing":         { kicker: "02 // CASE FILE",      label: "Case File" },
@@ -611,6 +644,7 @@ If the rep's behavior is egregious (extreme clichés, lying about credentials, h
     RESEARCH_TOOLS,
     RESEARCH_CONTENT,
     JUDGE_PROMPTS,
+    SCORING_REFERENCE,
     characterPrompt,
     SCORING,
     computeBreakdown,

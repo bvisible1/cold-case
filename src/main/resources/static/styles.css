@@ -663,6 +663,7 @@ label.field > .lbl {
 .brf-subject2 { font-family: var(--typewriter); font-size: clamp(20px, 2.4vw, 34px); color: var(--accent); background: #0a0a0c; display: inline-block; padding: 2px 12px; margin-top: 10px; }
 .brf-cols { display: grid; grid-template-columns: 0.82fr 1.45fr; gap: 34px; align-items: start; }
 .brf-left { padding-top: 8px; }
+.brf-right { margin-top: -28px; }
 .brf-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
 .brf-block { margin-bottom: 26px; }
 .brf-block p { font-family: var(--serif); font-size: 15px; line-height: 1.62; color: var(--text-2); }
