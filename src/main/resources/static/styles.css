@@ -150,10 +150,10 @@ body::before {
 /* Room clock bar */
 .room-clock {
   position: fixed; top: 12px; right: 16px; z-index: 60;
-  background: rgba(11, 16, 25, 0.82);
+  background: rgba(8, 13, 20, 0.92);
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  border: 1px solid var(--border-2); border-radius: 7px;
-  display: flex; align-items: center; gap: 12px;
+  border: 1px solid rgba(45, 212, 208, 0.38); border-radius: 7px;
+  display: flex; align-items: center; gap: 10px;
   padding: 7px 14px;
   font-family: var(--mono);
   font-size: 11px;
@@ -161,7 +161,18 @@ body::before {
   text-transform: uppercase;
   color: var(--text-dim);
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.55);
+}
+.room-clock .live-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(45, 212, 208, 0.6);
+  animation: live-pulse 1.4s ease-out infinite;
+}
+@keyframes live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(45, 212, 208, 0.55); opacity: 1; }
+  70%  { box-shadow: 0 0 0 6px rgba(45, 212, 208, 0); opacity: 0.6; }
+  100% { box-shadow: 0 0 0 0 rgba(45, 212, 208, 0); opacity: 1; }
 }
 .room-clock .label { color: var(--text-2); }
 .room-clock .time { color: var(--accent); font-size: 13px; font-weight: 500; }

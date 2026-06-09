@@ -146,7 +146,7 @@ function PreCallScreen({ state, nav }) {
     <div className="precall-exact-stage">
       <div className="pc-frame">
         <img className="exact-img" src="assets/precall-exact.png" alt="Pre-Call Discovery Plan" />
-        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
+        {/* no brand bar on the paper pre-call screen */}
 
         {/* Auto-filled persona briefing line */}
         <div className="pc-intro">

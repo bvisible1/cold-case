@@ -412,7 +412,7 @@ function ResearchScreen({ state, nav }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-investigation">
         <img className="exact-img" src="assets/investigation-exact.png" alt="Investigation — Phase 01" />
-        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
+        {/* SignalPursuits | CASE FILE brand is baked into the screen image */}
 
         {/* Left "what you're looking for" list is static (not clickable) */}
 
@@ -555,7 +555,7 @@ function PersonaSelectScreen({ state, nav }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-persona">
         <img className="exact-img" src="assets/persona-exact.png" alt="Persons of Interest" />
-        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
+        {/* SignalPursuits | CASE FILE brand is baked into the screen image */}
         {/* Three SELECT buttons → choose persona and proceed to outreach */}
         <button className="exact-hotspot persona-select" style={{ left: "27.4%", top: "62.4%", width: "11.2%", height: "5.2%" }} onClick={() => pick("sarah")} aria-label="Select Rachel Morgan"></button>
         <button className="exact-hotspot persona-select" style={{ left: "43.1%", top: "62.6%", width: "11.2%", height: "5.2%" }} onClick={() => pick("michael")} aria-label="Select Daniel Hughes"></button>
@@ -709,7 +709,7 @@ function OutreachScreen({ state, nav }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-outreach">
         <img className="exact-img" src="assets/outreach-exact.png" alt="Outreach — Phase 01" />
-        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
+        {/* SignalPursuits | CASE FILE brand is baked into the screen image */}
 
         {/* Dynamic polaroid: face + caption over the baked card */}
         <div className="ot-photo"><img src={"assets/face-" + pkey + ".png"} alt={persona.name} /></div>
@@ -876,7 +876,7 @@ function ColdCallScreen({ state, nav, difficulty }) {
     <div className="exact-landing">
       <div className="exact-frame exact-frame-coldcall">
         <img className="exact-img" src="assets/coldcall-exact.png" alt="Cold call — surveillance room" />
-        <div className="lp-logo"><span className="lp-badge">S</span><span className="lp-name">SignalPursuits</span><span className="lp-div">|</span><span className="lp-cf">CASE FILE</span></div>
+        {/* SignalPursuits | CASE FILE brand is baked into the screen image */}
         <div className="cc-title"><b>COLD CALL</b> <span>/ SURVEILLANCE ROOM</span></div>
         <div className={"cc-timer" + tcls}>{tmm}:{tss}</div>
 

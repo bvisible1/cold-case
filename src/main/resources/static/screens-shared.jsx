@@ -39,8 +39,9 @@ function RoomClock({ seconds, label = "Case open" }) {
   const s = seconds % 60;
   return (
     <div className="room-clock">
+      <span className="live-dot" aria-hidden="true"></span>
       <span className="label">{label}</span>
-      <span className="time">⏱ {String(m).padStart(2, "0")}:{String(s).padStart(2, "0")} elapsed</span>
+      <span className="time">{String(m).padStart(2, "0")}:{String(s).padStart(2, "0")} elapsed</span>
     </div>
   );
 }
